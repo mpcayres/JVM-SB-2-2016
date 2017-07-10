@@ -1,0 +1,1098 @@
+        -:    0:Source:InstrucoesCat2.c
+        -:    0:Programs:12
+        -:    1:#include <stdlib.h>
+        -:    2:#include <string.h>
+        -:    3:#include <stdio.h>
+        -:    4:#include <math.h>
+        -:    5:#include <inttypes.h>
+        -:    6:
+        -:    7:#include "InstrucoesCat2.h"
+        -:    8:
+        -:    9:extern struct frame *frame_corrente;
+        -:   10:
+function jvm_lconst_0 called 0 returned 0% blocks executed 0%
+    #####:   11:void jvm_lconst_0() {
+    #####:   12:	push(0); push(0);
+call    0 never executed
+call    1 never executed
+    #####:   13:	frame_corrente->pc++;
+    #####:   14:}
+        -:   15:
+function jvm_lconst_1 called 0 returned 0% blocks executed 0%
+    #####:   16:void jvm_lconst_1() {
+    #####:   17:	push(0); push(1);
+call    0 never executed
+call    1 never executed
+    #####:   18:	frame_corrente->pc++;
+    #####:   19:}
+        -:   20:
+function jvm_dconst_0 called 0 returned 0% blocks executed 0%
+    #####:   21:void jvm_dconst_0() {
+        -:   22:	u4 temp4;
+        -:   23:	u8 *temp8;
+    #####:   24:	double auxD = 0.0;
+        -:   25:	
+    #####:   26:	temp8 = (u8*) malloc(sizeof(u8));
+    #####:   27:	memcpy(temp8, &auxD, 2*sizeof(u4));
+        -:   28:	
+    #####:   29:	temp4 = *temp8 >> 32;
+    #####:   30:	push(temp4);
+call    0 never executed
+        -:   31:	
+    #####:   32:	temp4 = *temp8;
+    #####:   33:	push(temp4);
+call    0 never executed
+    #####:   34:	frame_corrente->pc++;
+    #####:   35:}
+        -:   36:
+function jvm_dconst_1 called 0 returned 0% blocks executed 0%
+    #####:   37:void jvm_dconst_1() {
+        -:   38:	u4 temp4;
+        -:   39:	u8 *temp8;
+    #####:   40:	double auxD = 1.0;
+        -:   41:	
+    #####:   42:	temp8 = (u8*) malloc(sizeof(u8));
+    #####:   43:	memcpy(temp8, &auxD, 2*sizeof(u4));
+        -:   44:	
+    #####:   45:	temp4 = *temp8 >> 32;
+    #####:   46:	push(temp4);
+call    0 never executed
+        -:   47:	
+    #####:   48:	temp4 = *temp8;
+    #####:   49:	push(temp4);
+call    0 never executed
+    #####:   50:	frame_corrente->pc++;
+    #####:   51:}
+        -:   52:
+function jvm_ldc called 0 returned 0% blocks executed 0%
+    #####:   53:void jvm_ldc() {
+        -:   54:	u1 indice, tag;
+        -:   55:	u2 stringIndex;
+        -:   56:	
+    #####:   57:	frame_corrente->pc++;
+    #####:   58:	indice = frame_corrente->code[frame_corrente->pc];
+    #####:   59:	tag = frame_corrente->constantPool[indice-1].tag;
+        -:   60:	
+    #####:   61:	switch(tag) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+        -:   62:		case(CPOOL_INTEGER):
+    #####:   63:			push(frame_corrente->constantPool[indice-1].type.Integer.bytes);
+call    0 never executed
+    #####:   64:			break;
+        -:   65:		case(CPOOL_FLOAT):
+    #####:   66:			push(frame_corrente->constantPool[indice-1].type.Float.bytes);
+call    0 never executed
+    #####:   67:			break;
+        -:   68:		case(CPOOL_STRING):
+    #####:   69:			stringIndex = frame_corrente->constantPool[indice-1].type.String.stringIndex;
+    #####:   70:			push((u4)getNome(frame_corrente->class, stringIndex));
+call    0 never executed
+call    1 never executed
+    #####:   71:			break;
+        -:   72:	}
+        -:   73:	
+    #####:   74:	frame_corrente->pc++;
+    #####:   75:}
+        -:   76:
+function jvm_ldc_w called 0 returned 0% blocks executed 0%
+    #####:   77:void jvm_ldc_w() {
+        -:   78:	u1 tag;
+        -:   79:	u4 indice;
+        -:   80:	u4 last, first;
+        -:   81:	u2 stringIndex;
+        -:   82:
+    #####:   83:	frame_corrente->pc++;
+    #####:   84:	last = frame_corrente->code[frame_corrente->pc];
+        -:   85:	
+    #####:   86:	frame_corrente->pc++;
+    #####:   87:	first = frame_corrente->code[frame_corrente->pc];
+        -:   88:	
+    #####:   89:	indice = shift8To32(first, last);
+call    0 never executed
+    #####:   90:	tag = frame_corrente->constantPool[indice-1].tag;
+        -:   91:
+    #####:   92:	switch(tag) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+        -:   93:		case(CPOOL_INTEGER):
+    #####:   94:			push(frame_corrente->constantPool[indice-1].type.Integer.bytes);
+call    0 never executed
+    #####:   95:			break;
+        -:   96:		case(CPOOL_FLOAT):
+    #####:   97:			push(frame_corrente->constantPool[indice-1].type.Float.bytes);
+call    0 never executed
+    #####:   98:			break;
+        -:   99:		case(CPOOL_STRING):
+    #####:  100:			stringIndex = frame_corrente->constantPool[indice-1].type.String.stringIndex;
+    #####:  101:			push((u4)getNome(frame_corrente->class, stringIndex));
+call    0 never executed
+call    1 never executed
+    #####:  102:			break;
+        -:  103:	}
+        -:  104:	
+    #####:  105:	frame_corrente->pc++;
+    #####:  106:}
+        -:  107:
+function jvm_ldc2_w called 0 returned 0% blocks executed 0%
+    #####:  108:void jvm_ldc2_w() {
+        -:  109:	u1 tag;
+        -:  110:	u4 indice;
+        -:  111:	u4 last, first;
+        -:  112:
+    #####:  113:	frame_corrente->pc++;
+    #####:  114:	last = frame_corrente->code[frame_corrente->pc];
+        -:  115:	
+    #####:  116:	frame_corrente->pc++;
+    #####:  117:	first = frame_corrente->code[frame_corrente->pc];
+        -:  118:	
+    #####:  119:	indice = shift8To32(first, last);
+call    0 never executed
+    #####:  120:	tag = (frame_corrente->constantPool[indice-1]).tag;
+        -:  121:
+    #####:  122:	switch(tag) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  123:		case(CPOOL_LONG):
+    #####:  124:			push(frame_corrente->constantPool[indice-1].type.Long.highBytes);
+call    0 never executed
+    #####:  125:			push(frame_corrente->constantPool[indice-1].type.Long.lowBytes);
+call    0 never executed
+    #####:  126:			break;
+        -:  127:		case(CPOOL_DOUBLE):
+    #####:  128:			push(frame_corrente->constantPool[indice-1].type.Double.highBytes);
+call    0 never executed
+    #####:  129:			push(frame_corrente->constantPool[indice-1].type.Double.lowBytes);
+call    0 never executed
+    #####:  130:			break;
+        -:  131:	}
+        -:  132:	
+    #####:  133:	frame_corrente->pc++;
+    #####:  134:}
+        -:  135:
+function jvm_lload_0 called 0 returned 0% blocks executed 0%
+    #####:  136:void jvm_lload_0() {
+    #####:  137:	push(frame_corrente->fields[0]);
+call    0 never executed
+    #####:  138:	push(frame_corrente->fields[1]);
+call    0 never executed
+    #####:  139:	frame_corrente->pc++;
+    #####:  140:}
+        -:  141:
+function jvm_lload_1 called 0 returned 0% blocks executed 0%
+    #####:  142:void jvm_lload_1() {
+    #####:  143:	push(frame_corrente->fields[1]);
+call    0 never executed
+    #####:  144:	push(frame_corrente->fields[2]);
+call    0 never executed
+    #####:  145:	frame_corrente->pc++;
+    #####:  146:}
+        -:  147:
+function jvm_lload_2 called 0 returned 0% blocks executed 0%
+    #####:  148:void jvm_lload_2() {
+    #####:  149:	push(frame_corrente->fields[2]);
+call    0 never executed
+    #####:  150:	push(frame_corrente->fields[3]);
+call    0 never executed
+    #####:  151:	frame_corrente->pc++;
+    #####:  152:}
+        -:  153:
+function jvm_lload_3 called 0 returned 0% blocks executed 0%
+    #####:  154:void jvm_lload_3() {
+    #####:  155:	push(frame_corrente->fields[3]);
+call    0 never executed
+    #####:  156:	push(frame_corrente->fields[4]);
+call    0 never executed
+    #####:  157:	frame_corrente->pc++;
+    #####:  158:}
+        -:  159:
+function jvm_dload_0 called 0 returned 0% blocks executed 0%
+    #####:  160:void jvm_dload_0() {
+    #####:  161:	push(frame_corrente->fields[0]);
+call    0 never executed
+    #####:  162:	push(frame_corrente->fields[1]);
+call    0 never executed
+    #####:  163:	frame_corrente->pc++;
+    #####:  164:}
+        -:  165:
+function jvm_dload_1 called 0 returned 0% blocks executed 0%
+    #####:  166:void jvm_dload_1() {
+    #####:  167:	push(frame_corrente->fields[1]);
+call    0 never executed
+    #####:  168:	push(frame_corrente->fields[2]);
+call    0 never executed
+    #####:  169:	frame_corrente->pc++;
+    #####:  170:}
+        -:  171:
+function jvm_dload_2 called 0 returned 0% blocks executed 0%
+    #####:  172:void jvm_dload_2() {
+    #####:  173:	push(frame_corrente->fields[2]);
+call    0 never executed
+    #####:  174:	push(frame_corrente->fields[3]);
+call    0 never executed
+    #####:  175:	frame_corrente->pc++;
+    #####:  176:}
+        -:  177:
+function jvm_dload_3 called 0 returned 0% blocks executed 0%
+    #####:  178:void jvm_dload_3() {
+    #####:  179:	push(frame_corrente->fields[3]);
+call    0 never executed
+    #####:  180:	push(frame_corrente->fields[4]);
+call    0 never executed
+    #####:  181:	frame_corrente->pc++;
+    #####:  182:}
+        -:  183:
+function jvm_laload called 0 returned 0% blocks executed 0%
+    #####:  184:void jvm_laload() {
+        -:  185:	u4 indice;
+        -:  186:	void *ref;
+        -:  187:	
+    #####:  188:	indice = pop();
+call    0 never executed
+    #####:  189:	ref = (void*) pop();
+call    0 never executed
+    #####:  190:	pushU8(((u8*)ref)[indice]);
+call    0 never executed
+    #####:  191:	frame_corrente->pc++;
+    #####:  192:}
+        -:  193:
+function jvm_daload called 0 returned 0% blocks executed 0%
+    #####:  194:void jvm_daload() {
+        -:  195:	u4 indice;
+        -:  196:	void *ref;
+        -:  197:	
+    #####:  198:	indice = pop();
+call    0 never executed
+    #####:  199:	ref = (void*) pop();
+call    0 never executed
+    #####:  200:	pushU8(((u8*)ref)[indice]);
+call    0 never executed
+    #####:  201:	frame_corrente->pc++;
+    #####:  202:}
+        -:  203:
+function jvm_lstore called 0 returned 0% blocks executed 0%
+    #####:  204:void jvm_lstore() {
+        -:  205:	u2 indice;
+        -:  206:	u4 last, first;
+        -:  207:	
+    #####:  208:	frame_corrente->pc++;
+    #####:  209:	indice = frame_corrente->code[frame_corrente->pc];
+        -:  210:	
+    #####:  211:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+        -:  212:	
+    #####:  213:	frame_corrente->fields[indice] = last;
+    #####:  214:	frame_corrente->fields[indice + 1] = first;
+    #####:  215:	frame_corrente->pc++;
+    #####:  216:}
+        -:  217:
+function jvm_dstore called 0 returned 0% blocks executed 0%
+    #####:  218:void jvm_dstore() {
+        -:  219:	u2 indice;
+        -:  220:	u4 last, first;
+        -:  221:	
+    #####:  222:	frame_corrente->pc++;
+    #####:  223:	indice = frame_corrente->code[frame_corrente->pc];
+        -:  224:	
+    #####:  225:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+        -:  226:	
+    #####:  227:	frame_corrente->fields[indice] = first;
+    #####:  228:	frame_corrente->fields[indice + 1] = last;
+    #####:  229:	frame_corrente->pc++;
+    #####:  230:}
+        -:  231:
+function jvm_lstore_0 called 0 returned 0% blocks executed 0%
+    #####:  232:void jvm_lstore_0() {
+        -:  233:	u4 last, first;
+        -:  234:	
+    #####:  235:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+        -:  236:	
+    #####:  237:	frame_corrente->fields[0] = last;
+    #####:  238:	frame_corrente->fields[1] = first;
+    #####:  239:	frame_corrente->pc++;
+    #####:  240:}
+        -:  241:
+function jvm_lstore_1 called 0 returned 0% blocks executed 0%
+    #####:  242:void jvm_lstore_1() {
+        -:  243:	u4 last, first;
+        -:  244:	
+    #####:  245:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+        -:  246:	
+    #####:  247:	frame_corrente->fields[1] = last;
+    #####:  248:	frame_corrente->fields[2] = first;
+    #####:  249:	frame_corrente->pc++;
+    #####:  250:}
+        -:  251:
+function jvm_lstore_2 called 0 returned 0% blocks executed 0%
+    #####:  252:void jvm_lstore_2() {
+        -:  253:	u4 last, first;
+        -:  254:	
+    #####:  255:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+        -:  256:	
+    #####:  257:	frame_corrente->fields[2] = last;
+    #####:  258:	frame_corrente->fields[3] = first;
+    #####:  259:	frame_corrente->pc++;
+    #####:  260:}
+        -:  261:
+function jvm_lstore_3 called 0 returned 0% blocks executed 0%
+    #####:  262:void jvm_lstore_3() {
+        -:  263:	u4 last, first;
+        -:  264:	
+    #####:  265:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+        -:  266:	
+    #####:  267:	frame_corrente->fields[3] = last;
+    #####:  268:	frame_corrente->fields[4] = first;
+    #####:  269:	frame_corrente->pc++;
+    #####:  270:}
+        -:  271:
+function jvm_dstore_0 called 0 returned 0% blocks executed 0%
+    #####:  272:void jvm_dstore_0() {
+        -:  273:	u4 last, first;
+        -:  274:	
+    #####:  275:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+        -:  276:	
+    #####:  277:	frame_corrente->fields[0] = first;
+    #####:  278:	frame_corrente->fields[1] = last;
+    #####:  279:	frame_corrente->pc++;
+    #####:  280:}
+        -:  281:
+function jvm_dstore_1 called 0 returned 0% blocks executed 0%
+    #####:  282:void jvm_dstore_1() {
+        -:  283:	u4 last, first;
+        -:  284:	
+    #####:  285:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+        -:  286:	
+    #####:  287:	frame_corrente->fields[1] = first;
+    #####:  288:	frame_corrente->fields[2] = last;
+    #####:  289:	frame_corrente->pc++;
+    #####:  290:}
+        -:  291:
+function jvm_dstore_2 called 0 returned 0% blocks executed 0%
+    #####:  292:void jvm_dstore_2() {
+        -:  293:	u4 last, first;
+        -:  294:	
+    #####:  295:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+        -:  296:	
+    #####:  297:	frame_corrente->fields[2] = first;
+    #####:  298:	frame_corrente->fields[3] = last;
+    #####:  299:	frame_corrente->pc++;
+    #####:  300:}
+        -:  301:
+function jvm_dstore_3 called 0 returned 0% blocks executed 0%
+    #####:  302:void jvm_dstore_3() {
+        -:  303:	u4 last, first;
+        -:  304:	
+    #####:  305:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+        -:  306:	
+    #####:  307:	frame_corrente->fields[3] = first;
+    #####:  308:	frame_corrente->fields[4] = last;
+    #####:  309:	frame_corrente->pc++;
+    #####:  310:}
+        -:  311:
+function jvm_lastore called 0 returned 0% blocks executed 0%
+    #####:  312:void jvm_lastore() {
+        -:  313:	u4 indice, first, last;
+        -:  314:	u8 num;
+        -:  315:	void *ref;
+        -:  316:	
+    #####:  317:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  318:	num = shift32To64(first, last);
+call    0 never executed
+        -:  319:	
+    #####:  320:	indice = pop();
+call    0 never executed
+    #####:  321:	ref = (void *)pop();
+call    0 never executed
+    #####:  322:	((u8 *)ref)[indice] = num;
+    #####:  323:	frame_corrente->pc++;
+    #####:  324:}
+        -:  325:
+function jvm_dastore called 0 returned 0% blocks executed 0%
+    #####:  326:void jvm_dastore() {
+        -:  327:	u4 indice, first, last;
+        -:  328:	u8 num;
+        -:  329:	void *ref;
+        -:  330:	
+    #####:  331:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  332:	num = shift32To64(first, last);
+call    0 never executed
+        -:  333:	
+    #####:  334:	indice = pop();
+call    0 never executed
+    #####:  335:	ref = (void *)pop();
+call    0 never executed
+    #####:  336:	((u8 *)ref)[indice] = num;
+    #####:  337:	frame_corrente->pc++;
+    #####:  338:}
+        -:  339:
+function jvm_ladd called 0 returned 0% blocks executed 0%
+    #####:  340:void jvm_ladd() {
+        -:  341:	int64_t temp1, temp2;
+        -:  342:	u4 first, last;
+        -:  343:	
+    #####:  344:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  345:	temp1 = shift32To64(first, last);
+call    0 never executed
+        -:  346:	
+    #####:  347:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  348:	temp2 = shift32To64(first, last);
+call    0 never executed
+        -:  349:	
+    #####:  350:	pushU8(temp1 + temp2);
+call    0 never executed
+    #####:  351:	frame_corrente->pc++;
+    #####:  352:}
+        -:  353:
+function jvm_dadd called 0 returned 0% blocks executed 0%
+    #####:  354:void jvm_dadd() {
+        -:  355:	double temp1, temp2;
+        -:  356:	u4 last, first;
+        -:  357:	u8 temp;
+        -:  358:	
+    #####:  359:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  360:	temp = shift32To64(first, last);
+call    0 never executed
+    #####:  361:	memcpy(&temp1, &temp, sizeof(u8));
+        -:  362:	
+    #####:  363:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  364:	temp = shift32To64(first, last);
+call    0 never executed
+    #####:  365:	memcpy(&temp2, &temp, sizeof(u8));
+        -:  366:	
+    #####:  367:	temp1 += temp2;
+    #####:  368:	memcpy(&temp, &temp1, sizeof(u8));
+    #####:  369:	shift64To32(temp, &first, &last);
+call    0 never executed
+        -:  370:	
+    #####:  371:	push(last); push(first);
+call    0 never executed
+call    1 never executed
+    #####:  372:	frame_corrente->pc++;
+    #####:  373:}
+        -:  374:
+function jvm_lsub called 0 returned 0% blocks executed 0%
+    #####:  375:void jvm_lsub() {
+        -:  376:	int64_t temp1, temp2;
+        -:  377:	u4 first, last;
+        -:  378:	
+    #####:  379:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  380:	temp1 = (signed) shift32To64(first, last);
+call    0 never executed
+        -:  381:	
+    #####:  382:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  383:	temp2 = (signed) shift32To64(first, last);
+call    0 never executed
+        -:  384:	
+    #####:  385:	pushU8(temp2 - temp1);
+call    0 never executed
+    #####:  386:	frame_corrente->pc++;
+    #####:  387:}
+        -:  388:
+function jvm_dsub called 0 returned 0% blocks executed 0%
+    #####:  389:void jvm_dsub() {
+        -:  390:	u4 last1, first1, last2, first2;
+        -:  391:	double num1, num2;
+        -:  392:	u8 resulto;
+        -:  393:	
+    #####:  394:	first2 = pop(); last2 = pop();
+call    0 never executed
+call    1 never executed
+    #####:  395:	first1 = pop(); last1 = pop();
+call    0 never executed
+call    1 never executed
+        -:  396:	
+    #####:  397:	num1 = shiftCast32ToDouble(first1, last1);
+call    0 never executed
+    #####:  398:	num2 = shiftCast32ToDouble(first2, last2);
+call    0 never executed
+    #####:  399:	num1 -= num2;
+    #####:  400:	memcpy(&resulto, &num1, sizeof(u8));
+        -:  401:	
+    #####:  402:	pushU8(resulto);
+call    0 never executed
+    #####:  403:	frame_corrente->pc++;
+    #####:  404:}
+        -:  405:
+function jvm_lmul called 0 returned 0% blocks executed 0%
+    #####:  406:void jvm_lmul() {
+        -:  407:	int64_t num1, num2, resulto;
+        -:  408:	u4 last1, first1, last2, first2;
+        -:  409:	
+    #####:  410:	first1 = pop(); last1 = pop();
+call    0 never executed
+call    1 never executed
+    #####:  411:	first2 = pop(); last2 = pop();
+call    0 never executed
+call    1 never executed
+        -:  412:	
+    #####:  413:	num1 = (int64_t)shift32To64(first1, last1);
+call    0 never executed
+    #####:  414:	num2 = (int64_t)shift32To64(first2, last2);
+call    0 never executed
+    #####:  415:	resulto = num1 * num2;
+        -:  416:	
+    #####:  417:	pushU8(((u8)resulto));
+call    0 never executed
+    #####:  418:	frame_corrente->pc++;
+    #####:  419:}
+        -:  420:
+function jvm_dmul called 0 returned 0% blocks executed 0%
+    #####:  421:void jvm_dmul() {
+        -:  422:	u4 last1, first1, last2, first2;
+        -:  423:	u8 num;
+        -:  424:	double num1, num2;
+        -:  425:	
+    #####:  426:	first1 = pop(); last1 = pop();
+call    0 never executed
+call    1 never executed
+    #####:  427:	first2 = pop(); last2 = pop();
+call    0 never executed
+call    1 never executed
+        -:  428:	
+    #####:  429:	num1 = shiftCast32ToDouble(first1, last1);
+call    0 never executed
+    #####:  430:	num2 = shiftCast32ToDouble(first2, last2);
+call    0 never executed
+    #####:  431:	num1 *= num2;
+    #####:  432:	memcpy(&num, &num1, sizeof(u8));
+        -:  433:	
+    #####:  434:	pushU8(num);
+call    0 never executed
+    #####:  435:	frame_corrente->pc++;
+    #####:  436:}
+        -:  437:
+function jvm_ldiv called 0 returned 0% blocks executed 0%
+    #####:  438:void jvm_ldiv() {
+        -:  439:	int64_t num1, num2;
+        -:  440:	u4 last1, first1, last2, first2;
+        -:  441:	
+    #####:  442:	first2 = pop(); last2 = pop();
+call    0 never executed
+call    1 never executed
+    #####:  443:	first1 = pop(); last1 = pop();
+call    0 never executed
+call    1 never executed
+        -:  444:	
+    #####:  445:	num1 = (int64_t) shift32To64(first1, last1);
+call    0 never executed
+    #####:  446:	num2 = (int64_t) shift32To64(first2, last2);
+call    0 never executed
+        -:  447:	
+    #####:  448:	pushU8(num1/num2);
+call    0 never executed
+    #####:  449:	frame_corrente->pc++;
+    #####:  450:}
+        -:  451:
+function jvm_ddiv called 0 returned 0% blocks executed 0%
+    #####:  452:void jvm_ddiv() {
+        -:  453:	u4 last1, first1, last2, first2;
+        -:  454:	u8 temp;
+        -:  455:	double num1, num2;
+        -:  456:	
+    #####:  457:	first2 = pop(); last2 = pop();
+call    0 never executed
+call    1 never executed
+    #####:  458:	first1 = pop(); last1 = pop();
+call    0 never executed
+call    1 never executed
+        -:  459:	
+    #####:  460:	num1 = shiftCast32ToDouble(first1, last1);
+call    0 never executed
+    #####:  461:	num2 = shiftCast32ToDouble(first2, last2);
+call    0 never executed
+    #####:  462:	num1 /= num2;
+    #####:  463:	memcpy(&temp, &num1, sizeof(u8));
+        -:  464:	
+    #####:  465:	pushU8(temp);
+call    0 never executed
+    #####:  466:	frame_corrente->pc++;
+    #####:  467:}
+        -:  468:
+function jvm_lrem called 0 returned 0% blocks executed 0%
+    #####:  469:void jvm_lrem() {
+        -:  470:	int64_t temp1, temp2;
+        -:  471:	u4 first, last;
+        -:  472:	
+    #####:  473:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  474:	temp2 = (signed) shift32To64(first, last);
+call    0 never executed
+        -:  475:	
+    #####:  476:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  477:	temp1 = (signed) shift32To64(first, last);
+call    0 never executed
+    #####:  478:	temp1 %= temp2;
+        -:  479:	
+    #####:  480:	push((u8) temp1);
+call    0 never executed
+    #####:  481:	frame_corrente->pc++;
+    #####:  482:}
+        -:  483:
+function jvm_drem called 0 returned 0% blocks executed 0%
+    #####:  484:void jvm_drem() {
+        -:  485:	double d1, d2;
+        -:  486:	u8 temp;
+        -:  487:	u4 first, last;
+        -:  488:
+    #####:  489:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  490:	temp = shift32To64(first, last);	
+call    0 never executed
+    #####:  491:	memcpy(&d2, &temp, sizeof(u8));
+        -:  492:	
+    #####:  493:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  494:	temp = shift32To64(first, last);
+call    0 never executed
+    #####:  495:	memcpy(&d1, &temp, sizeof(u8));
+        -:  496:	
+    #####:  497:	d1 = fmod(d1, d2);
+    #####:  498:	memcpy(&temp, &d1, sizeof(u8));
+        -:  499:	
+    #####:  500:	pushU8(temp);
+call    0 never executed
+    #####:  501:	frame_corrente->pc++;
+    #####:  502:}
+        -:  503:
+function jvm_lneg called 0 returned 0% blocks executed 0%
+    #####:  504:void jvm_lneg() {
+        -:  505:	int64_t temp;
+        -:  506:	u4 first, last;
+        -:  507:	
+    #####:  508:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  509:	temp = (int64_t) shift32To64(first, last);
+call    0 never executed
+    #####:  510:	temp = -temp;
+        -:  511:	
+    #####:  512:	pushU8((u8)temp);
+call    0 never executed
+    #####:  513:	frame_corrente->pc++;
+    #####:  514:}
+        -:  515:
+function jvm_dneg called 0 returned 0% blocks executed 0%
+    #####:  516:void jvm_dneg() {
+        -:  517:	double d;
+        -:  518:	u8 temp;
+        -:  519:	u4 first, last;
+        -:  520:	
+    #####:  521:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  522:	temp = shift32To64(first, last);
+call    0 never executed
+    #####:  523:	memcpy(&d, &temp, sizeof(u8));
+        -:  524:	
+    #####:  525:	d = -d;
+    #####:  526:	memcpy(&temp, &d, sizeof(u8));
+        -:  527:	
+    #####:  528:	pushU8(temp);
+call    0 never executed
+    #####:  529:	frame_corrente->pc++;
+    #####:  530:}
+        -:  531:
+function jvm_lshl called 0 returned 0% blocks executed 0%
+    #####:  532:void jvm_lshl() {
+        -:  533:	int64_t temp1;
+    #####:  534:	u4 mask = 0x3f, first, last, temp2;
+        -:  535:	
+    #####:  536:	temp2 = pop();
+call    0 never executed
+    #####:  537:	temp2 &= mask;
+        -:  538:	
+    #####:  539:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  540:	temp1 = (signed) shift32To64(first, last);
+call    0 never executed
+    #####:  541:	temp1 <<= temp2;
+        -:  542:	
+    #####:  543:	push((u8) temp1);
+call    0 never executed
+    #####:  544:	frame_corrente->pc++;
+    #####:  545:}
+        -:  546:
+function jvm_lshr called 0 returned 0% blocks executed 0%
+    #####:  547:void jvm_lshr() {
+    #####:  548:	u4 mask = 0x3f, temp2, first, last;
+    #####:  549:	u8 temp1 = 0xffffffffffffffff, temp4 = 0x8000000000000000;
+        -:  550:	int64_t temp3;
+        -:  551:	
+    #####:  552:	temp2 = pop();
+call    0 never executed
+    #####:  553:	temp2 &= mask;
+        -:  554:
+    #####:  555:	temp1 <<= (64-temp2);
+    #####:  556:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  557:	temp3 = (signed) shift32To64(first, last);
+call    0 never executed
+        -:  558:
+    #####:  559:	temp4 = temp3 & temp4;
+    #####:  560:	temp3 >>= temp2;
+    #####:  561:	if(temp4) temp3 |= temp1;
+branch  0 never executed
+branch  1 never executed
+        -:  562:	
+    #####:  563:	push((u8)temp3);
+call    0 never executed
+    #####:  564:	frame_corrente->pc++;
+    #####:  565:}
+        -:  566:
+function jvm_lushr called 0 returned 0% blocks executed 0%
+    #####:  567:void jvm_lushr() {
+        -:  568:	int64_t temp1;
+    #####:  569:	u4 mask = 0x3f;
+        -:  570:	u4 temp2;
+        -:  571:	u4 first, last;
+        -:  572:	
+    #####:  573:	temp2 = pop();
+call    0 never executed
+    #####:  574:	temp2 &= mask;
+        -:  575:	
+    #####:  576:	first = pop();last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  577:	temp1 = (signed) shift32To64(first, last);
+call    0 never executed
+    #####:  578:	temp1 >>= temp2;
+        -:  579:	
+    #####:  580:	pushU8((u8) temp1);
+call    0 never executed
+    #####:  581:	frame_corrente->pc++;
+    #####:  582:}
+        -:  583:
+function jvm_land called 0 returned 0% blocks executed 0%
+    #####:  584:void jvm_land() {
+        -:  585:	u8 temp1, temp2;
+        -:  586:	u4 first, last;
+        -:  587:	
+    #####:  588:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  589:	temp1 = shift32To64(first, last);
+call    0 never executed
+        -:  590:	
+    #####:  591:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  592:	temp2 = shift32To64(first, last);
+call    0 never executed
+    #####:  593:	temp1 &= temp2;
+        -:  594:	
+    #####:  595:	pushU8(temp1);
+call    0 never executed
+    #####:  596:	frame_corrente->pc++;
+    #####:  597:}
+        -:  598:
+function jvm_lor called 0 returned 0% blocks executed 0%
+    #####:  599:void jvm_lor() {
+        -:  600:	u8 temp1, temp2;
+        -:  601:	u4 first, last;
+        -:  602:	
+    #####:  603:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  604:	temp1 = shift32To64(first, last);
+call    0 never executed
+        -:  605:	
+    #####:  606:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  607:	temp2 = shift32To64(first, last);
+call    0 never executed
+    #####:  608:	temp1 |= temp2;
+        -:  609:	
+    #####:  610:	pushU8(temp1);
+call    0 never executed
+    #####:  611:	frame_corrente->pc++;
+    #####:  612:}
+        -:  613:
+function jvm_lxor called 0 returned 0% blocks executed 0%
+    #####:  614:void jvm_lxor() {
+        -:  615:	u8 temp1, temp2;
+        -:  616:	u4 first, last;
+        -:  617:	
+    #####:  618:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  619:	temp1 = shift32To64(first, last);
+call    0 never executed
+        -:  620:	
+    #####:  621:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  622:	temp2 = shift32To64(first, last);
+call    0 never executed
+    #####:  623:	temp1 ^= temp2;
+        -:  624:	
+    #####:  625:	pushU8(temp1);
+call    0 never executed
+    #####:  626:	frame_corrente->pc++;
+    #####:  627:}
+        -:  628:
+function jvm_l2i called 0 returned 0% blocks executed 0%
+    #####:  629:void jvm_l2i() {
+        -:  630:	u4 first, last;
+        -:  631:	
+    #####:  632:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+        -:  633:	
+    #####:  634:	push(first);
+call    0 never executed
+    #####:  635:	frame_corrente->pc++;
+    #####:  636:}
+        -:  637:
+function jvm_l2f called 0 returned 0% blocks executed 0%
+    #####:  638:void jvm_l2f() {
+        -:  639:	u4 first, last, *temp;
+        -:  640:	float auxF;
+        -:  641:	
+    #####:  642:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  643:	auxF = (float) shiftCast32ToDouble(first, last);
+call    0 never executed
+        -:  644:	
+    #####:  645:	temp = (u4*) malloc(sizeof(u4));
+    #####:  646:	memcpy(temp, &auxF, sizeof(u4));
+        -:  647:	
+    #####:  648:	push(*temp);
+call    0 never executed
+    #####:  649:	frame_corrente->pc++;
+    #####:  650:}
+        -:  651:
+function jvm_l2d called 0 returned 0% blocks executed 0%
+    #####:  652:void jvm_l2d() {
+        -:  653:	u8 *temp8;
+        -:  654:	u4 first, last, temp4;
+        -:  655:	double auxD;
+        -:  656:	
+    #####:  657:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  658:	auxD =  shiftCast32ToDouble(first, last);
+call    0 never executed
+        -:  659:	
+    #####:  660:	temp8 = (u8*) malloc(sizeof(u8));
+    #####:  661:	memcpy(temp8, &auxD, 2*sizeof(u4));
+    #####:  662:	temp4 = *temp8 >> 32;
+        -:  663:	
+    #####:  664:	push(temp4);
+call    0 never executed
+    #####:  665:	temp4 = *temp8;
+        -:  666:	
+    #####:  667:	push(temp4);
+call    0 never executed
+    #####:  668:	frame_corrente->pc++;
+    #####:  669:}
+        -:  670:
+function jvm_d2i called 0 returned 0% blocks executed 0%
+    #####:  671:void jvm_d2i() {
+        -:  672:	u8 temp;
+        -:  673:	u4 first, last;
+        -:  674:	int32_t resp;
+        -:  675:	double auxD;
+        -:  676:	
+    #####:  677:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  678:	temp = shift32To64(first, last);
+call    0 never executed
+        -:  679:	
+    #####:  680:	memcpy(&auxD, &temp, 2*sizeof(u4));
+    #####:  681:	resp = (int32_t) auxD;
+        -:  682:	
+    #####:  683:	push((u4)resp);
+call    0 never executed
+    #####:  684:	frame_corrente->pc++;
+    #####:  685:}
+        -:  686:
+function jvm_d2l called 0 returned 0% blocks executed 0%
+    #####:  687:void jvm_d2l() {
+        -:  688:	u8 temp;
+        -:  689:	u4 first, last;
+        -:  690:	double auxD;
+        -:  691:	
+    #####:  692:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  693:	temp = shift32To64(first, last);
+call    0 never executed
+        -:  694:	
+    #####:  695:	memcpy(&auxD, &temp, 2*sizeof(u4));
+    #####:  696:	temp = (u8) auxD;
+        -:  697:	
+    #####:  698:	push(temp);
+call    0 never executed
+    #####:  699:	frame_corrente->pc++;
+    #####:  700:}
+        -:  701:
+function jvm_d2f called 0 returned 0% blocks executed 0%
+    #####:  702:void jvm_d2f() {
+        -:  703:	u8 temp;
+        -:  704:	u4 first, last, resp;
+        -:  705:	double d;
+        -:  706:	float f;
+        -:  707:	
+    #####:  708:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  709:	temp = shift32To64(first, last);
+call    0 never executed
+    #####:  710:	memcpy(&d, &temp, 2*sizeof(u4));
+        -:  711:	
+    #####:  712:	f = (float) d;
+    #####:  713:	memcpy(&resp, &f, sizeof(u4));
+        -:  714:	
+    #####:  715:	push(resp);
+call    0 never executed
+    #####:  716:	frame_corrente->pc++;
+    #####:  717:}
+        -:  718:
+function jvm_lcmp called 0 returned 0% blocks executed 0%
+    #####:  719:void jvm_lcmp() {
+        -:  720:	int32_t resp;
+        -:  721:	u4 first, last;
+        -:  722:	u8 temp1, temp2;
+        -:  723:	
+    #####:  724:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  725:	temp2 = shift32To64(first, last);
+call    0 never executed
+        -:  726:	
+    #####:  727:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  728:	temp1 = shift32To64(first, last);
+call    0 never executed
+        -:  729:	
+    #####:  730:	if(temp1 == temp2) resp = 0;
+branch  0 never executed
+branch  1 never executed
+    #####:  731:	else if(temp1 > temp2) resp = 1;
+branch  0 never executed
+branch  1 never executed
+    #####:  732:	else resp = -1;
+        -:  733:	
+    #####:  734:	push((u4) resp);
+call    0 never executed
+    #####:  735:	frame_corrente->pc++;
+    #####:  736:}
+        -:  737:
+function jvm_dcmpl called 0 returned 0% blocks executed 0%
+    #####:  738:void jvm_dcmpl() {
+        -:  739:	u8 temp;
+        -:  740:	u4 first, last;
+        -:  741:	double auxD1, auxD2;
+        -:  742:	int32_t resultado;
+        -:  743:	
+    #####:  744:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  745:	temp = shift32To64(first, last);
+call    0 never executed
+    #####:  746:	memcpy(&auxD2, &temp, 2*sizeof(u4));
+        -:  747:	
+    #####:  748:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  749:	temp = shift32To64(first, last);
+call    0 never executed
+    #####:  750:	memcpy(&auxD1, &temp, 2*sizeof(u4));
+        -:  751:	
+    #####:  752:	if(auxD1 == auxD2) resultado = 0;
+branch  0 never executed
+branch  1 never executed
+    #####:  753:	else if(auxD1 > auxD2) resultado = 1;
+branch  0 never executed
+branch  1 never executed
+    #####:  754:	else resultado = -1;
+        -:  755:	
+    #####:  756:	push((u4) resultado);
+call    0 never executed
+    #####:  757:	frame_corrente->pc++;
+    #####:  758:}
+        -:  759:
+function jvm_dcmpg called 0 returned 0% blocks executed 0%
+    #####:  760:void jvm_dcmpg() {
+        -:  761:	u8 temp;
+        -:  762:	u4 first, last;
+        -:  763:	double auxD1, auxD2;
+        -:  764:	int32_t resultado;
+        -:  765:	
+    #####:  766:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  767:	temp = shift32To64(first, last);
+call    0 never executed
+    #####:  768:	memcpy(&auxD2, &temp, 2*sizeof(u4));
+        -:  769:	
+    #####:  770:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  771:	temp = shift32To64(first, last);
+call    0 never executed
+    #####:  772:	memcpy(&auxD1, &temp, 2*sizeof(u4));
+        -:  773:	
+    #####:  774:	if(auxD1 == auxD2) resultado = 0;
+branch  0 never executed
+branch  1 never executed
+    #####:  775:	else if(auxD1 > auxD2) resultado = 1;
+branch  0 never executed
+branch  1 never executed
+    #####:  776:	else resultado = -1;
+        -:  777:	
+    #####:  778:	push((u4) resultado);
+call    0 never executed
+    #####:  779:	frame_corrente->pc++;
+    #####:  780:}

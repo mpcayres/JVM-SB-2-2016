@@ -1,0 +1,279 @@
+
+Hello.class
+
+General Information:
+
+Magic Number:   	0xCAFEBABE
+Minor Version:              0
+Major Version:             46
+Constant Pool Count:       33
+Access Flags:  	0x21 [ public super ]
+This Class:    	#1 <Hello>
+Super Class:   	#3 <java/lang/Object>
+Interface Count:            0
+Field Count:                0
+Method Count:               2
+Attribute Count:            1
+
+-----------------------------------------------
+
+Constant Pool Count: 33
+
+Constant Pool [1]
+Type: Class
+Name: #2 <Hello>
+
+Constant Pool [2]
+Type: Utf8
+Length: 5
+String: Hello
+
+Constant Pool [3]
+Type: Class
+Name: #4 <java/lang/Object>
+
+Constant Pool [4]
+Type: Utf8
+Length: 16
+String: java/lang/Object
+
+Constant Pool [5]
+Type: Utf8
+Length: 6
+String: <init>
+
+Constant Pool [6]
+Type: Utf8
+Length: 3
+String: ()V
+
+Constant Pool [7]
+Type: Utf8
+Length: 4
+String: Code
+
+Constant Pool [8]
+Type: Method Reference
+Class: #3 <java/lang/Object>
+Name and Type: #9 <<init>()V>
+
+Constant Pool [9]
+Type: Name and Type
+Name: #5 <<init>>
+Descriptor: #6 <()V>
+
+Constant Pool [10]
+Type: Utf8
+Length: 15
+String: LineNumberTable
+
+Constant Pool [11]
+Type: Utf8
+Length: 18
+String: LocalVariableTable
+
+Constant Pool [12]
+Type: Utf8
+Length: 4
+String: this
+
+Constant Pool [13]
+Type: Utf8
+Length: 7
+String: LHello;
+
+Constant Pool [14]
+Type: Utf8
+Length: 4
+String: main
+
+Constant Pool [15]
+Type: Utf8
+Length: 22
+String: ([Ljava/lang/String;)V
+
+Constant Pool [16]
+Type: Field Reference
+Class: #17 <java/lang/System>
+Name and Type: #19 <outLjava/io/PrintStream;>
+
+Constant Pool [17]
+Type: Class
+Name: #18 <java/lang/System>
+
+Constant Pool [18]
+Type: Utf8
+Length: 16
+String: java/lang/System
+
+Constant Pool [19]
+Type: Name and Type
+Name: #20 <out>
+Descriptor: #21 <Ljava/io/PrintStream;>
+
+Constant Pool [20]
+Type: Utf8
+Length: 3
+String: out
+
+Constant Pool [21]
+Type: Utf8
+Length: 21
+String: Ljava/io/PrintStream;
+
+Constant Pool [22]
+Type: String
+String: #23 <Hello, World!>
+
+Constant Pool [23]
+Type: Utf8
+Length: 13
+String: Hello, World!
+
+Constant Pool [24]
+Type: Method Reference
+Class: #25 <java/io/PrintStream>
+Name and Type: #27 <println(Ljava/lang/String;)V>
+
+Constant Pool [25]
+Type: Class
+Name: #26 <java/io/PrintStream>
+
+Constant Pool [26]
+Type: Utf8
+Length: 19
+String: java/io/PrintStream
+
+Constant Pool [27]
+Type: Name and Type
+Name: #28 <println>
+Descriptor: #29 <(Ljava/lang/String;)V>
+
+Constant Pool [28]
+Type: Utf8
+Length: 7
+String: println
+
+Constant Pool [29]
+Type: Utf8
+Length: 21
+String: (Ljava/lang/String;)V
+
+Constant Pool [30]
+Type: Utf8
+Length: 4
+String: args
+
+Constant Pool [31]
+Type: Utf8
+Length: 19
+String: [Ljava/lang/String;
+
+Constant Pool [32]
+Type: Utf8
+Length: 10
+String: SourceFile
+
+Constant Pool [33]
+Type: Utf8
+Length: 10
+String: Hello.java
+
+-----------------------------------------------
+
+Interface Count: 0
+
+-----------------------------------------------
+
+Field Count: 0
+
+-----------------------------------------------
+
+Method Count: 2
+
+Method [1]
+Access Flags: 0x1 [ public ]
+Name: #5 <<init>>
+Descriptor: #6 <()V>
+
+Attribute Count: 1
+
+	Attribute [1]
+	[Generic Info]
+	Attribute Name: #7 <Code>
+	Attribute Length: 47
+
+	[Specific Info]
+	Maximum stack depth: 1
+	Maximum local variables: 1
+	Code Length: 5
+
+	Exception Table Length: 0
+
+
+	Sub-attribute Count: 2
+
+	Attribute [1]
+	[Generic Info]
+	Attribute Name: #10 <LineNumberTable>
+	Attribute Length: 6
+
+	Attribute [2]
+	[Generic Info]
+	Attribute Name: #11 <LocalVariableTable>
+	Attribute Length: 12
+
+	Bytecode:
+	0  aload_0
+	1  invokespecial #8
+	4  return
+
+Method [2]
+Access Flags: 0x9 [ public static ]
+Name: #14 <main>
+Descriptor: #15 <([Ljava/lang/String;)V>
+
+Attribute Count: 1
+
+	Attribute [1]
+	[Generic Info]
+	Attribute Name: #7 <Code>
+	Attribute Length: 55
+
+	[Specific Info]
+	Maximum stack depth: 2
+	Maximum local variables: 1
+	Code Length: 9
+
+	Exception Table Length: 0
+
+
+	Sub-attribute Count: 2
+
+	Attribute [1]
+	[Generic Info]
+	Attribute Name: #10 <LineNumberTable>
+	Attribute Length: 10
+
+	Attribute [2]
+	[Generic Info]
+	Attribute Name: #11 <LocalVariableTable>
+	Attribute Length: 12
+
+	Bytecode:
+	0  getstatic #16
+	3  ldc #22
+	5  invokevirtual #24
+	8  return
+
+-----------------------------------------------
+
+Attribute Count: 1
+
+	Attribute [1]
+	[Generic Info]
+	Attribute Name: #32 <SourceFile>
+	Attribute Length: 2
+
+	[Specific Info]
+	Source File Name Index: #33

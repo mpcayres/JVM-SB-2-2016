@@ -1,0 +1,26 @@
+digraph "SalvaInfo.h"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="SalvaInfo.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="InicializaClasses.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$InicializaClasses_8h.html",tooltip="Arquivo de inicializacao de classes. "];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="CarregaInfo.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$CarregaInfo_8h.html",tooltip="Arquivo do Leitor. "];
+  Node3 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="main.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8c.html",tooltip="Aquivo principal do programa. "];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="GerenciaFrames.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$GerenciaFrames_8h.html",tooltip="Arquivo de Frames. "];
+  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="InstrucoesGerais.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$InstrucoesGerais_8h.html",tooltip="Arquivo de instrucoes gerais. "];
+  Node6 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="GerenciaHeap.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$GerenciaHeap_8h.html",tooltip="Arquivo da Heap. "];
+  Node7 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

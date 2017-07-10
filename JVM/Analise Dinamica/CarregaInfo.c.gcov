@@ -1,0 +1,536 @@
+        -:    0:Source:CarregaInfo.c
+        -:    0:Programs:12
+        -:    1:#include <stdio.h>
+        -:    2:#include <stdlib.h>
+        -:    3:#include <string.h>
+        -:    4:#include <stdint.h>
+        -:    5:
+        -:    6:#include "CarregaInfo.h"
+        -:    7:
+function u1Leitura called 0 returned 0% blocks executed 0%
+    #####:    8:u1 u1Leitura(FILE *fpClass) {
+        -:    9:	u1 byte;
+        -:   10:	
+    #####:   11:    if(fread(&byte, sizeof(u1), 1, fpClass) < 0) {
+call    0 never executed
+        -:   12:		printf("\nErro: leitura do byte com incompatibilidade.\n");
+        -:   13:		return EXIT_FAILURE;
+        -:   14:	}
+        -:   15:
+    #####:   16:    return byte;
+        -:   17:}
+        -:   18:
+function u2Leitura called 0 returned 0% blocks executed 0%
+    #####:   19:u2 u2Leitura(FILE *fpClass) {
+        -:   20:	u1 byte1, byte2;
+        -:   21:
+    #####:   22:	if((fread(&byte1, sizeof(u1), 1, fpClass)) < 0 || 
+call    0 never executed
+    #####:   23:		(fread(&byte2, sizeof(u1), 1, fpClass)) < 0) {
+call    0 never executed
+        -:   24:		printf("\nErro: leitura do byte com incompatibilidade.\n");
+        -:   25:		return EXIT_FAILURE;
+        -:   26:	}
+        -:   27:
+    #####:   28:    return ((byte1 << 8) | byte2);
+        -:   29:}
+        -:   30:
+function u4Leitura called 0 returned 0% blocks executed 0%
+    #####:   31:u4 u4Leitura(FILE *fpClass) {
+        -:   32:	u1 byte1, byte2, byte3, byte4;
+        -:   33:
+    #####:   34:    if((fread(&byte1, sizeof(u1), 1, fpClass)) < 0 || 
+call    0 never executed
+    #####:   35:		(fread(&byte2, sizeof(u1), 1, fpClass)) < 0 || 
+call    0 never executed
+    #####:   36:		(fread(&byte3, sizeof(u1), 1, fpClass)) < 0 || 
+call    0 never executed
+    #####:   37:		(fread(&byte4, sizeof(u1), 1, fpClass)) < 0) {
+call    0 never executed
+        -:   38:		printf("\nErro: leitura do byte com incompatibilidade.\n");
+        -:   39:		return EXIT_FAILURE;
+        -:   40:	}
+        -:   41:
+    #####:   42:    return ((byte1 << 24) | (byte2 << 16) | (byte3 << 8) | byte4);
+        -:   43:}
+        -:   44:
+function verificaNumMagic called 0 returned 0% blocks executed 0%
+    #####:   45:int32_t verificaNumMagic(FILE *fpClass) {
+    #####:   46:    cs->magicNumber = u4Leitura(fpClass);
+call    0 never executed
+        -:   47:    
+    #####:   48:    if(cs->magicNumber == 0xCAFEBABE) return TRUE;
+branch  0 never executed
+branch  1 never executed
+    #####:   49:    return FALSE;
+        -:   50:}
+        -:   51:
+function verificaVersao called 0 returned 0% blocks executed 0%
+    #####:   52:int32_t verificaVersao() {
+    #####:   53:    if(cs->majorVersion <= 0x2E) return TRUE;
+branch  0 never executed
+branch  1 never executed
+    #####:   54:    return FALSE;
+        -:   55:}
+        -:   56:
+function armazenaVersoes called 0 returned 0% blocks executed 0%
+    #####:   57:void armazenaVersoes(FILE *fpClass) {
+    #####:   58:    cs->minorVersion = u2Leitura(fpClass);
+call    0 never executed
+    #####:   59:    cs->majorVersion = u2Leitura(fpClass);
+call    0 never executed
+    #####:   60:}
+        -:   61:
+function armazenaConstantPool called 0 returned 0% blocks executed 0%
+    #####:   62:void armazenaConstantPool(FILE *fpClass) {
+        -:   63:    int32_t i, j;
+        -:   64:
+    #####:   65:    cs->constantPoolCount = u2Leitura(fpClass);
+call    0 never executed
+    #####:   66:    cs->constantPool = malloc(sizeof(cpInfo)*(cs->constantPoolCount - 1));
+        -:   67:
+    #####:   68:    for(i = 0; i < (cs->constantPoolCount - 1); i++) {
+branch  0 never executed
+branch  1 never executed
+        -:   69:    	
+        -:   70:        cpInfo cpi, cpi2;
+    #####:   71:        cpi.tag = u1Leitura(fpClass);
+call    0 never executed
+        -:   72:        
+    #####:   73:        switch(cpi.tag) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+branch  4 never executed
+branch  5 never executed
+branch  6 never executed
+branch  7 never executed
+branch  8 never executed
+branch  9 never executed
+branch 10 never executed
+branch 11 never executed
+        -:   74:            case CPOOL_UTF8:
+    #####:   75:                cpi.type.Utf8.length = u2Leitura(fpClass);
+call    0 never executed
+    #####:   76:                cpi.type.Utf8.bytes = malloc(sizeof(u1)*(cpi.type.Utf8.length + 1));
+    #####:   77:                for(j = 0; j < cpi.type.Utf8.length; j++)
+branch  0 never executed
+branch  1 never executed
+    #####:   78:                    cpi.type.Utf8.bytes[j] = u1Leitura(fpClass);
+call    0 never executed
+    #####:   79:                cpi.type.Utf8.bytes[j] = '\0';
+    #####:   80:                break;
+        -:   81:            case CPOOL_INTEGER:
+    #####:   82:                cpi.type.Integer.bytes = u4Leitura(fpClass);
+call    0 never executed
+    #####:   83:                break;
+        -:   84:            case CPOOL_FLOAT:
+    #####:   85:                cpi.type.Float.bytes = u4Leitura(fpClass);
+call    0 never executed
+    #####:   86:                break;
+        -:   87:            case CPOOL_LONG:
+    #####:   88:                cpi.type.Long.highBytes = u4Leitura(fpClass);
+call    0 never executed
+    #####:   89:                cpi.type.Long.lowBytes = u4Leitura(fpClass);
+call    0 never executed
+    #####:   90:                break;
+        -:   91:            case CPOOL_DOUBLE:
+    #####:   92:                cpi.type.Double.highBytes = u4Leitura(fpClass);
+call    0 never executed
+    #####:   93:                cpi.type.Double.lowBytes = u4Leitura(fpClass);
+call    0 never executed
+    #####:   94:                break;
+        -:   95:            case CPOOL_CLASS:
+    #####:   96:                cpi.type.Class.nameIndex = u2Leitura(fpClass);
+call    0 never executed
+    #####:   97:                break;
+        -:   98:            case CPOOL_STRING:
+    #####:   99:                cpi.type.String.stringIndex = u2Leitura(fpClass);
+call    0 never executed
+    #####:  100:                break;
+        -:  101:            case CPOOL_FIELD:
+    #####:  102:                cpi.type.FieldRef.classIndex = u2Leitura(fpClass);
+call    0 never executed
+    #####:  103:                cpi.type.FieldRef.nameTypeIndex = u2Leitura(fpClass);
+call    0 never executed
+    #####:  104:                break;
+        -:  105:            case CPOOL_METHOD:
+    #####:  106:                cpi.type.MethodRef.classIndex = u2Leitura(fpClass);
+call    0 never executed
+    #####:  107:                cpi.type.MethodRef.nameTypeIndex = u2Leitura(fpClass);
+call    0 never executed
+    #####:  108:                break;
+        -:  109:            case CPOOL_INTERFACE:
+    #####:  110:                cpi.type.InterfaceMethodRef.classIndex = u2Leitura(fpClass);
+call    0 never executed
+    #####:  111:                cpi.type.InterfaceMethodRef.nameTypeIndex = u2Leitura(fpClass);
+call    0 never executed
+    #####:  112:                break;
+        -:  113:            case CPOOL_NAMETYPE:
+    #####:  114:                cpi.type.NameType.nameIndex = u2Leitura(fpClass);
+call    0 never executed
+    #####:  115:                cpi.type.NameType.descriptorIndex = u2Leitura(fpClass);
+call    0 never executed
+    #####:  116:                break;
+        -:  117:            default:
+    #####:  118:                break;
+        -:  119:        }
+        -:  120:        
+    #####:  121:        cs->constantPool[i] = cpi;
+    #####:  122:        if(cpi.tag == CPOOL_LONG || cpi.tag == CPOOL_DOUBLE) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  123:            cpi2.tag = 0;
+    #####:  124:            sprintf(cpi2.type.Continued.bytes, "(large numeric continued)");
+    #####:  125:            cs->constantPool[++i] = cpi2;
+        -:  126:        }
+        -:  127:        
+        -:  128:    }
+        -:  129:    
+    #####:  130:}
+        -:  131:
+function armazenaAccessFlags called 0 returned 0% blocks executed 0%
+    #####:  132:void armazenaAccessFlags(FILE *fpClass) {
+    #####:  133:    cs->accessFlags = u2Leitura(fpClass);
+call    0 never executed
+    #####:  134:}
+        -:  135:
+function armazenaClasses called 0 returned 0% blocks executed 0%
+    #####:  136:void armazenaClasses(FILE *fpClass) {
+    #####:  137:    cs->thisClass = u2Leitura(fpClass);
+call    0 never executed
+    #####:  138:    cs->superClass = u2Leitura(fpClass);
+call    0 never executed
+    #####:  139:}
+        -:  140:
+function armazenaInterfaces called 0 returned 0% blocks executed 0%
+    #####:  141:void armazenaInterfaces(FILE *fpClass) {
+        -:  142:    int32_t i;
+        -:  143:
+    #####:  144:    cs->interfaceCount = u2Leitura(fpClass);
+call    0 never executed
+    #####:  145:    cs->interfaces = malloc(sizeof(u2)*(cs->interfaceCount));
+        -:  146:
+    #####:  147:    for(i = 0; i < cs->interfaceCount; i++)
+branch  0 never executed
+branch  1 never executed
+    #####:  148:        cs->interfaces[i] = u2Leitura(fpClass);
+call    0 never executed
+        -:  149:        
+    #####:  150:}
+        -:  151:
+function armazenaCampos called 0 returned 0% blocks executed 0%
+    #####:  152:void armazenaCampos(FILE *fpClass) {
+        -:  153:    int32_t i, j;
+        -:  154:
+    #####:  155:    cs->fieldCount = u2Leitura(fpClass);
+call    0 never executed
+    #####:  156:    cs->fields = malloc(sizeof(fieldInfo)*(cs->fieldCount));
+        -:  157:
+    #####:  158:    for(i = 0; i < cs->fieldCount; i++) {
+branch  0 never executed
+branch  1 never executed
+        -:  159:        fieldInfo field;
+        -:  160:        
+    #####:  161:        field.accessFlags = u2Leitura(fpClass);
+call    0 never executed
+    #####:  162:        field.nameIndex = u2Leitura(fpClass);
+call    0 never executed
+    #####:  163:        field.descriptorIndex = u2Leitura(fpClass);
+call    0 never executed
+    #####:  164:        field.attributeCount = u2Leitura(fpClass);
+call    0 never executed
+        -:  165:        
+    #####:  166:        field.attributes = malloc(sizeof(attributeInfo)*(field.attributeCount));
+    #####:  167:        for(j = 0; j < field.attributeCount; j++)
+branch  0 never executed
+branch  1 never executed
+    #####:  168:            armazenaAtributoUnico(fpClass, &(field.attributes[j]));
+call    0 never executed
+    #####:  169:        cs->fields[i] = field;
+        -:  170:    }
+        -:  171:    
+    #####:  172:}
+        -:  173:
+function armazenaMetodos called 0 returned 0% blocks executed 0%
+    #####:  174:void armazenaMetodos(FILE *fpClass) {
+        -:  175:    int32_t i, j;
+        -:  176:
+    #####:  177:    cs->methodCount = u2Leitura(fpClass);
+call    0 never executed
+    #####:  178:    cs->methods = malloc(sizeof(methodInfo)*(cs->methodCount));
+        -:  179:
+    #####:  180:    for(i = 0; i < cs->methodCount; i++) {
+branch  0 never executed
+branch  1 never executed
+        -:  181:        methodInfo met;
+        -:  182:        
+    #####:  183:        met.accessFlags = u2Leitura(fpClass);
+call    0 never executed
+    #####:  184:        met.nameIndex = u2Leitura(fpClass);
+call    0 never executed
+    #####:  185:        met.descriptorIndex = u2Leitura(fpClass);
+call    0 never executed
+    #####:  186:        met.attributeCount = u2Leitura(fpClass);
+call    0 never executed
+        -:  187:        
+    #####:  188:        met.attributes = malloc(sizeof(attributeInfo)*(met.attributeCount));
+    #####:  189:        for(j = 0; j < met.attributeCount; j++)
+branch  0 never executed
+branch  1 never executed
+    #####:  190:            armazenaAtributoUnico(fpClass, &(met.attributes[j]));
+call    0 never executed
+    #####:  191:        cs->methods[i] = met;
+        -:  192:    }
+        -:  193:    
+    #####:  194:}
+        -:  195:
+function armazenaAtributos called 0 returned 0% blocks executed 0%
+    #####:  196:void armazenaAtributos(FILE *fpClass) {
+        -:  197:    int32_t i;
+        -:  198:
+    #####:  199:    cs->attributeCount = u2Leitura(fpClass);
+call    0 never executed
+        -:  200:    
+    #####:  201:    cs->attributes = malloc(sizeof(attributeInfo)*(cs->attributeCount));
+    #####:  202:    for(i = 0; i < cs->attributeCount; i++)
+branch  0 never executed
+branch  1 never executed
+    #####:  203:        armazenaAtributoUnico(fpClass, &(cs->attributes[i]));
+call    0 never executed
+        -:  204:        
+    #####:  205:}
+        -:  206:
+function armazenaAtributoUnico called 0 returned 0% blocks executed 0%
+    #####:  207:void armazenaAtributoUnico(FILE *fpClass, attributeInfo *atrib) {
+        -:  208:    char *attType;
+        -:  209:
+    #####:  210:    atrib->attributeNameIndex = u2Leitura(fpClass);
+call    0 never executed
+    #####:  211:    atrib->attributeLength = u4Leitura(fpClass);
+call    0 never executed
+        -:  212:
+    #####:  213:    attType = malloc(sizeof(char)*(cs->constantPool[atrib->attributeNameIndex - 1].type.Utf8.length));
+    #####:  214:    strcpy(attType, (char*) cs->constantPool[atrib->attributeNameIndex - 1].type.Utf8.bytes);
+        -:  215:    
+    #####:  216:    if(strcmp(attType, "ConstantValue") == 0) armazenaAtrConst(fpClass, atrib);
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+    #####:  217:    else if(strcmp(attType, "Code") == 0) armazenaAtrCode(fpClass, atrib);
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+    #####:  218:    else if(strcmp(attType, "Exceptions") == 0) armazenaAtrExc(fpClass, atrib);
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+    #####:  219:    else if(strcmp(attType, "InnerClasses") == 0) armazenaAtrInnerClass(fpClass, atrib);
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+    #####:  220:    else if(strcmp(attType, "Synthetic") == 0) armazenaAtrSynthetic(fpClass, atrib);
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+    #####:  221:	else if(strcmp(attType, "Deprecated") == 0) armazenaAtrDeprec(fpClass, atrib);
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+    #####:  222:	else if(strcmp(attType, "LineNumberTable") == 0) armazenaAtrLineNumTable(fpClass, atrib);
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+    #####:  223:	else if(strcmp(attType, "LocalVariableTable") == 0) armazenaAtrLocalVarTable(fpClass, atrib);
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+    #####:  224:	else if(strcmp(attType, "SourceFile") == 0) armazenaAtrSourceFile(fpClass, atrib);
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+    #####:  225:    else armazenaAtrDefault(fpClass, atrib);
+call    0 never executed
+    #####:  226:}
+        -:  227:
+function armazenaAtrConst called 0 returned 0% blocks executed 0%
+    #####:  228:void armazenaAtrConst(FILE *fpClass, attributeInfo *atrib) {
+    #####:  229:	atrib->tag = ATTRIBUTE_CONSTANT_VALUE;
+    #####:  230:    atrib->type.ConstantValue.constantValueIndex = u2Leitura(fpClass);
+call    0 never executed
+    #####:  231:}
+        -:  232:
+function armazenaAtrCode called 0 returned 0% blocks executed 0%
+    #####:  233:void armazenaAtrCode(FILE *fpClass, attributeInfo *atrib) {
+        -:  234:    int32_t i;
+        -:  235:
+    #####:  236:	atrib->tag = ATTRIBUTE_CODE;
+    #####:  237:    atrib->type.Code.maxStack = u2Leitura(fpClass);
+call    0 never executed
+    #####:  238:    atrib->type.Code.maxLocals = u2Leitura(fpClass);
+call    0 never executed
+    #####:  239:    atrib->type.Code.codeLength = u4Leitura(fpClass);
+call    0 never executed
+        -:  240:    
+    #####:  241:    atrib->type.Code.code = malloc(sizeof(u1)*(atrib->type.Code.codeLength));
+    #####:  242:    for(i = 0; i < atrib->type.Code.codeLength; i++)
+branch  0 never executed
+branch  1 never executed
+    #####:  243:        atrib->type.Code.code[i] = u1Leitura(fpClass);
+call    0 never executed
+        -:  244:        
+    #####:  245:    atrib->type.Code.exceptionTableLength = u2Leitura(fpClass);
+call    0 never executed
+        -:  246:    
+    #####:  247:    atrib->type.Code.exceptionTable = 
+    #####:  248:		malloc(sizeof(exceptionTableType)*(atrib->type.Code.exceptionTableLength));
+    #####:  249:    for(i = 0; i < atrib->type.Code.exceptionTableLength; i++) {
+branch  0 never executed
+branch  1 never executed
+    #####:  250:        atrib->type.Code.exceptionTable[i].startPc = u2Leitura(fpClass);
+call    0 never executed
+    #####:  251:        atrib->type.Code.exceptionTable[i].endPc = u2Leitura(fpClass);
+call    0 never executed
+    #####:  252:        atrib->type.Code.exceptionTable[i].handlerPc = u2Leitura(fpClass);
+call    0 never executed
+    #####:  253:        atrib->type.Code.exceptionTable[i].catchType = u2Leitura(fpClass);
+call    0 never executed
+        -:  254:    }
+        -:  255:    
+    #####:  256:    atrib->type.Code.attributeCount = u2Leitura(fpClass);
+call    0 never executed
+        -:  257:    
+    #####:  258:    atrib->type.Code.attributes = 
+    #####:  259:		malloc(sizeof(attributeInfo)*(atrib->type.Code.attributeCount));
+    #####:  260:    for(i = 0; i < atrib->type.Code.attributeCount; i++)
+branch  0 never executed
+branch  1 never executed
+    #####:  261:        armazenaAtributoUnico(fpClass, &(atrib->type.Code.attributes[i]));
+call    0 never executed
+        -:  262:    
+    #####:  263:}
+        -:  264:
+function armazenaAtrExc called 0 returned 0% blocks executed 0%
+    #####:  265:void armazenaAtrExc(FILE *fpClass, attributeInfo *atrib) {
+        -:  266:    int32_t i;
+        -:  267:
+    #####:  268:	atrib->tag = ATTRIBUTE_EXCEPTIONS;
+    #####:  269:    atrib->type.Exceptions.numberOfExceptions = u2Leitura(fpClass);
+call    0 never executed
+        -:  270:    
+    #####:  271:    atrib->type.Exceptions.exceptionIndexTable = 
+    #####:  272:		malloc(sizeof(u2)*(atrib->type.Exceptions.numberOfExceptions));
+    #####:  273:    for(i = 0; i < atrib->type.Exceptions.numberOfExceptions; i++)
+branch  0 never executed
+branch  1 never executed
+    #####:  274:        atrib->type.Exceptions.exceptionIndexTable[i] = u2Leitura(fpClass);
+call    0 never executed
+        -:  275:        
+    #####:  276:}
+        -:  277:
+function armazenaAtrInnerClass called 0 returned 0% blocks executed 0%
+    #####:  278:void armazenaAtrInnerClass(FILE *fpClass, attributeInfo *atrib) {
+        -:  279:    int32_t i;
+        -:  280:
+    #####:  281:	atrib->tag = ATTRIBUTE_INNER_CLASSES;
+    #####:  282:    atrib->type.InnerClasses.numberOfClasses = u2Leitura(fpClass);
+call    0 never executed
+        -:  283:    
+    #####:  284:    atrib->type.InnerClasses.classes = 
+    #####:  285:		malloc(sizeof(classType)*(atrib->type.InnerClasses.numberOfClasses));
+    #####:  286:    for(i = 0; i < atrib->type.InnerClasses.numberOfClasses; i++) {
+branch  0 never executed
+branch  1 never executed
+    #####:  287:        atrib->type.InnerClasses.classes[i].innerClassInfoIndex = u2Leitura(fpClass);
+call    0 never executed
+    #####:  288:        atrib->type.InnerClasses.classes[i].outerClassInfoIndex = u2Leitura(fpClass);
+call    0 never executed
+    #####:  289:        atrib->type.InnerClasses.classes[i].innerNameIndex = u2Leitura(fpClass);
+call    0 never executed
+    #####:  290:        atrib->type.InnerClasses.classes[i].innerClassAccessFlags = u2Leitura(fpClass);
+call    0 never executed
+        -:  291:    }
+        -:  292:    
+    #####:  293:}
+        -:  294:
+function armazenaAtrSynthetic called 0 returned 0% blocks executed 0%
+    #####:  295:void armazenaAtrSynthetic(FILE *fpClass, attributeInfo *atrib) {
+    #####:  296:	printf("\nErro: o programa não trabalha com atributos sinteticos.\n");
+call    0 never executed
+    #####:  297:}
+        -:  298:
+function armazenaAtrDefault called 0 returned 0% blocks executed 0%
+    #####:  299:void armazenaAtrDefault(FILE *fpClass, attributeInfo *atrib) {
+        -:  300:    int32_t i;
+        -:  301:
+    #####:  302:    atrib->type.Default.info = malloc(sizeof(u1)*(atrib->attributeLength));
+    #####:  303:    for(i = 0; i < atrib->attributeLength; i++)
+branch  0 never executed
+branch  1 never executed
+    #####:  304:        atrib->type.Default.info[i] = u1Leitura(fpClass);
+call    0 never executed
+        -:  305:        
+    #####:  306:}
+        -:  307:
+function armazenaAtrDeprec called 0 returned 0% blocks executed 0%
+    #####:  308:void armazenaAtrDeprec(FILE *fpClass, attributeInfo *atrib) {
+    #####:  309:	atrib->tag = ATTRIBUTE_DEPRECATED;
+    #####:  310:}
+        -:  311:
+function armazenaAtrLineNumTable called 0 returned 0% blocks executed 0%
+    #####:  312:void armazenaAtrLineNumTable(FILE *fpClass, attributeInfo *atrib) {
+        -:  313:	int32_t i;
+        -:  314:
+    #####:  315:	atrib->tag = ATTRIBUTE_LINE_NUMBER_TABLE;
+    #####:  316:	atrib->type.LineNumberTable.lineNumberTableLength = u2Leitura(fpClass);
+call    0 never executed
+        -:  317:	
+    #####:  318:	atrib->type.LineNumberTable.lineNumberTable = 
+    #####:  319:		malloc(sizeof(LineNumberTableType)*(atrib->type.LineNumberTable.lineNumberTableLength));
+    #####:  320:	for(i = 0; i < atrib->type.LineNumberTable.lineNumberTableLength; i++) {
+branch  0 never executed
+branch  1 never executed
+    #####:  321:		atrib->type.LineNumberTable.lineNumberTable[i].startPc = u2Leitura(fpClass);
+call    0 never executed
+    #####:  322:		atrib->type.LineNumberTable.lineNumberTable[i].lineNumber = u2Leitura(fpClass);
+call    0 never executed
+        -:  323:	}
+        -:  324:	
+    #####:  325:}
+        -:  326:
+function armazenaAtrLocalVarTable called 0 returned 0% blocks executed 0%
+    #####:  327:void armazenaAtrLocalVarTable(FILE *fpClass, attributeInfo *atrib) {
+        -:  328:	int32_t i;
+        -:  329:
+    #####:  330:	atrib->tag = ATTRIBUTE_LOCAL_VARIABLE_TABLE;
+    #####:  331:	atrib->type.LocalVariableTable.localVariableTableLength = u2Leitura(fpClass);
+call    0 never executed
+        -:  332:	
+    #####:  333:	atrib->type.LocalVariableTable.localVariableTable = 
+    #####:  334:		malloc(sizeof(LocalVariableTableType)*(atrib->type.LocalVariableTable.localVariableTableLength));
+    #####:  335:	for(i = 0; i < atrib->type.LocalVariableTable.localVariableTableLength; i++) {
+branch  0 never executed
+branch  1 never executed
+    #####:  336:		atrib->type.LocalVariableTable.localVariableTable[i].startPc = u2Leitura(fpClass);
+call    0 never executed
+    #####:  337:		atrib->type.LocalVariableTable.localVariableTable[i].length = u2Leitura(fpClass);
+call    0 never executed
+    #####:  338:		atrib->type.LocalVariableTable.localVariableTable[i].nameIndex = u2Leitura(fpClass);
+call    0 never executed
+    #####:  339:		atrib->type.LocalVariableTable.localVariableTable[i].descriptorIndex = u2Leitura(fpClass);
+call    0 never executed
+    #####:  340:		atrib->type.LocalVariableTable.localVariableTable[i].index = u2Leitura(fpClass);
+call    0 never executed
+        -:  341:	}
+        -:  342:	
+    #####:  343:}
+        -:  344:
+function armazenaAtrSourceFile called 0 returned 0% blocks executed 0%
+    #####:  345:void armazenaAtrSourceFile(FILE *fpClass, attributeInfo *atrib) {
+    #####:  346:	atrib->tag = ATTRIBUTE_SOURCE_FILE;
+    #####:  347:	atrib->type.SourceFile.sourceFileIndex = u2Leitura(fpClass);
+call    0 never executed
+    #####:  348:}

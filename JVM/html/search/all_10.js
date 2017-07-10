@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['tag',['tag',['../structcpInfo.html#ade36e742627e238230e827676272cdb3',1,'cpInfo']]],
+  ['tamarray',['tamArray',['../GerenciaHeap_8h.html#a8a613cdcfb26cb937ffe481283edd415',1,'tamArray():&#160;GerenciaHeap.h'],['../main_8c.html#a8a613cdcfb26cb937ffe481283edd415',1,'tamArray():&#160;main.c']]],
+  ['this',['this',['../structObject.html#a62fc533c88117864daf8b588eb53aad5',1,'Object']]],
+  ['thisclass',['thisClass',['../structclassStructure.html#ae9cbcfd5dc4da2c1c153aeec8d0c6083',1,'classStructure']]],
+  ['trocacaracter',['trocaCaracter',['../FuncoesAuxiliares_8h.html#a4518fab36e7d6103e086c820a9290750',1,'FuncoesAuxiliares.c']]],
+  ['type_5fboolean',['TYPE_BOOLEAN',['../FuncoesAuxiliares_8h.html#a8a6f100a36d46cce85bde91f58f4c69b',1,'FuncoesAuxiliares.h']]],
+  ['type_5fboolean_5fsize',['TYPE_BOOLEAN_SIZE',['../FuncoesAuxiliares_8h.html#aa10438d5d5a15be337296a9ec743cca0',1,'FuncoesAuxiliares.h']]],
+  ['type_5fbyte',['TYPE_BYTE',['../FuncoesAuxiliares_8h.html#ad62574650f26d2392ab55729769948b8',1,'FuncoesAuxiliares.h']]],
+  ['type_5fbyte_5fsize',['TYPE_BYTE_SIZE',['../FuncoesAuxiliares_8h.html#a3289e85c1cb13b0f9371beffd99855b0',1,'FuncoesAuxiliares.h']]],
+  ['type_5fchar',['TYPE_CHAR',['../FuncoesAuxiliares_8h.html#a26d8c7975967e3eac4c483dd5f04ad25',1,'FuncoesAuxiliares.h']]],
+  ['type_5fchar_5fsize',['TYPE_CHAR_SIZE',['../FuncoesAuxiliares_8h.html#aa3e5b8223970fa87d7b801389efaca56',1,'FuncoesAuxiliares.h']]],
+  ['type_5fdouble',['TYPE_DOUBLE',['../FuncoesAuxiliares_8h.html#ac87fa650bc0dcd101b39e15ecdb57477',1,'FuncoesAuxiliares.h']]],
+  ['type_5fdouble_5fsize',['TYPE_DOUBLE_SIZE',['../FuncoesAuxiliares_8h.html#aeffb189ae612609036bf4ef79d67f6d0',1,'FuncoesAuxiliares.h']]],
+  ['type_5ffloat',['TYPE_FLOAT',['../FuncoesAuxiliares_8h.html#a105c7addfad52601f4d079673eae7982',1,'FuncoesAuxiliares.h']]],
+  ['type_5ffloat_5fsize',['TYPE_FLOAT_SIZE',['../FuncoesAuxiliares_8h.html#a797e183084b677a0d44e6bbfb424e408',1,'FuncoesAuxiliares.h']]],
+  ['type_5fint',['TYPE_INT',['../FuncoesAuxiliares_8h.html#a56e5f9a95536838408fcca8f22d541b4',1,'FuncoesAuxiliares.h']]],
+  ['type_5fint_5fsize',['TYPE_INT_SIZE',['../FuncoesAuxiliares_8h.html#a5244472b703ff7001aed974a97ad7b74',1,'FuncoesAuxiliares.h']]],
+  ['type_5flong',['TYPE_LONG',['../FuncoesAuxiliares_8h.html#a64b164f200989fc609ff40c0e1aa2518',1,'FuncoesAuxiliares.h']]],
+  ['type_5flong_5fsize',['TYPE_LONG_SIZE',['../FuncoesAuxiliares_8h.html#afed3676971cd1f3357cce087f8e06c4c',1,'FuncoesAuxiliares.h']]],
+  ['type_5freference',['TYPE_REFERENCE',['../FuncoesAuxiliares_8h.html#aa1e9e57b2fa5fdc501d79de85b69c986',1,'FuncoesAuxiliares.h']]],
+  ['type_5freference_5fsize',['TYPE_REFERENCE_SIZE',['../FuncoesAuxiliares_8h.html#a89e1a27d7e98b4be1cbeb39b2304f9e2',1,'FuncoesAuxiliares.h']]],
+  ['type_5fshort',['TYPE_SHORT',['../FuncoesAuxiliares_8h.html#acea74779f1725006872a52c9dd870975',1,'FuncoesAuxiliares.h']]],
+  ['type_5fshort_5fsize',['TYPE_SHORT_SIZE',['../FuncoesAuxiliares_8h.html#a66a5a4271f101399b2e6b641b53de599',1,'FuncoesAuxiliares.h']]]
+];

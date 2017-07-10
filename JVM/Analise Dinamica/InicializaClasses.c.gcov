@@ -1,0 +1,213 @@
+        -:    0:Source:InicializaClasses.c
+        -:    0:Programs:12
+        -:    1:#include <string.h>
+        -:    2:#include <stdio.h>
+        -:    3:#include <stdlib.h>
+        -:    4:
+        -:    5:#include "InicializaClasses.h"
+        -:    6:
+        -:    7:classStructure **vetorClasses = NULL;
+        -:    8:staticStruct *vetorClassesEstatico = NULL;
+        -:    9:int32_t numero_classes = 0;
+        -:   10:
+        -:   11:int32_t flag_impressao = 0;
+        -:   12:char strOut[100];
+        -:   13:char strPath[200];
+        -:   14:
+function configuraSaida called 2 returned 100% blocks executed 100%
+        2:   15:void configuraSaida(char *out, char *path, int32_t flag){
+        2:   16:	flag_impressao = flag;
+        2:   17:	strcpy(strOut, out);
+        2:   18:	strcpy(strPath, path);	
+        2:   19:}
+        -:   20:
+function carregaClass called 2 returned 0% blocks executed 24%
+        2:   21:int32_t carregaClass(char *nomeClass) {
+        -:   22:	int32_t i, classIndice;
+        -:   23:	methodInfo *metodoEstatico;
+        -:   24:
+        2:   25:	if (nomeClass == NULL) return -1;
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+        2:   26:	for (i = 0; i < numero_classes; i++)
+branch  0 taken 0%
+branch  1 taken 100% (fallthrough)
+    #####:   27:		if (strcmp(nomeClass, capturaNomeClass(vetorClasses[i])) == 0) return i;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        2:   28:	numero_classes++;
+        2:   29:	classIndice = numero_classes;
+        -:   30:	
+        2:   31:	vetorClasses = realloc(vetorClasses, sizeof(classStructure*)*classIndice);
+        2:   32:	vetorClassesEstatico = realloc(vetorClassesEstatico, sizeof(staticStruct)*classIndice);
+        -:   33:
+        2:   34:	vetorClasses[classIndice-1] = salvaInfos(nomeClass, strOut, strPath, flag_impressao);
+call    0 returned 0%
+    #####:   35:	if (vetorClasses[classIndice-1] == NULL) {
+branch  0 never executed
+branch  1 never executed
+    #####:   36:		printf("\nErro: nao foi possivel abrir o arquivo.\n");
+call    0 never executed
+    #####:   37:		exit(1);
+call    0 never executed
+        -:   38:	}
+        -:   39:	//Caso queira imprimir apenas os dados do primeiro arquivo aberto
+        -:   40:	//if(flag_impressao == 1) flag_impressao = 0;
+        -:   41:	
+    #####:   42:	vetorClassesEstatico[classIndice-1].className = malloc(strlen(nomeClass)+1);
+    #####:   43:	memcpy(vetorClassesEstatico[classIndice-1].className, nomeClass, strlen(nomeClass));
+    #####:   44:	vetorClassesEstatico[classIndice-1].fieldCount = vetorClasses[classIndice-1]->fieldCount;
+    #####:   45:	vetorClassesEstatico[classIndice-1].value = malloc(vetorClasses[classIndice-1]->fieldCount * sizeof(u8));
+        -:   46:
+    #####:   47:	if ((metodoEstatico = recuperaMetodoEstaticoInit(vetorClasses[classIndice-1])) != NULL) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   48:		prepararMetodo(metodoEstatico, vetorClasses[classIndice-1]);
+call    0 never executed
+    #####:   49:		executarMetodo();
+call    0 never executed
+        -:   50:	}
+        -:   51:	
+    #####:   52:	char* parent = capturaParentNome(vetorClasses[classIndice-1]);
+call    0 never executed
+    #####:   53:	if(parent != NULL) trocaCaracter(parent, "/", "\\");
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+        -:   54:
+        -:   55:	//Caso deseje carregar sempre a super classe, porém pode ser que não esteja disponível para ser aberta na pasta
+        -:   56:	//carregaClass(parent);
+    #####:   57:	return classIndice-1;
+        -:   58:}
+        -:   59:
+function capturaNomeClass called 0 returned 0% blocks executed 0%
+    #####:   60:char* capturaNomeClass(classStructure *class) {
+    #####:   61:	u2 thisClass = class->thisClass;
+    #####:   62:	u2 nameIndex = (class->constantPool[thisClass-1]).type.Class.nameIndex;
+        -:   63:	
+    #####:   64:	return getNome(class, nameIndex);
+call    0 never executed
+        -:   65:}
+        -:   66:
+function capturaParentNome called 0 returned 0% blocks executed 0%
+    #####:   67:char* capturaParentNome(classStructure *class) {
+        -:   68:	u1 *name;
+        -:   69:	u2 superClass, nameIndex, length;
+        -:   70:	char *nomeClass;
+        -:   71:
+    #####:   72:	superClass = class->superClass;
+    #####:   73:	if (superClass == 0) return NULL;
+branch  0 never executed
+branch  1 never executed
+        -:   74:
+    #####:   75:	nameIndex = class->constantPool[superClass-1].type.Class.nameIndex;
+    #####:   76:	length = class->constantPool[nameIndex-1].type.Utf8.length;
+    #####:   77:	name = class->constantPool[nameIndex-1].type.Utf8.bytes;
+        -:   78:	
+    #####:   79:	nomeClass = malloc(sizeof(u2) * length+1);
+    #####:   80:	strncpy(nomeClass, (char *) name, length);
+    #####:   81:	nomeClass[length] = '\0';
+        -:   82:	
+    #####:   83:	return nomeClass;
+        -:   84:}
+        -:   85:
+function capturaClassPorNome called 0 returned 0% blocks executed 0%
+    #####:   86:classStructure* capturaClassPorNome(char *nomeClass) {
+        -:   87:	int32_t i;
+    #####:   88:	if (!nomeClass) return NULL;
+branch  0 never executed
+branch  1 never executed
+        -:   89:	
+    #####:   90:	for (i = 0; i < numero_classes; i++)
+branch  0 never executed
+branch  1 never executed
+    #####:   91:		if (strcmp(nomeClass, capturaNomeClass(vetorClasses[i])) == 0)	return vetorClasses[i];
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:   92:		
+    #####:   93:	return NULL;
+        -:   94:}
+        -:   95:
+function capturaClassPorIndice called 0 returned 0% blocks executed 0%
+    #####:   96:classStructure* capturaClassPorIndice(int32_t indice) {
+    #####:   97:	if (indice >= numero_classes) return NULL;
+branch  0 never executed
+branch  1 never executed
+        -:   98:	
+    #####:   99:	return vetorClasses[indice];
+        -:  100:}
+        -:  101:
+function capturaIndicedoDescritor called 0 returned 0% blocks executed 0%
+    #####:  102:int32_t capturaIndicedoDescritor(char *nomeClass, char *name, u2 nameLen, char *desc, u2 descLen) {
+        -:  103:	u1 *m_nome, *m_descriptor;
+        -:  104:	u2 m_nome_tam, m_descriptor_tam;
+        -:  105:	classStructure *main_class;
+        -:  106:	int32_t i;
+        -:  107:
+    #####:  108:	main_class = capturaClassPorNome(nomeClass);
+call    0 never executed
+    #####:  109:	if (!main_class) return -2;
+branch  0 never executed
+branch  1 never executed
+        -:  110:	
+    #####:  111:	for (i = 0; main_class && i < main_class->fieldCount; i++) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  112:		m_nome = main_class->constantPool[(main_class->fields[i].nameIndex-1)].type.Utf8.bytes;
+    #####:  113:		m_nome_tam = main_class->constantPool[(main_class->fields[i].nameIndex-1)].type.Utf8.length;
+    #####:  114:		m_descriptor = main_class->constantPool[(main_class->fields[i].descriptorIndex-1)].type.Utf8.bytes;
+    #####:  115:		m_descriptor_tam = main_class->constantPool[(main_class->fields[i].descriptorIndex-1)].type.Utf8.length;
+        -:  116:		
+    #####:  117:		if(m_descriptor[0] != 'C' && m_descriptor[0] != 'I' && m_descriptor[0] != 'F' && m_descriptor[0] != 'J' &&
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+branch  4 never executed
+branch  5 never executed
+branch  6 never executed
+branch  7 never executed
+branch  8 never executed
+branch  9 never executed
+    #####:  118:			m_descriptor[0] != 'D' && m_descriptor[0] != 'L' && m_descriptor[0] != '[') {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  119:			printf("\nErro: descritor desconhecido.\n");
+call    0 never executed
+    #####:  120:			exit(1);
+call    0 never executed
+        -:  121:		}
+    #####:  122:		if (nameLen != m_nome_tam && descLen != m_descriptor_tam) continue;
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+        -:  123:
+    #####:  124:		if ((strncmp((char *)name, (char *)m_nome, m_nome_tam) == 0) && 
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  125:			(strncmp((char *)desc, (char *)m_descriptor, m_descriptor_tam) == 0)) 
+    #####:  126:			return i;
+        -:  127:	}
+        -:  128:
+    #####:  129:	return -1;
+        -:  130:}
+        -:  131:
+function capturaCampoEstatico called 0 returned 0% blocks executed 0%
+    #####:  132:u8 capturaCampoEstatico(int32_t classIndice, int32_t campo_indice) {
+    #####:  133:	return vetorClassesEstatico[classIndice].value[campo_indice];
+        -:  134:}
+        -:  135:
+function atribuiCampoEstatico called 0 returned 0% blocks executed 0%
+    #####:  136:void atribuiCampoEstatico(int32_t classIndice, int32_t campo_indice, u8 value) {
+    #####:  137:	vetorClassesEstatico[classIndice].value[campo_indice] = value;
+    #####:  138:}

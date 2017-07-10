@@ -1,0 +1,364 @@
+        -:    0:Source:FuncoesAuxiliares.c
+        -:    0:Programs:12
+        -:    1:#include <stdio.h>
+        -:    2:#include <stdlib.h>
+        -:    3:#include <string.h>
+        -:    4:#include <inttypes.h>
+        -:    5:
+        -:    6:#include "FuncoesAuxiliares.h"
+        -:    7:
+function shift32To64 called 0 returned 0% blocks executed 0%
+    #####:    8:u8 shift32To64(u4 low, u4 high) {
+        -:    9:	u8 aux;
+        -:   10:	
+    #####:   11:	aux = high;
+    #####:   12:	aux <<= 32;
+    #####:   13:	aux += low;
+        -:   14:	
+    #####:   15:	return aux;
+        -:   16:}
+        -:   17:
+function shift8To32 called 0 returned 0% blocks executed 0%
+    #####:   18:u4 shift8To32(u4 low, u4 high) {
+        -:   19:	u4 aux;
+        -:   20:	
+    #####:   21:	aux = high;
+    #####:   22:	aux <<= 8;
+    #####:   23:	aux |= low;
+        -:   24:	
+    #####:   25:	return aux;
+        -:   26:}
+        -:   27:
+function shift64To32 called 0 returned 0% blocks executed 0%
+    #####:   28:void shift64To32(u8 aux, u4 *low, u4 *high) {
+    #####:   29:	*high = aux >> 32;
+    #####:   30:	*low = aux & 0xffffffff;
+    #####:   31:}
+        -:   32:
+function shiftCast32ToDouble called 0 returned 0% blocks executed 0%
+    #####:   33:double shiftCast32ToDouble(u4 low, u4 high) {
+        -:   34:	double m, pot;
+        -:   35:	int64_t bits, s, e, aux_high;
+        -:   36:	int32_t i, j;
+        -:   37:	
+    #####:   38:	aux_high = high;
+    #####:   39:	bits = (aux_high << 32) + low;
+        -:   40:	
+    #####:   41:	s = ((bits >> 63) == 0) ? 1 : -1;
+branch  0 never executed
+branch  1 never executed
+    #####:   42:	e = ((bits >> 52) & 0x7ffL);
+    #####:   43:	for(m = 0, i = 1; i <= 52; i++) {
+branch  0 never executed
+branch  1 never executed
+    #####:   44:		if((bits >> (52 - i)) & 1)	{
+branch  0 never executed
+branch  1 never executed
+    #####:   45:			pot = 1;
+    #####:   46:			for(j = 1; j <= i; j++) pot = pot*2;
+branch  0 never executed
+branch  1 never executed
+    #####:   47:			m = m + (1.0 / pot);
+        -:   48:		}
+        -:   49:	}
+        -:   50:	
+    #####:   51:	m = m + 1; pot = 1;
+    #####:   52:	if((e-1023) > 0) for(j = 1; j <= (e - 1023); j++) pot = pot*2;
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:   53:	else for(j = 1; j <= -(e - 1023); j++) pot = pot/2;
+branch  0 never executed
+branch  1 never executed
+        -:   54:	
+    #####:   55:	return s*m*pot;
+        -:   56:}
+        -:   57:
+function trocaCaracter called 0 returned 0% blocks executed 0%
+    #####:   58:void trocaCaracter(char *stringOriginal, char *subString, char *stringSubstituta) {
+        -:   59:	char buffer[4096], *ch;
+        -:   60:	
+    #####:   61:	if(!(ch = strstr(stringOriginal, subString))) return;
+branch  0 never executed
+branch  1 never executed
+        -:   62:	
+    #####:   63:	strncpy(buffer, stringOriginal, ch-stringOriginal);
+    #####:   64:	buffer[ch-stringOriginal] = 0;
+        -:   65:	
+    #####:   66:	sprintf(buffer+(ch - stringOriginal), "%s%s", stringSubstituta, ch + strlen(subString));
+    #####:   67:	stringOriginal[0] = 0;
+        -:   68:	
+    #####:   69:	strcpy(stringOriginal, buffer);
+    #####:   70:	return trocaCaracter(stringOriginal, subString, stringSubstituta);
+call    0 never executed
+        -:   71:}
+        -:   72:
+function carregaOpcodeInfo called 2 returned 100% blocks executed 100%
+        2:   73:void carregaOpcodeInfo() {
+        -:   74:	int32_t i;
+        2:   75:	op_info = malloc(sizeof(opcode_informacao)*256);
+        -:   76:
+        2:   77:	strcpy(op_info[0x00].info, "nop");
+        2:   78:	strcpy(op_info[0x01].info, "aconst_null");
+        2:   79:	strcpy(op_info[0x02].info, "iconst_m1");
+        2:   80:	strcpy(op_info[0x03].info, "iconst_0");
+        2:   81:	strcpy(op_info[0x04].info, "iconst_1");
+        2:   82:	strcpy(op_info[0x05].info, "iconst_2");
+        2:   83:	strcpy(op_info[0x06].info, "iconst_3");
+        2:   84:	strcpy(op_info[0x07].info, "iconst_4");
+        2:   85:	strcpy(op_info[0x08].info, "iconst_5");
+        2:   86:	strcpy(op_info[0x09].info, "lconst_0");
+        2:   87:	strcpy(op_info[0x0a].info, "lconst_1");
+        2:   88:	strcpy(op_info[0x0b].info, "fconst_0");
+        2:   89:	strcpy(op_info[0x0c].info, "fconst_1");
+        2:   90:	strcpy(op_info[0x0d].info, "fconst_2");
+        2:   91:	strcpy(op_info[0x0e].info, "dconst_0");
+        2:   92:	strcpy(op_info[0x0f].info, "dconst_1");
+        2:   93:	strcpy(op_info[0x10].info, "bipush");
+        2:   94:	strcpy(op_info[0x11].info, "sipush");
+        2:   95:	strcpy(op_info[0x12].info, "ldc");
+        2:   96:	strcpy(op_info[0x13].info, "ldc_w");
+        2:   97:	strcpy(op_info[0x14].info, "ldc2_w");
+        2:   98:	strcpy(op_info[0x15].info, "iload");
+        2:   99:	strcpy(op_info[0x16].info, "lload");
+        2:  100:	strcpy(op_info[0x17].info, "fload");
+        2:  101:	strcpy(op_info[0x18].info, "dload");
+        2:  102:	strcpy(op_info[0x19].info, "aload");
+        2:  103:	strcpy(op_info[0x1a].info, "iload_0");
+        2:  104:	strcpy(op_info[0x1b].info, "iload_1");
+        2:  105:	strcpy(op_info[0x1c].info, "iload_2");
+        2:  106:	strcpy(op_info[0x1d].info, "iload_3");
+        2:  107:	strcpy(op_info[0x1e].info, "lload_0");
+        2:  108:	strcpy(op_info[0x1f].info, "lload_1");
+        2:  109:	strcpy(op_info[0x20].info, "lload_2");
+        2:  110:	strcpy(op_info[0x21].info, "lload_3");
+        2:  111:	strcpy(op_info[0x22].info, "fload_0");
+        2:  112:	strcpy(op_info[0x23].info, "fload_1");
+        2:  113:	strcpy(op_info[0x24].info, "fload_2");
+        2:  114:	strcpy(op_info[0x25].info, "fload_3");
+        2:  115:	strcpy(op_info[0x26].info, "dload_0");
+        2:  116:	strcpy(op_info[0x27].info, "dload_1");
+        2:  117:	strcpy(op_info[0x28].info, "dload_2");
+        2:  118:	strcpy(op_info[0x29].info, "dload_3");
+        2:  119:	strcpy(op_info[0x2a].info, "aload_0");
+        2:  120:	strcpy(op_info[0x2b].info, "aload_1");
+        2:  121:	strcpy(op_info[0x2c].info, "aload_2");
+        2:  122:	strcpy(op_info[0x2d].info, "aload_3");
+        2:  123:	strcpy(op_info[0x2e].info, "iaload");
+        2:  124:	strcpy(op_info[0x2f].info, "laload");
+        2:  125:	strcpy(op_info[0x31].info, "daload");
+        2:  126:	strcpy(op_info[0x32].info, "aaload");
+        2:  127:	strcpy(op_info[0x33].info, "baload");
+        2:  128:	strcpy(op_info[0x34].info, "caload");
+        2:  129:	strcpy(op_info[0x35].info, "saload");
+        2:  130:	strcpy(op_info[0x36].info, "istore");
+        2:  131:	strcpy(op_info[0x37].info, "lstore");
+        2:  132:	strcpy(op_info[0x38].info, "fstore");
+        2:  133:	strcpy(op_info[0x39].info, "dstore");
+        2:  134:	strcpy(op_info[0x3a].info, "astore");
+        2:  135:	strcpy(op_info[0x3b].info, "istore_0");
+        2:  136:	strcpy(op_info[0x3c].info, "istore_1");
+        2:  137:	strcpy(op_info[0x3d].info, "istore_2");
+        2:  138:	strcpy(op_info[0x3e].info, "istore_3");
+        2:  139:	strcpy(op_info[0x3f].info, "lstore_0");
+        2:  140:	strcpy(op_info[0x40].info, "lstore_1");
+        2:  141:	strcpy(op_info[0x41].info, "lstore_2");
+        2:  142:	strcpy(op_info[0x42].info, "lstore_3");
+        2:  143:	strcpy(op_info[0x43].info, "fstore_0");
+        2:  144:	strcpy(op_info[0x44].info, "fstore_1");
+        2:  145:	strcpy(op_info[0x45].info, "fstore_2");
+        2:  146:	strcpy(op_info[0x46].info, "fstore_3");
+        2:  147:	strcpy(op_info[0x47].info, "dstore_0");
+        2:  148:	strcpy(op_info[0x48].info, "dstore_1");
+        2:  149:	strcpy(op_info[0x49].info, "dstore_2");
+        2:  150:	strcpy(op_info[0x4a].info, "dstore_3");
+        2:  151:	strcpy(op_info[0x4b].info, "astore_0");
+        2:  152:	strcpy(op_info[0x4c].info, "astore_1");
+        2:  153:	strcpy(op_info[0x4d].info, "astore_2");
+        2:  154:	strcpy(op_info[0x4e].info, "astore_3");
+        2:  155:	strcpy(op_info[0x4f].info, "iastore");
+        2:  156:	strcpy(op_info[0x50].info, "lastore");
+        2:  157:	strcpy(op_info[0x51].info, "fastore");
+        2:  158:	strcpy(op_info[0x52].info, "dastore");
+        2:  159:	strcpy(op_info[0x53].info, "aastore");
+        2:  160:	strcpy(op_info[0x54].info, "bastore");
+        2:  161:	strcpy(op_info[0x55].info, "castore");
+        2:  162:	strcpy(op_info[0x56].info, "sastore");
+        2:  163:	strcpy(op_info[0x57].info, "pop");
+        2:  164:	strcpy(op_info[0x58].info, "pop2");
+        2:  165:	strcpy(op_info[0x59].info, "dup");
+        2:  166:	strcpy(op_info[0x5a].info, "dup_x1");
+        2:  167:	strcpy(op_info[0x5b].info, "dup_x2");
+        2:  168:	strcpy(op_info[0x5c].info, "dup2");
+        2:  169:	strcpy(op_info[0x5d].info, "dup2_x1");
+        2:  170:	strcpy(op_info[0x5e].info, "dup2_x2");
+        2:  171:	strcpy(op_info[0x5f].info, "swap");
+        2:  172:	strcpy(op_info[0x60].info, "iadd");
+        2:  173:	strcpy(op_info[0x61].info, "ladd");
+        2:  174:	strcpy(op_info[0x62].info, "fadd");
+        2:  175:	strcpy(op_info[0x63].info, "dadd");
+        2:  176:	strcpy(op_info[0x64].info, "isub");
+        2:  177:	strcpy(op_info[0x65].info, "lsub");
+        2:  178:	strcpy(op_info[0x66].info, "fsub");
+        2:  179:	strcpy(op_info[0x67].info, "dsub");
+        2:  180:	strcpy(op_info[0x68].info, "imul");
+        2:  181:	strcpy(op_info[0x69].info, "lmul");
+        2:  182:	strcpy(op_info[0x6a].info, "fmul");
+        2:  183:	strcpy(op_info[0x6b].info, "dmul");
+        2:  184:	strcpy(op_info[0x6c].info, "idiv");
+        2:  185:	strcpy(op_info[0x6d].info, "ldiv");
+        2:  186:	strcpy(op_info[0x6e].info, "fdiv");
+        2:  187:	strcpy(op_info[0x6f].info, "ddiv");
+        2:  188:	strcpy(op_info[0x70].info, "irem");
+        2:  189:	strcpy(op_info[0x71].info, "lrem");
+        2:  190:	strcpy(op_info[0x72].info, "frem");
+        2:  191:	strcpy(op_info[0x73].info, "drem");
+        2:  192:	strcpy(op_info[0x74].info, "ineg");
+        2:  193:	strcpy(op_info[0x75].info, "lneg");
+        2:  194:	strcpy(op_info[0x76].info, "fneg");
+        2:  195:	strcpy(op_info[0x77].info, "dneg");
+        2:  196:	strcpy(op_info[0x78].info, "ishl");
+        2:  197:	strcpy(op_info[0x79].info, "lshl");
+        2:  198:	strcpy(op_info[0x7a].info, "ishr");
+        2:  199:	strcpy(op_info[0x7b].info, "lshr");
+        2:  200:	strcpy(op_info[0x7c].info, "iushr");
+        2:  201:	strcpy(op_info[0x7d].info, "lushr");
+        2:  202:	strcpy(op_info[0x7e].info, "iand");
+        2:  203:	strcpy(op_info[0x7f].info, "land");
+        2:  204:	strcpy(op_info[0x80].info, "ior");
+        2:  205:	strcpy(op_info[0x81].info, "lor");
+        2:  206:	strcpy(op_info[0x82].info, "ixor");
+        2:  207:	strcpy(op_info[0x83].info, "lxor");
+        2:  208:	strcpy(op_info[0x84].info, "iinc");
+        2:  209:	strcpy(op_info[0x85].info, "i2l");
+        2:  210:	strcpy(op_info[0x86].info, "i2f");
+        2:  211:	strcpy(op_info[0x87].info, "i2d");
+        2:  212:	strcpy(op_info[0x88].info, "l2i");
+        2:  213:	strcpy(op_info[0x89].info, "l2f");
+        2:  214:	strcpy(op_info[0x8a].info, "l2d");
+        2:  215:	strcpy(op_info[0x8b].info, "f2i");
+        2:  216:	strcpy(op_info[0x8c].info, "f2l");
+        2:  217:	strcpy(op_info[0x8d].info, "f2d");
+        2:  218:	strcpy(op_info[0x8e].info, "d2i");
+        2:  219:	strcpy(op_info[0x8f].info, "d2l");
+        2:  220:	strcpy(op_info[0x90].info, "d2f");
+        2:  221:	strcpy(op_info[0x91].info, "i2b");
+        2:  222:	strcpy(op_info[0x92].info, "i2c");
+        2:  223:	strcpy(op_info[0x93].info, "i2s");
+        2:  224:	strcpy(op_info[0x94].info, "lcmp");
+        2:  225:	strcpy(op_info[0x95].info, "fcmpl");
+        2:  226:	strcpy(op_info[0x96].info, "fcmpg");
+        2:  227:	strcpy(op_info[0x97].info, "dcmpl");
+        2:  228:	strcpy(op_info[0x98].info, "dcmpg");
+        2:  229:	strcpy(op_info[0x99].info, "ifeq");
+        2:  230:	strcpy(op_info[0x9a].info, "ifne");
+        2:  231:	strcpy(op_info[0x9b].info, "iflt");
+        2:  232:	strcpy(op_info[0x9c].info, "ifge");
+        2:  233:	strcpy(op_info[0x9d].info, "ifgt");
+        2:  234:	strcpy(op_info[0x9e].info, "ifle");
+        2:  235:	strcpy(op_info[0x9f].info, "if_icmpeq");
+        2:  236:	strcpy(op_info[0xa0].info, "if_icmpne");
+        2:  237:	strcpy(op_info[0xa1].info, "if_icmplt");
+        2:  238:	strcpy(op_info[0xa2].info, "if_icmpge");
+        2:  239:	strcpy(op_info[0xa3].info, "if_icmpgt");
+        2:  240:	strcpy(op_info[0xa4].info, "if_icmple");
+        2:  241:	strcpy(op_info[0xa5].info, "if_acmpeq");
+        2:  242:	strcpy(op_info[0xa6].info, "if_acmpne");
+        2:  243:	strcpy(op_info[0xa7].info, "goto");
+        2:  244:	strcpy(op_info[0xa8].info, "jsr");
+        2:  245:	strcpy(op_info[0xa9].info, "ret");
+        2:  246:	strcpy(op_info[0xaa].info, "tableswitch");
+        2:  247:	strcpy(op_info[0xab].info, "lookupswitch");
+        2:  248:	strcpy(op_info[0xac].info, "ireturn");
+        2:  249:	strcpy(op_info[0xad].info, "lreturn");
+        2:  250:	strcpy(op_info[0xae].info, "freturn");
+        2:  251:	strcpy(op_info[0xaf].info, "dreturn");
+        2:  252:	strcpy(op_info[0xb0].info, "areturn");
+        2:  253:	strcpy(op_info[0xb1].info, "return");
+        2:  254:	strcpy(op_info[0xb2].info, "getstatic");
+        2:  255:	strcpy(op_info[0xb3].info, "putstatic");
+        2:  256:	strcpy(op_info[0xb4].info, "getfield");
+        2:  257:	strcpy(op_info[0xb5].info, "putfield");
+        2:  258:	strcpy(op_info[0xb6].info, "invokevirtual");
+        2:  259:	strcpy(op_info[0xb7].info, "invokespecial");
+        2:  260:	strcpy(op_info[0xb8].info, "invokestatic");
+        2:  261:	strcpy(op_info[0xb9].info, "invokeinterface");
+        2:  262:	strcpy(op_info[0xba].info, "invokedynamic");
+        2:  263:	strcpy(op_info[0xbb].info, "new");
+        2:  264:	strcpy(op_info[0xbc].info, "newarray");
+        2:  265:	strcpy(op_info[0xbd].info, "anewarray");
+        2:  266:	strcpy(op_info[0xbe].info, "arraylength");
+        2:  267:	strcpy(op_info[0xbf].info, "athrow");
+        2:  268:	strcpy(op_info[0xc0].info, "checkcast");
+        2:  269:	strcpy(op_info[0xc1].info, "instanceof");
+        2:  270:	strcpy(op_info[0xc2].info, "monitorenter");
+        2:  271:	strcpy(op_info[0xc3].info, "monitorexit");
+        2:  272:	strcpy(op_info[0xc4].info, "wide");
+        2:  273:	strcpy(op_info[0xc5].info, "multianewarray");
+        2:  274:	strcpy(op_info[0xc6].info, "ifnull");
+        2:  275:	strcpy(op_info[0xc7].info, "ifnonnull");
+        2:  276:	strcpy(op_info[0xc8].info, "goto_w");
+        2:  277:	strcpy(op_info[0xc9].info, "jsr_w");
+        -:  278:
+        2:  279:	for(i = 0x00; i <= 0xc9; i++) op_info[i].cont_op = 0;
+branch  0 taken 99%
+branch  1 taken 1% (fallthrough)
+        -:  280:	
+        2:  281:	op_info[0x10].cont_op = 1;
+        2:  282:	op_info[0x11].cont_op = 2;
+        2:  283:	op_info[0x12].cont_op = 1;
+        2:  284:	op_info[0x13].cont_op = 2;
+        2:  285:	op_info[0x14].cont_op = 2;
+        2:  286:	op_info[0x15].cont_op = 1;
+        2:  287:	op_info[0x16].cont_op = 1;
+        2:  288:	op_info[0x17].cont_op = 1;
+        2:  289:	op_info[0x18].cont_op = 1;
+        2:  290:	op_info[0x19].cont_op = 1;
+        2:  291:	op_info[0x36].cont_op = 1;
+        2:  292:	op_info[0x37].cont_op = 1;
+        2:  293:	op_info[0x38].cont_op = 1;
+        2:  294:	op_info[0x39].cont_op = 1;
+        2:  295:	op_info[0x3a].cont_op = 1;
+        2:  296:	op_info[0x84].cont_op = 2;
+        2:  297:	op_info[0x99].cont_op = 2;
+        2:  298:	op_info[0x9a].cont_op = 2;
+        2:  299:	op_info[0x9b].cont_op = 2;
+        2:  300:	op_info[0x9c].cont_op = 2;
+        2:  301:	op_info[0x9d].cont_op = 2;
+        2:  302:	op_info[0x9e].cont_op = 2;
+        2:  303:	op_info[0x9f].cont_op = 2;
+        2:  304:	op_info[0xa0].cont_op = 2;
+        2:  305:	op_info[0xa1].cont_op = 2;
+        2:  306:	op_info[0xa2].cont_op = 2;
+        2:  307:	op_info[0xa3].cont_op = 2;
+        2:  308:	op_info[0xa4].cont_op = 2;
+        2:  309:	op_info[0xa5].cont_op = 2;
+        2:  310:	op_info[0xa6].cont_op = 2;
+        2:  311:	op_info[0xa7].cont_op = 2;
+        2:  312:	op_info[0xa8].cont_op = 2;
+        2:  313:	op_info[0xa9].cont_op = 1;
+        2:  314:	op_info[0xaa].cont_op = 14;
+        2:  315:	op_info[0xab].cont_op = 10;
+        2:  316:	op_info[0xb2].cont_op = 2;
+        2:  317:	op_info[0xb3].cont_op = 2;
+        2:  318:	op_info[0xb4].cont_op = 2;
+        2:  319:	op_info[0xb5].cont_op = 2;
+        2:  320:	op_info[0xb6].cont_op = 2;
+        2:  321:	op_info[0xb7].cont_op = 2;
+        2:  322:	op_info[0xb8].cont_op = 2;
+        2:  323:	op_info[0xb9].cont_op = 4;
+        2:  324:	op_info[0xba].cont_op = 4;
+        2:  325:	op_info[0xbb].cont_op = 2;
+        2:  326:	op_info[0xbc].cont_op = 1;
+        2:  327:	op_info[0xbd].cont_op = 2;
+        2:  328:	op_info[0xc0].cont_op = 2;
+        2:  329:	op_info[0xc1].cont_op = 2;
+        2:  330:	op_info[0xc4].cont_op = 5;
+        2:  331:	op_info[0xc5].cont_op = 3;
+        2:  332:	op_info[0xc6].cont_op = 2;
+        2:  333:	op_info[0xc7].cont_op = 2;
+        2:  334:	op_info[0xc8].cont_op = 4;
+        2:  335:	op_info[0xc9].cont_op = 4;
+        -:  336:
+        2:  337:}

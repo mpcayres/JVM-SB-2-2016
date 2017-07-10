@@ -1,0 +1,51 @@
+        -:    0:Source:GerenciaFrames.c
+        -:    0:Programs:12
+        -:    1:#include <stdlib.h>
+        -:    2:
+        -:    3:#include "GerenciaFrames.h"
+        -:    4:
+        -:    5:static struct pilhaFrames *pilha = NULL;
+        -:    6:
+function Popular_Frame called 0 returned 0% blocks executed 0%
+    #####:    7:void Popular_Frame(classStructure *class, cpInfo *constantPool, attributeInfo *attribute){
+    #####:    8:	pilha->valor->class = class;
+    #####:    9:	pilha->valor->constantPool = constantPool;
+    #####:   10:	pilha->valor->maxStack = attribute->type.Code.maxStack;
+    #####:   11:	pilha->valor->maxLocals = attribute->type.Code.maxLocals;
+    #####:   12:	pilha->valor->codeLength = attribute->type.Code.codeLength;
+    #####:   13:	pilha->valor->code = attribute->type.Code.code;
+    #####:   14:	pilha->valor->fields = calloc(sizeof(u4), pilha->valor->maxLocals);
+    #####:   15:	pilha->valor->pc = 0;
+    #####:   16:}
+        -:   17:
+function Novo_Frame called 0 returned 0% blocks executed 0%
+    #####:   18:void Novo_Frame(classStructure *class, cpInfo *constantPool, attributeInfo *attribute) {
+        -:   19:	struct pilhaFrames *novo;
+    #####:   20:	novo = calloc(sizeof(struct pilhaFrames), 1);
+    #####:   21:	novo->valor = calloc(sizeof(struct frame), 1);
+    #####:   22:	novo->prox = pilha;
+        -:   23:
+    #####:   24:	pilha = novo;
+    #####:   25:	Popular_Frame(class, constantPool, attribute);
+call    0 never executed
+        -:   26:	
+    #####:   27:	frame_corrente = pilha->valor;
+    #####:   28:	Novo_Frame_Pilha();
+call    0 never executed
+    #####:   29:}
+        -:   30:
+function Libera_Frame called 0 returned 0% blocks executed 0%
+    #####:   31:void Libera_Frame() {
+        -:   32:	struct pilhaFrames *proximo;
+        -:   33:	
+    #####:   34:	if(pilha != NULL) {
+branch  0 never executed
+branch  1 never executed
+    #####:   35:		proximo = pilha->prox;
+    #####:   36:		free(pilha->valor->fields); free(pilha->valor); free(pilha);
+    #####:   37:		pilha = proximo;
+        -:   38:		
+    #####:   39:		Libera_Frame_Pilha();
+call    0 never executed
+        -:   40:	}
+    #####:   41:}

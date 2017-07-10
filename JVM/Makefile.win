@@ -1,0 +1,61 @@
+# Project: JVM
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = CarregaInfo.o FuncoesAuxiliares.o GerenciaFrames.o GerenciaHeap.o GerenciaMetodos.o GerenciaPilha.o InicializaClasses.o main.o SalvaInfo.o InstrucoesCat1.o InstrucoesCat2.o InstrucoesGerais.o
+LINKOBJ  = CarregaInfo.o FuncoesAuxiliares.o GerenciaFrames.o GerenciaHeap.o GerenciaMetodos.o GerenciaPilha.o InicializaClasses.o main.o SalvaInfo.o InstrucoesCat1.o InstrucoesCat2.o InstrucoesGerais.o
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib32" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" -static-libgcc -m32
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = JVM.exe
+CXXFLAGS = $(CXXINCS) -m32
+CFLAGS   = $(INCS) -m32
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+CarregaInfo.o: CarregaInfo.c
+	$(CC) -c CarregaInfo.c -o CarregaInfo.o $(CFLAGS)
+
+FuncoesAuxiliares.o: FuncoesAuxiliares.c
+	$(CC) -c FuncoesAuxiliares.c -o FuncoesAuxiliares.o $(CFLAGS)
+
+GerenciaFrames.o: GerenciaFrames.c
+	$(CC) -c GerenciaFrames.c -o GerenciaFrames.o $(CFLAGS)
+
+GerenciaHeap.o: GerenciaHeap.c
+	$(CC) -c GerenciaHeap.c -o GerenciaHeap.o $(CFLAGS)
+
+GerenciaMetodos.o: GerenciaMetodos.c
+	$(CC) -c GerenciaMetodos.c -o GerenciaMetodos.o $(CFLAGS)
+
+GerenciaPilha.o: GerenciaPilha.c
+	$(CC) -c GerenciaPilha.c -o GerenciaPilha.o $(CFLAGS)
+
+InicializaClasses.o: InicializaClasses.c
+	$(CC) -c InicializaClasses.c -o InicializaClasses.o $(CFLAGS)
+
+main.o: main.c
+	$(CC) -c main.c -o main.o $(CFLAGS)
+
+SalvaInfo.o: SalvaInfo.c
+	$(CC) -c SalvaInfo.c -o SalvaInfo.o $(CFLAGS)
+
+InstrucoesCat1.o: InstrucoesCat1.c
+	$(CC) -c InstrucoesCat1.c -o InstrucoesCat1.o $(CFLAGS)
+
+InstrucoesCat2.o: InstrucoesCat2.c
+	$(CC) -c InstrucoesCat2.c -o InstrucoesCat2.o $(CFLAGS)
+
+InstrucoesGerais.o: InstrucoesGerais.c
+	$(CC) -c InstrucoesGerais.c -o InstrucoesGerais.o $(CFLAGS)

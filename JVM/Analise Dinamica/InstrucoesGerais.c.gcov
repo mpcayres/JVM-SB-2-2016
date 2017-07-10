@@ -1,0 +1,2111 @@
+        -:    0:Source:InstrucoesGerais.c
+        -:    0:Programs:12
+        -:    1:#include <stdlib.h>
+        -:    2:#include <string.h>
+        -:    3:#include <stdio.h>
+        -:    4:#include <math.h>
+        -:    5:#include <inttypes.h>
+        -:    6:
+        -:    7:#include "InstrucoesGerais.h"
+        -:    8:
+        -:    9:extern struct frame *frame_corrente;
+        -:   10:extern struct array *tamArray;
+        -:   11:extern u1 returnType;
+        -:   12:extern u8 returnValue;
+        -:   13:int32_t wide = 0;
+        -:   14:
+function jvm_nop called 0 returned 0% blocks executed 0%
+    #####:   15:void jvm_nop() {
+    #####:   16:	frame_corrente->pc++;
+    #####:   17:}
+        -:   18:
+function jvm_pop called 0 returned 0% blocks executed 0%
+    #####:   19:void jvm_pop() {
+    #####:   20:	pop();
+call    0 never executed
+    #####:   21:	frame_corrente->pc++;
+    #####:   22:}
+        -:   23:
+function jvm_pop2 called 0 returned 0% blocks executed 0%
+    #####:   24:void jvm_pop2() {
+    #####:   25:	pop();
+call    0 never executed
+    #####:   26:	pop();
+call    0 never executed
+    #####:   27:	frame_corrente->pc++;
+    #####:   28:}
+        -:   29:
+function jvm_dup called 0 returned 0% blocks executed 0%
+    #####:   30:void jvm_dup() {
+        -:   31:	u4 temp;
+        -:   32:	
+    #####:   33:	temp = pop();
+call    0 never executed
+        -:   34:	
+    #####:   35:	push(temp);
+call    0 never executed
+    #####:   36:	push(temp);
+call    0 never executed
+        -:   37:	
+    #####:   38:	frame_corrente->pc++;
+    #####:   39:}
+        -:   40:
+function jvm_dup_x1 called 0 returned 0% blocks executed 0%
+    #####:   41:void jvm_dup_x1() {
+        -:   42:	u4 temp1, temp2;
+        -:   43:	
+    #####:   44:	temp1 = pop();
+call    0 never executed
+    #####:   45:	temp2 = pop();
+call    0 never executed
+        -:   46:	
+    #####:   47:	push(temp1);
+call    0 never executed
+    #####:   48:	push(temp2);
+call    0 never executed
+    #####:   49:	push(temp1);
+call    0 never executed
+        -:   50:	
+    #####:   51:	frame_corrente->pc++;
+    #####:   52:}
+        -:   53:
+function jvm_dup_x2 called 0 returned 0% blocks executed 0%
+    #####:   54:void jvm_dup_x2() {
+        -:   55:	u4 atributo1, atributo2, atributo3;
+        -:   56:	
+    #####:   57:	atributo1 = pop();
+call    0 never executed
+    #####:   58:	atributo2 = pop();
+call    0 never executed
+    #####:   59:	atributo3 = pop();
+call    0 never executed
+        -:   60:	
+    #####:   61:	push(atributo1);
+call    0 never executed
+    #####:   62:	push(atributo3);
+call    0 never executed
+    #####:   63:	push(atributo2);
+call    0 never executed
+    #####:   64:	push(atributo1);
+call    0 never executed
+        -:   65:	
+    #####:   66:	frame_corrente->pc++;
+    #####:   67:}
+        -:   68:
+function jvm_dup2 called 0 returned 0% blocks executed 0%
+    #####:   69:void jvm_dup2() {
+        -:   70:	u4 atributo1, atributo2;
+        -:   71:	
+    #####:   72:	atributo1 = pop();
+call    0 never executed
+    #####:   73:	atributo2 = pop();
+call    0 never executed
+        -:   74:	
+    #####:   75:	push(atributo2);
+call    0 never executed
+    #####:   76:	push(atributo1);
+call    0 never executed
+    #####:   77:	push(atributo2);
+call    0 never executed
+    #####:   78:	push(atributo1);
+call    0 never executed
+        -:   79:	
+    #####:   80:	frame_corrente->pc++;
+    #####:   81:}
+        -:   82:
+function jvm_dup2_x1 called 0 returned 0% blocks executed 0%
+    #####:   83:void jvm_dup2_x1() {
+        -:   84:	u4 atributo1, atributo2, atributo3;
+        -:   85:	
+    #####:   86:	atributo1 = pop();
+call    0 never executed
+    #####:   87:	atributo2 = pop();
+call    0 never executed
+    #####:   88:	atributo3 = pop();
+call    0 never executed
+        -:   89:	
+    #####:   90:	push(atributo2);
+call    0 never executed
+    #####:   91:	push(atributo1);
+call    0 never executed
+    #####:   92:	push(atributo3);
+call    0 never executed
+    #####:   93:	push(atributo2);
+call    0 never executed
+    #####:   94:	push(atributo1);
+call    0 never executed
+        -:   95:	
+    #####:   96:	frame_corrente->pc++;
+    #####:   97:}
+        -:   98:
+function jvm_dup2_x2 called 0 returned 0% blocks executed 0%
+    #####:   99:void jvm_dup2_x2() {
+        -:  100:	u4 atributo1, atributo2, atributo3, atributo4;
+        -:  101:	
+    #####:  102:	atributo1 = pop();
+call    0 never executed
+    #####:  103:	atributo2 = pop();
+call    0 never executed
+    #####:  104:	atributo3 = pop();
+call    0 never executed
+    #####:  105:	atributo4 = pop();
+call    0 never executed
+        -:  106:	
+    #####:  107:	push(atributo2);
+call    0 never executed
+    #####:  108:	push(atributo1);
+call    0 never executed
+    #####:  109:	push(atributo4);
+call    0 never executed
+    #####:  110:	push(atributo3);
+call    0 never executed
+    #####:  111:	push(atributo2);
+call    0 never executed
+    #####:  112:	push(atributo1);
+call    0 never executed
+        -:  113:	
+    #####:  114:	frame_corrente->pc++;
+    #####:  115:}
+        -:  116:
+function jvm_swap called 0 returned 0% blocks executed 0%
+    #####:  117:void jvm_swap() {
+        -:  118:	u4 temp1, temp2;
+        -:  119:	
+    #####:  120:	temp1 = pop();
+call    0 never executed
+    #####:  121:	temp2 = pop();
+call    0 never executed
+        -:  122:	
+    #####:  123:	push(temp1);
+call    0 never executed
+    #####:  124:	push(temp2);
+call    0 never executed
+        -:  125:	
+    #####:  126:	frame_corrente->pc++;
+    #####:  127:}
+        -:  128:
+function jvm_iload called 0 returned 0% blocks executed 0%
+    #####:  129:void jvm_iload() {
+        -:  130:	u2 indice;
+        -:  131:	
+    #####:  132:	frame_corrente->pc++;
+    #####:  133:	indice = frame_corrente->code[frame_corrente->pc];
+        -:  134:
+    #####:  135:	if(wide == 1) {
+branch  0 never executed
+branch  1 never executed
+    #####:  136:		indice = indice << 8;
+    #####:  137:		frame_corrente->pc++;
+    #####:  138:		indice = indice | frame_corrente->code[frame_corrente->pc];
+    #####:  139:		wide = 0;
+        -:  140:	}
+        -:  141:	
+    #####:  142:	push(frame_corrente->fields[indice]);
+call    0 never executed
+    #####:  143:	frame_corrente->pc++;
+    #####:  144:}
+        -:  145:
+function jvm_fload called 0 returned 0% blocks executed 0%
+    #####:  146:void jvm_fload() {
+        -:  147:	u2 indice;
+        -:  148:	
+    #####:  149:	frame_corrente->pc++;
+    #####:  150:	indice = frame_corrente->code[frame_corrente->pc];
+        -:  151:
+    #####:  152:	if(wide == 1) {
+branch  0 never executed
+branch  1 never executed
+    #####:  153:		indice = indice << 8;
+    #####:  154:		frame_corrente->pc++;
+    #####:  155:		indice = indice | frame_corrente->code[frame_corrente->pc];
+    #####:  156:		wide = 0;
+        -:  157:	}
+        -:  158:	
+    #####:  159:	push(frame_corrente->fields[indice]);
+call    0 never executed
+    #####:  160:	frame_corrente->pc++;
+    #####:  161:}
+        -:  162:
+function jvm_lload called 0 returned 0% blocks executed 0%
+    #####:  163:void jvm_lload() {
+    #####:  164:	u2 indice = 0;
+        -:  165:	
+    #####:  166:	frame_corrente->pc++;
+    #####:  167:	indice = frame_corrente->code[frame_corrente->pc];
+        -:  168:
+    #####:  169:	if(wide == 1) {
+branch  0 never executed
+branch  1 never executed
+    #####:  170:		indice = indice << 8;
+    #####:  171:		frame_corrente->pc++;
+    #####:  172:		indice = indice | frame_corrente->code[frame_corrente->pc];
+    #####:  173:		wide = 0;
+        -:  174:	}
+        -:  175:	
+    #####:  176:	push(frame_corrente->fields[indice]);
+call    0 never executed
+    #####:  177:	push(frame_corrente->fields[indice+1]);
+call    0 never executed
+    #####:  178:	frame_corrente->pc++;
+    #####:  179:}
+        -:  180:
+function jvm_dload called 0 returned 0% blocks executed 0%
+    #####:  181:void jvm_dload() {
+        -:  182:	u2 indice;
+        -:  183:	
+    #####:  184:	frame_corrente->pc++;
+    #####:  185:	indice = frame_corrente->code[frame_corrente->pc];
+        -:  186:
+    #####:  187:	if(wide == 1) {
+branch  0 never executed
+branch  1 never executed
+    #####:  188:		indice = indice << 8;
+    #####:  189:		frame_corrente->pc++;
+    #####:  190:		indice = indice | frame_corrente->code[frame_corrente->pc];
+    #####:  191:		wide = 0;
+        -:  192:	}
+        -:  193:	
+    #####:  194:	push(frame_corrente->fields[indice]);
+call    0 never executed
+    #####:  195:	push(frame_corrente->fields[indice+1]);
+call    0 never executed
+    #####:  196:	frame_corrente->pc++;
+    #####:  197:}
+        -:  198:
+function jvm_aload called 0 returned 0% blocks executed 0%
+    #####:  199:void jvm_aload() {
+        -:  200:	u2 indice;
+        -:  201:	
+    #####:  202:	frame_corrente->pc++;
+    #####:  203:	indice = frame_corrente->code[frame_corrente->pc];
+        -:  204:
+    #####:  205:	if(wide == 1) {
+branch  0 never executed
+branch  1 never executed
+    #####:  206:		indice = indice << 8;
+    #####:  207:		frame_corrente->pc++;
+    #####:  208:		indice = indice | frame_corrente->code[frame_corrente->pc];
+    #####:  209:		wide = 0;
+        -:  210:	}
+        -:  211:	
+    #####:  212:	push(frame_corrente->fields[indice]);
+call    0 never executed
+    #####:  213:	frame_corrente->pc++;
+    #####:  214:}
+        -:  215:
+function jvm_ireturn called 0 returned 0% blocks executed 0%
+    #####:  216:void jvm_ireturn() {
+        -:  217:	u4 atributo;
+        -:  218:	
+    #####:  219:	atributo = pop();
+call    0 never executed
+    #####:  220:	returnType = RETURN_32;
+    #####:  221:	returnValue = (u8) atributo;
+        -:  222:	
+    #####:  223:	frame_corrente->pc++;
+    #####:  224:}
+        -:  225:
+function jvm_freturn called 0 returned 0% blocks executed 0%
+    #####:  226:void jvm_freturn() {
+        -:  227:	u4 atributo;
+        -:  228:	
+    #####:  229:	atributo = pop();
+call    0 never executed
+    #####:  230:	returnType = RETURN_32;
+    #####:  231:	returnValue = (u8) atributo;
+        -:  232:	
+    #####:  233:	frame_corrente->pc++;
+    #####:  234:}
+        -:  235:
+function jvm_lreturn called 0 returned 0% blocks executed 0%
+    #####:  236:void jvm_lreturn() {
+        -:  237:	u4 first, last;
+        -:  238:	
+    #####:  239:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  240:	returnType = RETURN_64;
+    #####:  241:	returnValue = shift32To64(first, last);
+call    0 never executed
+        -:  242:	
+    #####:  243:	frame_corrente->pc++;
+    #####:  244:}
+        -:  245:
+function jvm_dreturn called 0 returned 0% blocks executed 0%
+    #####:  246:void jvm_dreturn() {
+        -:  247:	u4 first, last;
+        -:  248:	
+    #####:  249:	first = pop(); last = pop();
+call    0 never executed
+call    1 never executed
+    #####:  250:	returnType = RETURN_64;
+    #####:  251:	returnValue = shift32To64(first, last);
+call    0 never executed
+        -:  252:	
+    #####:  253:	frame_corrente->pc++;
+    #####:  254:}
+        -:  255:
+function jvm_areturn called 0 returned 0% blocks executed 0%
+    #####:  256:void jvm_areturn() {
+        -:  257:	u4 atributo;
+        -:  258:	
+    #####:  259:	atributo = pop();
+call    0 never executed
+    #####:  260:	returnType = RETURN_32;
+    #####:  261:	returnValue = (u8) atributo;
+        -:  262:	
+    #####:  263:	frame_corrente->pc++;
+    #####:  264:}
+        -:  265:
+function jvm_return called 0 returned 0% blocks executed 0%
+    #####:  266:void jvm_return() {
+    #####:  267:	returnType = RETURN_NONE;
+    #####:  268:	returnValue = 0;
+    #####:  269:	frame_corrente->pc++;
+    #####:  270:}
+        -:  271:
+function jvm_ifeq called 0 returned 0% blocks executed 0%
+    #####:  272:void jvm_ifeq() {
+        -:  273:	u1 divinfo1, divinfo2;
+        -:  274:	int16_t desloc;
+        -:  275:	int32_t temp;
+        -:  276:	
+    #####:  277:	divinfo1 = frame_corrente->code[(frame_corrente->pc)+1];
+    #####:  278:	divinfo2 = frame_corrente->code[(frame_corrente->pc)+2];
+        -:  279:	
+    #####:  280:	temp = (signed) pop();
+call    0 never executed
+    #####:  281:	if(temp == 0) {
+branch  0 never executed
+branch  1 never executed
+    #####:  282:		desloc = (int16_t)shift8To32(divinfo2, divinfo1);
+call    0 never executed
+    #####:  283:		frame_corrente->pc += desloc;
+    #####:  284:	} else frame_corrente->pc += 3;
+        -:  285:	
+    #####:  286:}
+        -:  287:
+function jvm_ifne called 0 returned 0% blocks executed 0%
+    #####:  288:void jvm_ifne() {
+        -:  289:	u1 divinfo1, divinfo2;
+        -:  290:	int16_t desloc;
+        -:  291:	int32_t temp;
+        -:  292:	
+    #####:  293:	divinfo1 = frame_corrente->code[(frame_corrente->pc)+1];
+    #####:  294:	divinfo2 = frame_corrente->code[(frame_corrente->pc)+2];
+        -:  295:	
+    #####:  296:	temp = (signed) pop();
+call    0 never executed
+    #####:  297:	if(temp != 0) {
+branch  0 never executed
+branch  1 never executed
+    #####:  298:		desloc = (int16_t)shift8To32(divinfo2, divinfo1);
+call    0 never executed
+    #####:  299:		frame_corrente->pc += desloc;
+    #####:  300:	} else frame_corrente->pc += 3;
+        -:  301:	
+    #####:  302:}
+        -:  303:
+function jvm_iflt called 0 returned 0% blocks executed 0%
+    #####:  304:void jvm_iflt() {
+        -:  305:	u1 divinfo1, divinfo2;
+        -:  306:	int32_t temp;
+        -:  307:	int16_t desloc;
+    #####:  308:	divinfo1 = frame_corrente->code[(frame_corrente->pc)+1];
+    #####:  309:	divinfo2 = frame_corrente->code[(frame_corrente->pc)+2];
+    #####:  310:	temp = (signed) pop();
+call    0 never executed
+    #####:  311:	if(temp < 0) {
+branch  0 never executed
+branch  1 never executed
+    #####:  312:		desloc = (int16_t)shift8To32(divinfo2, divinfo1);
+call    0 never executed
+    #####:  313:		frame_corrente->pc += desloc;
+        -:  314:	} else {
+    #####:  315:		frame_corrente->pc += 3;
+        -:  316:	}
+    #####:  317:}
+        -:  318:
+function jvm_ifge called 0 returned 0% blocks executed 0%
+    #####:  319:void jvm_ifge() {
+        -:  320:	u1 divinfo1, divinfo2;
+        -:  321:	int32_t temp;
+        -:  322:	int16_t desloc;
+        -:  323:	
+    #####:  324:	divinfo1 = frame_corrente->code[(frame_corrente->pc)+1];
+    #####:  325:	divinfo2 = frame_corrente->code[(frame_corrente->pc)+2];
+        -:  326:	
+    #####:  327:	temp = (signed) pop();
+call    0 never executed
+    #####:  328: 	if(temp >= 0) {
+branch  0 never executed
+branch  1 never executed
+    #####:  329:		desloc = (int16_t)shift8To32(divinfo2, divinfo1);
+call    0 never executed
+    #####:  330:		frame_corrente->pc += desloc;
+    #####:  331:	} else frame_corrente->pc += 3;
+        -:  332:	
+    #####:  333:}
+        -:  334:
+function jvm_ifgt called 0 returned 0% blocks executed 0%
+    #####:  335:void jvm_ifgt() {
+        -:  336:	u1 divinfo1, divinfo2;
+        -:  337:	int32_t temp;
+        -:  338:	int16_t desloc;
+        -:  339:	
+    #####:  340:	divinfo1 = frame_corrente->code[(frame_corrente->pc)+1];
+    #####:  341:	divinfo2 = frame_corrente->code[(frame_corrente->pc)+2];
+        -:  342:	
+    #####:  343:	temp = (signed) pop();
+call    0 never executed
+    #####:  344:	if(temp > 0) {
+branch  0 never executed
+branch  1 never executed
+    #####:  345:		desloc = (int16_t)shift8To32(divinfo2, divinfo1);
+call    0 never executed
+    #####:  346:		frame_corrente->pc += desloc;
+    #####:  347:	} else frame_corrente->pc += 3;
+        -:  348:	
+    #####:  349:}
+        -:  350:
+function jvm_ifle called 0 returned 0% blocks executed 0%
+    #####:  351:void jvm_ifle() {
+        -:  352:	u1 divinfo1, divinfo2;
+        -:  353:	int32_t temp;
+        -:  354:	int16_t desloc;
+        -:  355:	
+    #####:  356:	divinfo1 = frame_corrente->code[(frame_corrente->pc)+1];
+    #####:  357:	divinfo2 = frame_corrente->code[(frame_corrente->pc)+2];
+        -:  358:	
+    #####:  359:	temp = (signed) pop();
+call    0 never executed
+    #####:  360:	if(temp <= 0) {
+branch  0 never executed
+branch  1 never executed
+    #####:  361:		desloc = (int16_t)shift8To32(divinfo2, divinfo1);
+call    0 never executed
+    #####:  362:		frame_corrente->pc += desloc;
+    #####:  363:	} else frame_corrente->pc += 3;
+        -:  364:	
+    #####:  365:}
+        -:  366:
+function jvm_if_icmpeq called 0 returned 0% blocks executed 0%
+    #####:  367:void jvm_if_icmpeq() {
+        -:  368:	u1 divinfo1, divinfo2;
+        -:  369:	int32_t temp1, temp2;
+        -:  370:	int16_t desloc;
+        -:  371:	
+    #####:  372:	divinfo1 = frame_corrente->code[(frame_corrente->pc)+1];
+    #####:  373:	divinfo2 = frame_corrente->code[(frame_corrente->pc)+2];
+        -:  374:	
+    #####:  375:	temp1 = (signed) pop(); temp2 = (signed) pop();
+call    0 never executed
+call    1 never executed
+    #####:  376:	if(temp1 == temp2) {
+branch  0 never executed
+branch  1 never executed
+    #####:  377:		desloc = (int16_t)shift8To32(divinfo2, divinfo1);
+call    0 never executed
+    #####:  378:		frame_corrente->pc += desloc;
+    #####:  379:	} else frame_corrente->pc += 3;
+        -:  380:	
+    #####:  381:}
+        -:  382:
+function jvm_if_icmpne called 0 returned 0% blocks executed 0%
+    #####:  383:void jvm_if_icmpne() {
+        -:  384:	u1 divinfo1, divinfo2;
+        -:  385:	int32_t temp1, temp2;
+        -:  386:	int16_t desloc;
+        -:  387:	
+    #####:  388:	divinfo1 = frame_corrente->code[(frame_corrente->pc)+1];
+    #####:  389:	divinfo2 = frame_corrente->code[(frame_corrente->pc)+2];
+        -:  390:	
+    #####:  391:	temp1 = (signed) pop(); temp2 = (signed) pop();
+call    0 never executed
+call    1 never executed
+    #####:  392:	if(temp1 != temp2) {
+branch  0 never executed
+branch  1 never executed
+    #####:  393:		desloc = (int16_t)shift8To32(divinfo2, divinfo1);
+call    0 never executed
+    #####:  394:		frame_corrente->pc += desloc;
+    #####:  395:	} else frame_corrente->pc += 3;
+        -:  396:	
+    #####:  397:}
+        -:  398:
+function jvm_if_icmplt called 0 returned 0% blocks executed 0%
+    #####:  399:void jvm_if_icmplt() {
+        -:  400:	u1 divinfo1, divinfo2;
+        -:  401:	int32_t temp1, temp2;
+        -:  402:	int16_t desloc;
+        -:  403:	
+    #####:  404:	divinfo1 = frame_corrente->code[(frame_corrente->pc)+1];
+    #####:  405:	divinfo2 = frame_corrente->code[(frame_corrente->pc)+2];
+        -:  406:	
+    #####:  407:	temp2 = (signed) pop(); temp1 = (signed) pop();
+call    0 never executed
+call    1 never executed
+    #####:  408: 	if(temp1 < temp2) {
+branch  0 never executed
+branch  1 never executed
+    #####:  409:		desloc = (int16_t)shift8To32(divinfo2, divinfo1);
+call    0 never executed
+    #####:  410:		frame_corrente->pc += desloc;
+    #####:  411:	} else frame_corrente->pc += 3;
+        -:  412:	
+    #####:  413:}
+        -:  414:
+function jvm_if_icmpge called 0 returned 0% blocks executed 0%
+    #####:  415:void jvm_if_icmpge() {
+        -:  416:	u1 divinfo1, divinfo2;
+        -:  417:	int32_t temp1, temp2;
+        -:  418:	int16_t desloc;
+        -:  419:	
+    #####:  420:	divinfo1 = frame_corrente->code[(frame_corrente->pc)+1];
+    #####:  421:	divinfo2 = frame_corrente->code[(frame_corrente->pc)+2];
+        -:  422:	
+    #####:  423:	temp2 = (signed) pop(); temp1 = (signed) pop();
+call    0 never executed
+call    1 never executed
+    #####:  424:	if(temp1 >= temp2) {
+branch  0 never executed
+branch  1 never executed
+    #####:  425:		desloc = (int16_t)shift8To32(divinfo2, divinfo1);
+call    0 never executed
+    #####:  426:		frame_corrente->pc += desloc;
+    #####:  427:	} else frame_corrente->pc += 3;
+        -:  428:	
+    #####:  429:}
+        -:  430:
+function jvm_if_icmpgt called 0 returned 0% blocks executed 0%
+    #####:  431:void jvm_if_icmpgt() {
+        -:  432:	u1 divinfo1, divinfo2;
+        -:  433:	int32_t temp1, temp2;
+        -:  434:	int16_t desloc;
+        -:  435:	
+    #####:  436:	divinfo1 = frame_corrente->code[(frame_corrente->pc)+1];
+    #####:  437:	divinfo2 = frame_corrente->code[(frame_corrente->pc)+2];
+        -:  438:	
+    #####:  439:	temp2 = (signed) pop(); temp1 = (signed) pop();
+call    0 never executed
+call    1 never executed
+    #####:  440:	if(temp1 > temp2) {
+branch  0 never executed
+branch  1 never executed
+    #####:  441:		desloc = (int16_t)shift8To32(divinfo2, divinfo1);
+call    0 never executed
+    #####:  442:		frame_corrente->pc += desloc;
+    #####:  443:	} else frame_corrente->pc += 3;
+        -:  444:	
+    #####:  445:}
+        -:  446:
+function jvm_if_icmple called 0 returned 0% blocks executed 0%
+    #####:  447:void jvm_if_icmple() {
+        -:  448:	u1 divinfo1, divinfo2;
+        -:  449:	int32_t temp1, temp2;
+        -:  450:	int16_t desloc;
+        -:  451:	
+    #####:  452:	divinfo1 = frame_corrente->code[(frame_corrente->pc)+1];
+    #####:  453:	divinfo2 = frame_corrente->code[(frame_corrente->pc)+2];
+        -:  454:	
+    #####:  455:	temp2 = (signed) pop(); temp1 = (signed) pop();
+call    0 never executed
+call    1 never executed
+    #####:  456:	if(temp1 <= temp2) {
+branch  0 never executed
+branch  1 never executed
+    #####:  457:		desloc = (int16_t)shift8To32(divinfo2, divinfo1);
+call    0 never executed
+    #####:  458:		frame_corrente->pc += desloc;
+    #####:  459:	} else frame_corrente->pc += 3;
+        -:  460:	
+    #####:  461:}
+        -:  462:
+function jvm_if_acmpeq called 0 returned 0% blocks executed 0%
+    #####:  463:void jvm_if_acmpeq() {
+        -:  464:	u1 divinfo1, divinfo2;
+        -:  465:	int32_t temp1, temp2;
+        -:  466:	int16_t desloc;
+        -:  467:	
+    #####:  468:	divinfo1 = frame_corrente->code[(frame_corrente->pc)+1];
+    #####:  469:	divinfo2 = frame_corrente->code[(frame_corrente->pc)+2];
+        -:  470:	
+    #####:  471:	temp2 = (signed) pop(); temp1 = (signed) pop();
+call    0 never executed
+call    1 never executed
+    #####:  472:	if(temp1 == temp2) {
+branch  0 never executed
+branch  1 never executed
+    #####:  473:		desloc = (int16_t)shift8To32(divinfo2, divinfo1);
+call    0 never executed
+    #####:  474:		frame_corrente->pc += desloc;
+    #####:  475:	} else frame_corrente->pc += 3;
+        -:  476:	
+    #####:  477:}
+        -:  478:
+function jvm_if_acmpne called 0 returned 0% blocks executed 0%
+    #####:  479:void jvm_if_acmpne() {
+        -:  480:	u1 divinfo1, divinfo2;
+        -:  481:	int32_t temp1, temp2;
+        -:  482:	int16_t desloc;
+        -:  483:	
+    #####:  484:	divinfo1 = frame_corrente->code[(frame_corrente->pc)+1];
+    #####:  485:	divinfo2 = frame_corrente->code[(frame_corrente->pc)+2];
+        -:  486:	
+    #####:  487:	temp2 = (signed) pop(); temp1 = (signed) pop();
+call    0 never executed
+call    1 never executed
+    #####:  488:	if(temp1 != temp2) {
+branch  0 never executed
+branch  1 never executed
+    #####:  489:		desloc = (int16_t)shift8To32(divinfo2, divinfo1);
+call    0 never executed
+    #####:  490:		frame_corrente->pc += desloc;
+    #####:  491:	} else frame_corrente->pc += 3;
+        -:  492:	
+    #####:  493:}
+        -:  494:
+function jvm_goto called 0 returned 0% blocks executed 0%
+    #####:  495:void jvm_goto() {
+        -:  496:	u1 divinfo1, divinfo2;
+        -:  497:	int16_t desloc;
+        -:  498:	
+    #####:  499:	divinfo1 = frame_corrente->code[(frame_corrente->pc)+1];
+    #####:  500:	divinfo2 = frame_corrente->code[(frame_corrente->pc)+2];
+        -:  501:	
+    #####:  502:	desloc = (int16_t)shift8To32(divinfo2, divinfo1);
+call    0 never executed
+    #####:  503:	frame_corrente->pc += desloc;
+    #####:  504:}
+        -:  505:
+function jvm_jsr called 0 returned 0% blocks executed 0%
+    #####:  506:void jvm_jsr() {
+        -:  507:	u1 divinfo1, divinfo2;
+        -:  508:	int16_t desloc;
+        -:  509:	
+    #####:  510:	push((frame_corrente->pc) + 3);
+call    0 never executed
+    #####:  511:	divinfo1 = frame_corrente->code[(frame_corrente->pc)+1];
+    #####:  512:	divinfo2 = frame_corrente->code[(frame_corrente->pc)+2];
+        -:  513:	
+    #####:  514:	desloc = (int16_t)shift8To32(divinfo2, divinfo1);
+call    0 never executed
+    #####:  515:	frame_corrente->pc += desloc;
+    #####:  516:}
+        -:  517:
+function jvm_ret called 0 returned 0% blocks executed 0%
+    #####:  518:void jvm_ret() {
+        -:  519:	u2 indice;
+        -:  520:	
+    #####:  521:	frame_corrente->pc++;
+    #####:  522:	indice = frame_corrente->code[frame_corrente->pc];
+        -:  523:	
+    #####:  524:	if(wide == 1){
+branch  0 never executed
+branch  1 never executed
+    #####:  525:		indice = indice << 8;
+    #####:  526:		frame_corrente->pc++;
+    #####:  527:		indice = indice | frame_corrente->code[frame_corrente->pc];
+    #####:  528:		wide = 0;
+        -:  529:	}
+        -:  530:	
+    #####:  531:	frame_corrente->pc = frame_corrente->fields[indice];
+    #####:  532:}
+        -:  533:
+function jvm_tableswitch called 0 returned 0% blocks executed 0%
+    #####:  534:void jvm_tableswitch() {
+        -:  535:	int32_t defaulT, last, first, indice, *tableswitch;
+        -:  536:	u4 i, info1, info2, info3, info4, tableswitch_address, target, tableSize, desloc;
+        -:  537:
+    #####:  538:	indice = (int32_t) pop();
+call    0 never executed
+    #####:  539:	for(tableswitch_address = frame_corrente->pc; (frame_corrente->pc + 1) % 4 != 0; frame_corrente->pc++) 
+branch  0 never executed
+branch  1 never executed
+    #####:  540:	frame_corrente->pc++;
+        -:  541:
+    #####:  542:	info1 = frame_corrente->code[frame_corrente->pc++];
+    #####:  543:	info2 = frame_corrente->code[frame_corrente->pc++];
+    #####:  544:	info3 = frame_corrente->code[frame_corrente->pc++];
+    #####:  545:	info4 = frame_corrente->code[frame_corrente->pc++];
+    #####:  546:	defaulT = ((info1 & 0xFF) << 24) | ((info2 & 0xFF) << 16) | ((info3 & 0xFF) << 8) | (info4 & 0xFF);
+        -:  547:
+    #####:  548:	info1 = frame_corrente->code[frame_corrente->pc++];
+    #####:  549:	info2 = frame_corrente->code[frame_corrente->pc++];
+    #####:  550:	info3 = frame_corrente->code[frame_corrente->pc++];
+    #####:  551:	info4 = frame_corrente->code[frame_corrente->pc++];
+    #####:  552:	first = ((info1 & 0xFF) << 24) | ((info2 & 0xFF) << 16) | ((info3 & 0xFF) << 8) | (info4 & 0xFF);
+        -:  553:
+    #####:  554:	info1 = frame_corrente->code[frame_corrente->pc++];
+    #####:  555:	info2 = frame_corrente->code[frame_corrente->pc++];
+    #####:  556:	info3 = frame_corrente->code[frame_corrente->pc++];
+    #####:  557:	info4 = frame_corrente->code[frame_corrente->pc++];
+    #####:  558:	last = ((info1 & 0xFF) << 24) | ((info2 & 0xFF) << 16) | ((info3 & 0xFF) << 8) | (info4 & 0xFF);
+        -:  559:
+    #####:  560:	tableSize = last - first + 1;
+    #####:  561:	tableswitch = calloc(sizeof(u4), tableSize);
+        -:  562:
+    #####:  563:	for(i = 0; i < tableSize; i++) 	{
+branch  0 never executed
+branch  1 never executed
+    #####:  564:		info1 = frame_corrente->code[frame_corrente->pc++];
+    #####:  565:		info2 = frame_corrente->code[frame_corrente->pc++];
+    #####:  566:		info3 = frame_corrente->code[frame_corrente->pc++];
+    #####:  567:		info4 = frame_corrente->code[frame_corrente->pc++];
+    #####:  568:		tableswitch[i] = ((info1 & 0xFF) << 24) | ((info2 & 0xFF) << 16) | ((info3 & 0xFF) << 8) | (info4 & 0xFF);
+        -:  569:	}
+        -:  570:
+    #####:  571:	if(indice < first || indice > last) target = tableswitch_address + defaulT;
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+        -:  572:	else {
+    #####:  573:		desloc = tableswitch[indice - first];
+    #####:  574:		target = tableswitch_address + desloc;
+        -:  575:	}
+        -:  576:	
+    #####:  577:	frame_corrente->pc = target;
+    #####:  578:}
+        -:  579:
+function jvm_lookupswitch called 0 returned 0% blocks executed 0%
+    #####:  580:void jvm_lookupswitch() {
+        -:  581:	int32_t defaulT, npairs, key, *match, *desloc;
+        -:  582:	u4 i, info1, info2, info3, info4, target, lookupswitch_address;
+        -:  583:	u1 encontrado;
+        -:  584:
+    #####:  585:	key = (int32_t)pop();
+call    0 never executed
+    #####:  586:	for(lookupswitch_address = frame_corrente->pc; (frame_corrente->pc + 1) % 4 != 0; frame_corrente->pc++);
+branch  0 never executed
+branch  1 never executed
+    #####:  587:	frame_corrente->pc++;
+        -:  588:
+    #####:  589:	info1 = frame_corrente->code[frame_corrente->pc++];
+    #####:  590:	info2 = frame_corrente->code[frame_corrente->pc++];
+    #####:  591:	info3 = frame_corrente->code[frame_corrente->pc++];
+    #####:  592:	info4 = frame_corrente->code[frame_corrente->pc++];
+    #####:  593:	defaulT = ((info1 & 0xFF) << 24) | ((info2 & 0xFF) << 16) | ((info3 & 0xFF) << 8) | (info4 & 0xFF);
+        -:  594:
+    #####:  595:	info1 = frame_corrente->code[frame_corrente->pc++];
+    #####:  596:	info2 = frame_corrente->code[frame_corrente->pc++];
+    #####:  597:	info3 = frame_corrente->code[frame_corrente->pc++];
+    #####:  598:	info4 = frame_corrente->code[frame_corrente->pc++];
+    #####:  599:	npairs = ((info1 & 0xFF) << 24) | ((info2 & 0xFF) << 16) | ((info3 & 0xFF) << 8) | (info4 & 0xFF);
+        -:  600:
+    #####:  601:	match = calloc(sizeof(int32_t), npairs);
+    #####:  602:	desloc = calloc(sizeof(int32_t), npairs);
+    #####:  603:	for(i = 0; i < npairs; i++) {
+branch  0 never executed
+branch  1 never executed
+    #####:  604:		info1 = frame_corrente->code[frame_corrente->pc++];
+    #####:  605:		info2 = frame_corrente->code[frame_corrente->pc++];
+    #####:  606:		info3 = frame_corrente->code[frame_corrente->pc++];
+    #####:  607:		info4 = frame_corrente->code[frame_corrente->pc++];
+    #####:  608:		match[i] = ((info1 & 0xFF) << 24) | ((info2 & 0xFF) << 16) | ((info3 & 0xFF) << 8) | (info4 & 0xFF);
+        -:  609:		
+    #####:  610:		info1 = frame_corrente->code[frame_corrente->pc++];
+    #####:  611:		info2 = frame_corrente->code[frame_corrente->pc++];
+    #####:  612:		info3 = frame_corrente->code[frame_corrente->pc++];
+    #####:  613:		info4 = frame_corrente->code[frame_corrente->pc++];
+    #####:  614:		desloc[i] = ((info1 & 0xFF) << 24) | ((info2 & 0xFF) << 16) | ((info3 & 0xFF) << 8) | (info4 & 0xFF);
+        -:  615:	}
+        -:  616:
+    #####:  617:	for(i = 0, encontrado = 0; (i < npairs) && (!encontrado); i++)
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  618:		if(match[i] == key) encontrado = 1;
+branch  0 never executed
+branch  1 never executed
+    #####:  619:	i--;
+        -:  620:
+    #####:  621:	if(encontrado) target = desloc[i] + lookupswitch_address;
+branch  0 never executed
+branch  1 never executed
+    #####:  622:	else target = defaulT + lookupswitch_address;
+        -:  623:
+    #####:  624:	frame_corrente->pc = target;
+    #####:  625:}
+        -:  626:
+function jvm_getstatic called 0 returned 0% blocks executed 0%
+    #####:  627:void jvm_getstatic() {
+        -:  628:	u1 indice1, indice2;
+        -:  629:	u2 indice, nameTypeIndex;
+        -:  630:	u4 classIndexTemp;
+        -:  631:	u8 atributo;
+        -:  632:	int32_t classIndex, field_index;
+        -:  633:	char *className, *name, *type;
+        -:  634:
+    #####:  635:	indice1 = (u1) frame_corrente->code[++(frame_corrente->pc)];
+    #####:  636:	indice2 = (u1) frame_corrente->code[++(frame_corrente->pc)];
+    #####:  637:	indice = ((u2) indice1 << 8) | (u2) indice2;
+        -:  638:	
+    #####:  639:	classIndexTemp = frame_corrente->constantPool[indice-1].type.FieldRef.classIndex;
+    #####:  640:	className = getNome(frame_corrente->class, frame_corrente->constantPool[classIndexTemp-1].type.Class.nameIndex);
+call    0 never executed
+    #####:  641:	nameTypeIndex = frame_corrente->constantPool[indice-1].type.FieldRef.nameTypeIndex;
+    #####:  642:	name = getNome(frame_corrente->class, frame_corrente->constantPool[nameTypeIndex-1].type.NameType.nameIndex);
+call    0 never executed
+    #####:  643:	type = getNome(frame_corrente->class, frame_corrente->constantPool[nameTypeIndex-1].type.NameType.descriptorIndex);
+call    0 never executed
+        -:  644:
+    #####:  645:	while((field_index = capturaIndicedoDescritor(className, name, strlen(name), type, strlen(type))) == -1)
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  646:		className = capturaParentNome(capturaClassPorNome(className));
+call    0 never executed
+call    1 never executed
+        -:  647:
+    #####:  648:	if(field_index == -2) {
+branch  0 never executed
+branch  1 never executed
+    #####:  649:		if(type[0] == 'J' || type[0] == 'D') pushU8(0);
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+call    4 never executed
+    #####:  650:		else push(0);
+call    0 never executed
+        -:  651:	} else {
+    #####:  652:		classIndex = carregaClass(className);
+call    0 never executed
+    #####:  653:		atributo = capturaCampoEstatico(classIndex, field_index);
+call    0 never executed
+    #####:  654:		if(type[0] == 'J' || type[0] == 'D') pushU8(atributo);
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+call    4 never executed
+    #####:  655:		else push((u4)atributo);
+call    0 never executed
+        -:  656:	}
+        -:  657:	
+    #####:  658:	frame_corrente->pc++;
+    #####:  659:}
+        -:  660:
+function jvm_putstatic called 0 returned 0% blocks executed 0%
+    #####:  661:void jvm_putstatic() {
+        -:  662:	u1 indice1, indice2;
+        -:  663:	u2 indice, nameTypeIndex;
+        -:  664:	u4 classIndexTemp, atributo1, atributo2;
+        -:  665:	u8 atributo;
+        -:  666:	int32_t classIndex, field_index;
+        -:  667:	char *className, *name, *type;
+        -:  668:
+    #####:  669:	indice1 = (u1) frame_corrente->code[++(frame_corrente->pc)];
+    #####:  670:	indice2 = (u1) frame_corrente->code[++(frame_corrente->pc)];
+    #####:  671:	indice = ((u2)indice1 << 8) | (u2)indice2;
+        -:  672:	
+    #####:  673:	classIndexTemp = frame_corrente->constantPool[indice-1].type.FieldRef.classIndex;
+    #####:  674:	className = getNome(frame_corrente->class, frame_corrente->constantPool[classIndexTemp-1].type.Class.nameIndex);
+call    0 never executed
+    #####:  675:	nameTypeIndex = frame_corrente->constantPool[indice-1].type.FieldRef.nameTypeIndex;
+    #####:  676:	name = getNome(frame_corrente->class, frame_corrente->constantPool[nameTypeIndex-1].type.NameType.nameIndex);
+call    0 never executed
+    #####:  677:	type = getNome(frame_corrente->class, frame_corrente->constantPool[nameTypeIndex-1].type.NameType.descriptorIndex);
+call    0 never executed
+        -:  678:	
+    #####:  679:	while((field_index = capturaIndicedoDescritor(className, name, strlen(name), type, strlen(type))) == -1)
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  680:		className = capturaParentNome(capturaClassPorNome(className));
+call    0 never executed
+call    1 never executed
+        -:  681:
+    #####:  682:	if(field_index == -2) {
+branch  0 never executed
+branch  1 never executed
+    #####:  683:		if(type[0] == 'J' || type[0] == 'D') {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  684:			pop(); pop();
+call    0 never executed
+call    1 never executed
+    #####:  685:		} else pop();
+call    0 never executed
+        -:  686:	} else{
+    #####:  687:		if(type[0] == 'J' || type[0] == 'D') {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  688:			atributo1 = pop();
+call    0 never executed
+    #####:  689:			atributo2 = pop();
+call    0 never executed
+    #####:  690:			atributo = shift32To64(atributo1, atributo2);
+call    0 never executed
+    #####:  691:		} else atributo = (u8) pop();
+call    0 never executed
+    #####:  692:		classIndex = carregaClass(className);
+call    0 never executed
+    #####:  693:		atribuiCampoEstatico(classIndex, field_index, atributo);
+call    0 never executed
+        -:  694:	}
+        -:  695:
+    #####:  696:	frame_corrente->pc++;
+    #####:  697:}
+        -:  698:
+function jvm_getfield called 0 returned 0% blocks executed 0%
+    #####:  699:void jvm_getfield() {
+        -:  700:	u1 first, last;
+        -:  701:	u2 nameTypeIndex;
+        -:  702:	u4 indice, valor_temp;
+        -:  703:	u8 atributo;
+        -:  704:	int32_t classIndex, field_index, nameIndex;
+        -:  705:	char *className, *name, *type;
+        -:  706:	struct Object *objeto;
+        -:  707:
+    #####:  708:	last = frame_corrente->code[++(frame_corrente->pc)];
+    #####:  709:	first = frame_corrente->code[++(frame_corrente->pc)];
+    #####:  710:	indice = shift8To32(first, last);
+call    0 never executed
+        -:  711:	
+    #####:  712:	classIndex = frame_corrente->constantPool[indice-1].type.FieldRef.classIndex;
+    #####:  713:	className = getNome(frame_corrente->class, frame_corrente->constantPool[classIndex-1].type.Class.nameIndex);
+call    0 never executed
+    #####:  714:	nameTypeIndex = frame_corrente->constantPool[indice-1].type.FieldRef.nameTypeIndex;
+    #####:  715:	name = getNome(frame_corrente->class, frame_corrente->constantPool[nameTypeIndex-1].type.NameType.nameIndex);
+call    0 never executed
+    #####:  716:	type = getNome(frame_corrente->class, frame_corrente->constantPool[nameTypeIndex-1].type.NameType.descriptorIndex);
+call    0 never executed
+    #####:  717:	objeto = (struct Object *) pop();
+call    0 never executed
+        -:  718:
+    #####:  719:	while((field_index = capturaIndicedoDescritor(className, name, strlen(name), type, strlen(type))) == -1)
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  720:		className = capturaParentNome(capturaClassPorNome(className));
+call    0 never executed
+call    1 never executed
+        -:  721:
+    #####:  722:	if(field_index == -2) {
+branch  0 never executed
+branch  1 never executed
+    #####:  723:		if(type[0] == 'J' || type[0] == 'D') pushU8(0);
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+call    4 never executed
+    #####:  724:		else push(0);
+call    0 never executed
+        -:  725:	} else{	
+    #####:  726:		nameIndex = frame_corrente->class->fields[field_index].nameIndex;
+    #####:  727:		if(type[0] == 'J' || type[0] == 'D') {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  728:			atributo = capturaCampoObjetoLargo(objeto, nameIndex);
+call    0 never executed
+    #####:  729:			pushU8(atributo);
+call    0 never executed
+        -:  730:		} else {
+    #####:  731:			valor_temp = capturaCampoObjeto(objeto, nameIndex);
+call    0 never executed
+    #####:  732:			push(valor_temp);
+call    0 never executed
+        -:  733:		}
+        -:  734:	}
+    #####:  735:	frame_corrente->pc++;
+    #####:  736:}
+        -:  737:
+function jvm_putfield called 0 returned 0% blocks executed 0%
+    #####:  738:void jvm_putfield() {
+        -:  739:	u1 first, last;
+        -:  740:	u4 indice;
+        -:  741:	int32_t classIndex, field_index, nameIndex;
+        -:  742:	u2 nameTypeIndex;
+        -:  743:	char *className, *name, *type;
+        -:  744:
+        -:  745:	struct Object *objeto;
+        -:  746:	u4 atributo1, atributo2;
+        -:  747:	u8 atributo;
+        -:  748:
+    #####:  749:	last = frame_corrente->code[++(frame_corrente->pc)];
+    #####:  750:	first = frame_corrente->code[++(frame_corrente->pc)];
+    #####:  751:	indice = shift8To32(first, last);
+call    0 never executed
+    #####:  752:	classIndex = frame_corrente->constantPool[indice-1].type.FieldRef.classIndex;
+    #####:  753:	className = getNome(frame_corrente->class, frame_corrente->constantPool[classIndex-1].type.Class.nameIndex);
+call    0 never executed
+    #####:  754:	nameTypeIndex = frame_corrente->constantPool[indice-1].type.FieldRef.nameTypeIndex;
+    #####:  755:	name = getNome(frame_corrente->class, frame_corrente->constantPool[nameTypeIndex-1].type.NameType.nameIndex);
+call    0 never executed
+    #####:  756:	type = getNome(frame_corrente->class, frame_corrente->constantPool[nameTypeIndex-1].type.NameType.descriptorIndex);
+call    0 never executed
+        -:  757:
+    #####:  758:	while((field_index = capturaIndicedoDescritor(className, name, strlen(name), type, strlen(type))) == -1) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  759:		className = capturaParentNome(capturaClassPorNome(className));
+call    0 never executed
+call    1 never executed
+        -:  760:	}
+        -:  761:
+    #####:  762:	if(field_index == -2) {
+branch  0 never executed
+branch  1 never executed
+    #####:  763:		if(type[0] == 'J' || type[0] == 'D') {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  764:			pop();
+call    0 never executed
+    #####:  765:			pop();
+call    0 never executed
+        -:  766:		} else {
+    #####:  767:			pop();
+call    0 never executed
+        -:  768:		}
+    #####:  769:		frame_corrente->pc++;
+    #####:  770:		return;
+        -:  771:	}
+        -:  772:
+    #####:  773:	nameIndex = frame_corrente->class->fields[field_index].nameIndex;
+    #####:  774:	if(type[0] == 'J' || type[0] == 'D') {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  775:		atributo1 = pop();
+call    0 never executed
+    #####:  776:		atributo2 = pop();
+call    0 never executed
+    #####:  777:		objeto = (struct Object *) pop();
+call    0 never executed
+    #####:  778:		atributo = shift32To64(atributo1, atributo2);
+call    0 never executed
+    #####:  779:		atribuiCampoObjetoLargo(objeto, nameIndex, atributo);
+call    0 never executed
+        -:  780:	} else {
+    #####:  781:		atributo1 = pop();
+call    0 never executed
+    #####:  782:		objeto = (struct Object *) pop();
+call    0 never executed
+    #####:  783:		atribuiCampoObjeto(objeto, nameIndex, atributo1);
+call    0 never executed
+        -:  784:	}
+    #####:  785:	frame_corrente->pc++;
+        -:  786:}
+        -:  787:
+function jvm_invokevirtual called 0 returned 0% blocks executed 0%
+    #####:  788:void jvm_invokevirtual() {
+        -:  789:	classStructure *class;
+        -:  790:	methodInfo *method;
+        -:  791:	u1 first, last, *bytes;
+        -:  792:	u2 length, nameTypeIndex, methodNameIndex, methodDescriptorIndex;
+        -:  793:	u4 indice, valorlast, valorfirst, vu4, array_ref, *fieldsTemp;
+        -:  794:	u8 atributo;
+        -:  795:	int32_t i, j, numParams, classIndex, classIndexTemp;
+        -:  796:	char *className, *methodName, *methodDesc;
+        -:  797:	float vfloat;
+        -:  798:
+    #####:  799:	last = frame_corrente->code[++(frame_corrente->pc)];
+    #####:  800:	first = frame_corrente->code[++(frame_corrente->pc)];
+    #####:  801:	indice = shift8To32(first, last);
+call    0 never executed
+        -:  802:	
+    #####:  803:	classIndexTemp = frame_corrente->constantPool[indice-1].type.MethodRef.classIndex;
+    #####:  804:	className = getNome(frame_corrente->class, frame_corrente->constantPool[classIndexTemp-1].type.Class.nameIndex);
+call    0 never executed
+    #####:  805:	nameTypeIndex = frame_corrente->constantPool[indice-1].type.MethodRef.nameTypeIndex;
+    #####:  806:	methodNameIndex = frame_corrente->constantPool[nameTypeIndex-1].type.NameType.nameIndex;
+    #####:  807:	methodDescriptorIndex = frame_corrente->constantPool[nameTypeIndex-1].type.NameType.descriptorIndex;
+    #####:  808:	methodDesc = getNome(frame_corrente->class, methodDescriptorIndex);
+call    0 never executed
+    #####:  809:	methodName = getNome(frame_corrente->class, methodNameIndex);
+call    0 never executed
+        -:  810:
+    #####:  811:	if((strcmp(className, "java/io/PrintStream") == 0) && ((strcmp(methodName,"print") == 0) || (strcmp(methodName,"println") == 0))) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:  812:
+    #####:  813:		if(strstr(methodDesc, "J") != NULL){
+branch  0 never executed
+branch  1 never executed
+    #####:  814:			valorfirst = pop();
+call    0 never executed
+    #####:  815:			valorlast = pop();
+call    0 never executed
+    #####:  816:			atributo = shift32To64(valorfirst, valorlast);
+call    0 never executed
+    #####:  817:			printf("%"PRIi64, (int64_t)atributo);
+call    0 never executed
+    #####:  818:		} else if(strstr(methodDesc, "D") != NULL) {
+branch  0 never executed
+branch  1 never executed
+    #####:  819:			valorfirst = pop();
+call    0 never executed
+    #####:  820:			valorlast = pop();
+call    0 never executed
+    #####:  821:			atributo = shift32To64(valorfirst, valorlast);
+call    0 never executed
+    #####:  822:			printf("%.15f", atributo);
+call    0 never executed
+    #####:  823:		} else if(strstr(methodDesc, "Z") != NULL) {
+branch  0 never executed
+branch  1 never executed
+    #####:  824:			if(pop()) printf("true");
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+    #####:  825:			else printf("false");
+call    0 never executed
+    #####:  826:		} else if(strstr(methodDesc, "C") != NULL) {
+branch  0 never executed
+branch  1 never executed
+        -:  827:
+    #####:  828:			if(strstr(methodDesc, "[C") != NULL){
+branch  0 never executed
+branch  1 never executed
+    #####:  829:				array_ref = pop();
+call    0 never executed
+    #####:  830:				for(i = 0; i < numArrays; i++)
+branch  0 never executed
+branch  1 never executed
+    #####:  831:					if(tamArray[i].ref == array_ref) break;
+branch  0 never executed
+branch  1 never executed
+    #####:  832:				for(j = 0; j < tamArray[i].size; j++)
+branch  0 never executed
+branch  1 never executed
+    #####:  833:					printf("%c", (int16_t) array_ref +i);
+call    0 never executed
+    #####:  834:			} else printf("%c", (int16_t) pop());
+call    0 never executed
+call    1 never executed
+        -:  835:
+    #####:  836:		} else if(strstr(methodDesc, "I") != NULL) {
+branch  0 never executed
+branch  1 never executed
+    #####:  837:			printf("%"PRIi32, (int32_t)pop());
+call    0 never executed
+call    1 never executed
+    #####:  838:		} else if(strstr(methodDesc, "F") != NULL) {
+branch  0 never executed
+branch  1 never executed
+    #####:  839:			vu4 = pop();
+call    0 never executed
+    #####:  840:			memcpy(&vfloat, &vu4, sizeof(u4));
+    #####:  841:			printf("%f", vfloat);
+call    0 never executed
+    #####:  842:		} else if(strstr(methodDesc, "Ljava/lang/String") != NULL) {
+branch  0 never executed
+branch  1 never executed
+    #####:  843:			vu4 = pop();
+call    0 never executed
+    #####:  844:			printf("%s", (char *)vu4);
+call    0 never executed
+    #####:  845:		} else if(strstr(methodDesc, "Ljava/lang/Object") != NULL) {
+branch  0 never executed
+branch  1 never executed
+    #####:  846:			printf("%p", (void *)pop());
+call    0 never executed
+call    1 never executed
+        -:  847:		}
+        -:  848:
+    #####:  849:		if(strcmp(methodName,"println") == 0) printf("\n");
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+        -:  850:		
+        -:  851:	} else {
+        -:  852:		
+    #####:  853:		classIndex = carregaClass(className);
+call    0 never executed
+    #####:  854:		class = capturaClassPorIndice(classIndex);
+call    0 never executed
+        -:  855:
+    #####:  856:		while(class != NULL && (method = recuperaMetodoPorNome_IndiceDesc(class, frame_corrente->class, nameTypeIndex)) == NULL) {
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####:  857:			className = capturaParentNome(class);
+call    0 never executed
+    #####:  858:			classIndex = carregaClass(className);
+call    0 never executed
+    #####:  859:			class = capturaClassPorIndice(classIndex);
+call    0 never executed
+        -:  860:		}
+        -:  861:
+    #####:  862:		if(class == NULL) {
+branch  0 never executed
+branch  1 never executed
+    #####:  863:			printf("\nErro: metodo nao localizado.\n");
+call    0 never executed
+    #####:  864:			exit(1);
+call    0 never executed
+        -:  865:		}
+        -:  866:
+    #####:  867:		numParams = recuperaNumeroParametros(method, class);
+call    0 never executed
+    #####:  868:		fieldsTemp = calloc(sizeof(u4),numParams+1);
+    #####:  869:		for(i = numParams; i >= 0; i--) fieldsTemp[i] = pop();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  870:
+    #####:  871:		if(((method->accessFlags) & FLAG_NATIVE) || strcmp("println", getNome(class, method->nameIndex)) == 0) {
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####:  872:			bytes = class->constantPool[(method->descriptorIndex-1)].type.Utf8.bytes;
+    #####:  873:			length = class->constantPool[(method->descriptorIndex-1)].type.Utf8.length;
+    #####:  874:			if(bytes[length-1] == 'D' || bytes[length-1] == 'J') pushU8(0);
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+call    4 never executed
+    #####:  875:			else if(bytes[length-1] != 'V') push(0);
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+        -:  876:		} else {
+    #####:  877:			prepararMetodo(method, class);
+call    0 never executed
+    #####:  878:			for(i = numParams; i >= 0; i--) frame_corrente->fields[i] = fieldsTemp[i];
+branch  0 never executed
+branch  1 never executed
+    #####:  879:			executarMetodo();
+call    0 never executed
+        -:  880:		}
+        -:  881:		
+        -:  882:	}
+        -:  883:
+    #####:  884:	frame_corrente->pc++;
+    #####:  885:}
+        -:  886:
+function jvm_invokespecial called 0 returned 0% blocks executed 0%
+    #####:  887:void jvm_invokespecial() {
+        -:  888:	classStructure *class;
+        -:  889:	methodInfo *method;
+        -:  890:	u1 first, last, *bytes;
+        -:  891:	u2 nameTypeIndex, length;
+        -:  892:	u4 indice, *fieldsTemp;
+        -:  893:	int32_t i, numParams, classIndex, classIndexTemp;
+        -:  894:	char *className;
+        -:  895:
+    #####:  896:	last = frame_corrente->code[++(frame_corrente->pc)];
+    #####:  897:	first = frame_corrente->code[++(frame_corrente->pc)];
+    #####:  898:	indice = shift8To32(first, last);
+call    0 never executed
+        -:  899:	
+    #####:  900:	classIndexTemp = (frame_corrente->constantPool[indice-1]).type.MethodRef.classIndex;
+    #####:  901:	className = getNome(frame_corrente->class, (frame_corrente->constantPool[classIndexTemp-1]).type.Class.nameIndex);
+call    0 never executed
+    #####:  902:	classIndex = carregaClass(className);
+call    0 never executed
+    #####:  903:	class = capturaClassPorIndice(classIndex);
+call    0 never executed
+    #####:  904:	nameTypeIndex = ((frame_corrente->constantPool[indice-1])).type.MethodRef.nameTypeIndex;
+        -:  905:
+    #####:  906:	while(class != NULL && (method = recuperaMetodoPorNome_IndiceDesc(class, frame_corrente->class, nameTypeIndex)) == NULL) {
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####:  907:		className = capturaParentNome(class);
+call    0 never executed
+    #####:  908:		classIndex = carregaClass(className);
+call    0 never executed
+    #####:  909:		class = capturaClassPorIndice(classIndex);
+call    0 never executed
+        -:  910:	}
+        -:  911:
+    #####:  912:	if(class == NULL) {
+branch  0 never executed
+branch  1 never executed
+    #####:  913:		printf("\nErro: metodo nao localizado.\n");
+call    0 never executed
+    #####:  914:		exit(1);
+call    0 never executed
+        -:  915:	}
+        -:  916:
+    #####:  917:	numParams = recuperaNumeroParametros(method, class);
+call    0 never executed
+    #####:  918:	fieldsTemp = calloc(sizeof(u4),numParams+1);
+    #####:  919:	for(i = numParams; i >= 0; i--) fieldsTemp[i] = pop();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  920:
+    #####:  921:	if(method->accessFlags & FLAG_NATIVE) {
+branch  0 never executed
+branch  1 never executed
+    #####:  922:		bytes = class->constantPool[(method->descriptorIndex-1)].type.Utf8.bytes;
+    #####:  923:		length = class->constantPool[(method->descriptorIndex-1)].type.Utf8.length;
+    #####:  924:		if(bytes[length-1] == 'D' || bytes[length-1] == 'J') pushU8(0);
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+call    4 never executed
+    #####:  925:		else if(bytes[length-1] != 'V') push(0);
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+        -:  926:	} else {
+    #####:  927:		prepararMetodo(method, class);
+call    0 never executed
+    #####:  928:		for(i = numParams; i >= 0; i--) frame_corrente->fields[i] = fieldsTemp[i];
+branch  0 never executed
+branch  1 never executed
+    #####:  929:		executarMetodo();
+call    0 never executed
+        -:  930:	}
+        -:  931:	
+    #####:  932:	frame_corrente->pc++;
+    #####:  933:}
+        -:  934:
+function jvm_invokestatic called 0 returned 0% blocks executed 0%
+    #####:  935:void jvm_invokestatic() {
+        -:  936:	classStructure *class;
+        -:  937:	methodInfo *method;
+        -:  938:	u1 first, last, *bytes;
+        -:  939:	u2 nameTypeIndex, length;
+        -:  940:	u4 indice, *fieldsTemp;	
+        -:  941:	int32_t i, numParams, classIndex, classIndexTemp;	
+        -:  942:	char *className;
+        -:  943:
+    #####:  944:	last = frame_corrente->code[++(frame_corrente->pc)];
+    #####:  945:	first = frame_corrente->code[++(frame_corrente->pc)];
+    #####:  946:	indice = shift8To32(first, last);
+call    0 never executed
+        -:  947:	
+    #####:  948:	classIndexTemp = frame_corrente->constantPool[indice-1].type.MethodRef.classIndex;
+    #####:  949:	className = getNome(frame_corrente->class, frame_corrente->constantPool[classIndexTemp-1].type.Class.nameIndex);
+call    0 never executed
+    #####:  950:	nameTypeIndex = frame_corrente->constantPool[indice-1].type.MethodRef.nameTypeIndex;
+    #####:  951:	classIndex = carregaClass(className);
+call    0 never executed
+        -:  952:	
+    #####:  953:	class = capturaClassPorIndice(classIndex);
+call    0 never executed
+    #####:  954:	method = recuperaMetodoPorNome_IndiceDesc(class, frame_corrente->class, nameTypeIndex);
+call    0 never executed
+    #####:  955:	numParams = recuperaNumeroParametros(method, class);
+call    0 never executed
+    #####:  956:	fieldsTemp = calloc(sizeof(u4),numParams+1);
+        -:  957:	
+    #####:  958:	for(i = numParams-1; i >= 0; i--) {
+branch  0 never executed
+branch  1 never executed
+    #####:  959:		indice = pop();
+call    0 never executed
+    #####:  960:		fieldsTemp[i] = indice;
+        -:  961:	}
+        -:  962:
+    #####:  963:	if(method->accessFlags & FLAG_NATIVE) {
+branch  0 never executed
+branch  1 never executed
+    #####:  964:		bytes = class->constantPool[(method->descriptorIndex-1)].type.Utf8.bytes;
+    #####:  965:		length = class->constantPool[(method->descriptorIndex-1)].type.Utf8.length;
+    #####:  966:		if(bytes[length-1] == 'D' || bytes[length-1] == 'J') pushU8(0);
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+call    4 never executed
+    #####:  967:		else if(bytes[length-1] != 'V') push(0);
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+        -:  968:	} else {
+    #####:  969:		prepararMetodo(method, class);
+call    0 never executed
+    #####:  970:		for(i = numParams-1; i >= 0; i--) frame_corrente->fields[i] = fieldsTemp[i];
+branch  0 never executed
+branch  1 never executed
+    #####:  971:		executarMetodo();
+call    0 never executed
+        -:  972:	}
+        -:  973:	
+    #####:  974:	frame_corrente->pc++;
+    #####:  975:}
+        -:  976:
+function jvm_invokeinterface called 0 returned 0% blocks executed 0%
+    #####:  977:void jvm_invokeinterface() {
+        -:  978:	classStructure *class;
+        -:  979:	methodInfo *method;
+        -:  980:	u1 first, last, args_count, zero;
+        -:  981:	u4 indice, *fieldsTemp;
+        -:  982:	u2 nameTypeIndex;
+        -:  983:	int32_t i, classIndex, classIndexTemp;
+        -:  984:	char *className;
+        -:  985:
+    #####:  986:	last = frame_corrente->code[++(frame_corrente->pc)];
+    #####:  987:	first = frame_corrente->code[++(frame_corrente->pc)];
+    #####:  988:	indice = shift8To32(first, last);
+call    0 never executed
+        -:  989:	
+    #####:  990:	args_count = frame_corrente->code[++(frame_corrente->pc)];
+    #####:  991:	zero = frame_corrente->code[++(frame_corrente->pc)];
+    #####:  992:	fieldsTemp = calloc(sizeof(u4),args_count+1);
+        -:  993:	
+    #####:  994:	for(i = args_count; i >= 0; i--) fieldsTemp[i] = pop();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  995:
+    #####:  996:	classIndexTemp = frame_corrente->constantPool[indice-1].type.MethodRef.classIndex;
+    #####:  997:	className = getNome(frame_corrente->class, frame_corrente->constantPool[classIndexTemp-1].type.Class.nameIndex);
+call    0 never executed
+    #####:  998:	classIndex = carregaClass(className);
+call    0 never executed
+        -:  999:	
+    #####: 1000:	class = capturaClassPorIndice(classIndex);
+call    0 never executed
+    #####: 1001:	nameTypeIndex = (frame_corrente->constantPool[indice-1].type.MethodRef.nameTypeIndex);
+        -: 1002:	
+    #####: 1003:	while(class != NULL && (method = recuperaMetodoPorNome_IndiceDesc(class, frame_corrente->class, nameTypeIndex)) == NULL) {
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####: 1004:		className = capturaParentNome(class);
+call    0 never executed
+    #####: 1005:		classIndex = carregaClass(className);
+call    0 never executed
+    #####: 1006:		class = capturaClassPorIndice(classIndex);
+call    0 never executed
+        -: 1007:	}
+        -: 1008:
+    #####: 1009:	if(class == NULL) {
+branch  0 never executed
+branch  1 never executed
+    #####: 1010:		printf("\nErro: metodo nao localizado.\n");
+call    0 never executed
+    #####: 1011:		exit(1);
+call    0 never executed
+        -: 1012:	}
+        -: 1013:	
+    #####: 1014:	prepararMetodo(method, class);
+call    0 never executed
+    #####: 1015:	for(i = args_count; i >= 0; i--) frame_corrente->fields[i] = fieldsTemp[i];
+branch  0 never executed
+branch  1 never executed
+    #####: 1016:	executarMetodo();
+call    0 never executed
+        -: 1017:	
+    #####: 1018:	frame_corrente->pc++;
+    #####: 1019:}
+        -: 1020:
+function jvm_invokedynamic called 0 returned 0% blocks executed 0%
+    #####: 1021:void jvm_invokedynamic() {
+    #####: 1022:	printf("\nErro: nao e capaz de realizar invokedynamic.\n");
+call    0 never executed
+    #####: 1023:}
+        -: 1024:
+function jvm_new called 0 returned 0% blocks executed 0%
+    #####: 1025:void jvm_new() {
+        -: 1026:	u1 first, last;
+        -: 1027:	u4 indice;
+        -: 1028:	int32_t classIndex;
+        -: 1029:	char *className;
+        -: 1030:	classStructure *class;
+        -: 1031:	struct Object *objeto;
+        -: 1032:
+    #####: 1033:	last = frame_corrente->code[++(frame_corrente->pc)];
+    #####: 1034:	first = frame_corrente->code[++(frame_corrente->pc)];
+        -: 1035:
+    #####: 1036:	indice = shift8To32(first, last);
+call    0 never executed
+    #####: 1037:	className = getNome(frame_corrente->class, frame_corrente->constantPool[indice-1].type.Class.nameIndex);
+call    0 never executed
+    #####: 1038:	classIndex = carregaClass(className);
+call    0 never executed
+    #####: 1039:	class = capturaClassPorIndice(classIndex);
+call    0 never executed
+    #####: 1040:	objeto = novoObject(class);
+call    0 never executed
+        -: 1041:	
+    #####: 1042:	push((u4) objeto);
+call    0 never executed
+    #####: 1043:	frame_corrente->pc++;
+    #####: 1044:}
+        -: 1045:
+function jvm_newarray called 0 returned 0% blocks executed 0%
+    #####: 1046:void jvm_newarray() {
+        -: 1047:	u1 type;
+        -: 1048:	u4 count;
+        -: 1049:	
+    #####: 1050:	count = pop();
+call    0 never executed
+    #####: 1051:	frame_corrente->pc++;
+    #####: 1052:	type = frame_corrente->code[frame_corrente->pc];
+        -: 1053:	
+        -: 1054:	if(count < 0){
+        -: 1055:		printf("\nErro: array de tamanho incompativel.\n");
+        -: 1056:		exit(1);
+        -: 1057:	}
+        -: 1058:	
+    #####: 1059:	push((u4)novoArray(count, type));
+call    0 never executed
+call    1 never executed
+    #####: 1060:	frame_corrente->pc++;
+    #####: 1061:}
+        -: 1062:
+function jvm_anewarray called 0 returned 0% blocks executed 0%
+    #####: 1063:void jvm_anewarray() {
+        -: 1064:	u4 count;
+    #####: 1065:	count = pop();
+call    0 never executed
+    #####: 1066:	frame_corrente->pc++;
+    #####: 1067:	frame_corrente->pc++;
+        -: 1068:	if(count < 0) {
+        -: 1069:		printf("\nErro: array de tamanho incompativel.\n");
+        -: 1070:		exit(1);
+        -: 1071:	}
+        -: 1072:	
+    #####: 1073:	push((u4) novoArray(count, 0));
+call    0 never executed
+call    1 never executed
+    #####: 1074:	frame_corrente->pc++;
+    #####: 1075:}
+        -: 1076:
+function jvm_arraylength called 0 returned 0% blocks executed 0%
+    #####: 1077:void jvm_arraylength() {
+        -: 1078:	u4 aref;
+        -: 1079:	int32_t i;
+        -: 1080:	
+    #####: 1081:	aref = pop();
+call    0 never executed
+    #####: 1082:	for(i = 0; i < numArrays; i++, frame_corrente->pc++) {
+branch  0 never executed
+branch  1 never executed
+    #####: 1083:		if(tamArray[i].ref == aref) {
+branch  0 never executed
+branch  1 never executed
+    #####: 1084:			push(tamArray[i].ref);
+call    0 never executed
+    #####: 1085:			frame_corrente->pc++;
+    #####: 1086:			return;
+        -: 1087:		}
+        -: 1088:	}
+        -: 1089:	
+    #####: 1090:	push(0);
+call    0 never executed
+    #####: 1091:	frame_corrente->pc++;
+        -: 1092:}
+        -: 1093:
+function jvm_athrow called 0 returned 0% blocks executed 0%
+    #####: 1094:void jvm_athrow() {
+    #####: 1095:	frame_corrente->pc++;
+    #####: 1096:}
+        -: 1097:
+function jvm_checkcast called 0 returned 0% blocks executed 0%
+    #####: 1098:void jvm_checkcast() {
+        -: 1099:	u2 indice;
+        -: 1100:	struct Object *ref;
+        -: 1101:
+    #####: 1102:	frame_corrente->pc++;
+    #####: 1103:	indice = frame_corrente->code[frame_corrente->pc];
+    #####: 1104:	indice = indice << 8;
+        -: 1105:	
+    #####: 1106:	frame_corrente->pc++;
+    #####: 1107:	indice = indice | frame_corrente->code[frame_corrente->pc];
+    #####: 1108:	ref = (struct Object *) pop();
+call    0 never executed
+        -: 1109:	
+    #####: 1110:	if(ref == NULL) {
+branch  0 never executed
+branch  1 never executed
+    #####: 1111:		printf("\nErro: referencia incorreta.\n");
+call    0 never executed
+    #####: 1112:		exit(1);
+call    0 never executed
+        -: 1113:	}
+        -: 1114:	
+    #####: 1115:	if(strcmp(getNome(frame_corrente->class, indice), capturaNomeClass(ref->this)) == 0) {
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####: 1116:		printf("\nErro: objeto de tipo errado.\n");
+call    0 never executed
+    #####: 1117:		exit(1);
+call    0 never executed
+        -: 1118:	}
+        -: 1119:	
+    #####: 1120:	push((u4) ref);
+call    0 never executed
+    #####: 1121:	frame_corrente->pc++;
+    #####: 1122:}
+        -: 1123:
+function jvm_instanceof called 0 returned 0% blocks executed 0%
+    #####: 1124:void jvm_instanceof() {
+        -: 1125:	u2 indice;
+        -: 1126:	struct Object *ref;
+        -: 1127:
+    #####: 1128:	frame_corrente->pc++;
+    #####: 1129:	indice = frame_corrente->code[frame_corrente->pc];
+    #####: 1130:	indice = indice << 8;
+        -: 1131:	
+    #####: 1132:	frame_corrente->pc++;
+    #####: 1133:	indice = indice | frame_corrente->code[frame_corrente->pc];
+    #####: 1134:	ref = (struct Object *) pop();
+call    0 never executed
+        -: 1135:	
+    #####: 1136:	if(ref == NULL) {
+branch  0 never executed
+branch  1 never executed
+    #####: 1137:		printf("\nErro: referencia nula.\n");
+call    0 never executed
+    #####: 1138:		exit(1);
+call    0 never executed
+        -: 1139:	}
+        -: 1140:	
+    #####: 1141:	if(strcmp(getNome(frame_corrente->class, indice), capturaNomeClass(ref->this)) == 0) {
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####: 1142:		push(1);
+call    0 never executed
+    #####: 1143:		frame_corrente->pc++;
+    #####: 1144:		return;
+        -: 1145:	}
+        -: 1146:	
+    #####: 1147:	push(0);
+call    0 never executed
+    #####: 1148:	frame_corrente->pc++;
+        -: 1149:}
+        -: 1150:
+function jvm_monitorenter called 0 returned 0% blocks executed 0%
+    #####: 1151:void jvm_monitorenter() {
+    #####: 1152:	pop();
+call    0 never executed
+    #####: 1153:	frame_corrente->pc++;
+    #####: 1154:}
+        -: 1155:
+function jvm_monitorexit called 0 returned 0% blocks executed 0%
+    #####: 1156:void jvm_monitorexit() {
+    #####: 1157:	pop();
+call    0 never executed
+    #####: 1158:	frame_corrente->pc++;
+    #####: 1159:}
+        -: 1160:
+function jvm_wide called 0 returned 0% blocks executed 0%
+    #####: 1161:void jvm_wide() {
+    #####: 1162:	wide = 1;	
+    #####: 1163:	frame_corrente->pc++;
+    #####: 1164:}
+        -: 1165:
+function jvm_multianewarray called 0 returned 0% blocks executed 0%
+    #####: 1166:void jvm_multianewarray() {
+        -: 1167:	u1 dimensions;
+        -: 1168:	u2 indexinfo1, indexinfo2, indice, type, atype;
+        -: 1169:	u4 i, dimension, size;
+        -: 1170:	void *arrayref;
+        -: 1171:	char *array_type;
+        -: 1172:
+    #####: 1173:	frame_corrente->pc++; indexinfo1 = frame_corrente->code[frame_corrente->pc];
+    #####: 1174:	frame_corrente->pc++; indexinfo2 = frame_corrente->code[frame_corrente->pc];
+    #####: 1175:	frame_corrente->pc++; frame_corrente->code[frame_corrente->pc];
+    #####: 1176:	frame_corrente->pc++; frame_corrente->code[frame_corrente->pc];
+        -: 1177:	
+    #####: 1178:	indice = ((indexinfo1 & 0xFF) << 8) | (indexinfo2 & 0xFF);
+    #####: 1179:	dimension = pop();
+call    0 never executed
+    #####: 1180:	arrayref = novoArray(dimension, TYPE_REFERENCE);
+call    0 never executed
+    #####: 1181:	array_type = getNome(frame_corrente->class, frame_corrente->constantPool[indice -1].type.Class.nameIndex);
+call    0 never executed
+        -: 1182:	
+    #####: 1183:	for(i = 0; array_type[i] == '['; i++);
+branch  0 never executed
+branch  1 never executed
+        -: 1184:	
+    #####: 1185:	switch(array_type[i]) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+branch  4 never executed
+branch  5 never executed
+branch  6 never executed
+branch  7 never executed
+branch  8 never executed
+branch  9 never executed
+        -: 1186:		case 'L':
+    #####: 1187:			type = TYPE_REFERENCE;
+    #####: 1188:			atype = TYPE_REFERENCE;
+    #####: 1189:			break;
+        -: 1190:		case 'Z':
+    #####: 1191:			type = TYPE_BOOLEAN;
+    #####: 1192:			atype = TYPE_BOOLEAN_SIZE;
+    #####: 1193:			break;
+        -: 1194:		case 'C':
+    #####: 1195:			type = TYPE_CHAR;
+    #####: 1196:			atype = TYPE_CHAR_SIZE;
+    #####: 1197:			break;
+        -: 1198:		case 'F':
+    #####: 1199:			type = TYPE_FLOAT;
+    #####: 1200:			atype = TYPE_FLOAT_SIZE;
+    #####: 1201:			break;
+        -: 1202:		case 'D':
+    #####: 1203:			type = TYPE_DOUBLE;
+    #####: 1204:			atype = TYPE_DOUBLE_SIZE;
+    #####: 1205:			break;
+        -: 1206:		case 'B':
+    #####: 1207:			type = TYPE_BYTE;
+    #####: 1208:			atype = TYPE_BYTE_SIZE;
+    #####: 1209:			break;
+        -: 1210:		case 'S':
+    #####: 1211:			type = TYPE_SHORT;
+    #####: 1212:			atype = TYPE_SHORT_SIZE;
+    #####: 1213:			break;
+        -: 1214:		case 'I':
+    #####: 1215:			type = TYPE_INT;
+    #####: 1216:			atype = TYPE_INT_SIZE;
+    #####: 1217:			break;
+        -: 1218:		case 'J':
+    #####: 1219:			type = TYPE_LONG;
+    #####: 1220:			atype = TYPE_LONG_SIZE;
+    #####: 1221:			break;
+        -: 1222:		default:
+    #####: 1223:			type = TYPE_REFERENCE;
+    #####: 1224:			atype = TYPE_REFERENCE_SIZE;
+        -: 1225:	}
+    #####: 1226:	for(i = 0; i < dimensions; i++)	{
+branch  0 never executed
+branch  1 never executed
+        -: 1227:		
+    #####: 1228:		size = pop();
+call    0 never executed
+        -: 1229:		
+    #####: 1230:		if(size == 0) break;
+branch  0 never executed
+branch  1 never executed
+    #####: 1231:		if(atype == 1) ((u1**)arrayref)[i] = (u1*)novoArray(type, size);
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+    #####: 1232:		else if(atype == 2) ((u2**)arrayref)[i] = (u2*)novoArray(type, size);
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+    #####: 1233:		else if(atype == 4) ((u4**)arrayref)[i] = (u4*)novoArray(type, size);
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+    #####: 1234:		else ((u8**)arrayref)[i] = (u8*)novoArray(type, size);
+call    0 never executed
+        -: 1235:		
+        -: 1236:	}
+        -: 1237:	
+    #####: 1238:	push((u4) arrayref);
+call    0 never executed
+    #####: 1239:	frame_corrente->pc++;
+    #####: 1240:}
+        -: 1241:
+function jvm_ifnull called 0 returned 0% blocks executed 0%
+    #####: 1242:void jvm_ifnull() {
+        -: 1243:	u4 desloc;
+        -: 1244:	u1 divinfo1, divinfo2;
+        -: 1245:	int32_t temp;
+        -: 1246:
+    #####: 1247:	divinfo1 = frame_corrente->code[(frame_corrente->pc)+1];
+    #####: 1248:	divinfo2 = frame_corrente->code[(frame_corrente->pc)+2];
+    #####: 1249:	temp = (signed) pop();
+call    0 never executed
+        -: 1250:	
+    #####: 1251:	if(temp == NULL_CONST) {
+branch  0 never executed
+branch  1 never executed
+    #####: 1252:		desloc = shift8To32(divinfo2, divinfo1);
+call    0 never executed
+    #####: 1253:		frame_corrente->pc += desloc;
+    #####: 1254:	} else frame_corrente->pc += 3;
+        -: 1255:	
+    #####: 1256:}
+        -: 1257:
+function jvm_ifnonnull called 0 returned 0% blocks executed 0%
+    #####: 1258:void jvm_ifnonnull() {
+        -: 1259:	u1 divinfo1, divinfo2;
+        -: 1260:	int32_t temp;
+        -: 1261:	int16_t desloc;
+        -: 1262:	
+    #####: 1263:	divinfo1 = frame_corrente->code[(frame_corrente->pc)+1];
+    #####: 1264:	divinfo2 = frame_corrente->code[(frame_corrente->pc)+2];
+    #####: 1265:	temp = (signed) pop();
+call    0 never executed
+        -: 1266:	
+    #####: 1267:	if(temp != NULL_CONST) {
+branch  0 never executed
+branch  1 never executed
+    #####: 1268:		desloc = (int16_t)shift8To32(divinfo2, divinfo1);
+call    0 never executed
+    #####: 1269:		frame_corrente->pc += desloc;
+    #####: 1270:	} else frame_corrente->pc += 3;
+        -: 1271:	
+    #####: 1272:}
+        -: 1273:
+function jvm_goto_w called 0 returned 0% blocks executed 0%
+    #####: 1274:void jvm_goto_w() {
+        -: 1275:	u4 divinfo1, divinfo2, divinfo3, divinfo4;
+        -: 1276:	int32_t desloc;
+        -: 1277:	
+    #####: 1278:	divinfo1 = frame_corrente->code[(frame_corrente->pc)+1];
+    #####: 1279:	divinfo2 = frame_corrente->code[(frame_corrente->pc)+2];
+    #####: 1280:	divinfo3 = frame_corrente->code[(frame_corrente->pc)+3];
+    #####: 1281:	divinfo4 = frame_corrente->code[(frame_corrente->pc)+4];
+        -: 1282:	
+    #####: 1283:	desloc = (int32_t) ( ((divinfo1 & 0xFF)<<24) | ((divinfo2 & 0xFF)<<16) | 
+    #####: 1284:						  ((divinfo3 & 0xFF)<<8) | (divinfo1 & 0xFF) );
+    #####: 1285:	frame_corrente->pc += desloc;
+    #####: 1286:}
+        -: 1287:
+function jvm_jsr_w called 0 returned 0% blocks executed 0%
+    #####: 1288:void jvm_jsr_w() {
+        -: 1289:	u4 divinfo1, divinfo2, divinfo3, divinfo4;
+        -: 1290:	int32_t desloc;
+        -: 1291:	
+    #####: 1292:	push((frame_corrente->pc) + 5);
+call    0 never executed
+    #####: 1293:	divinfo1 = frame_corrente->code[(frame_corrente->pc)+1];
+    #####: 1294:	divinfo2 = frame_corrente->code[(frame_corrente->pc)+2];
+    #####: 1295:	divinfo3 = frame_corrente->code[(frame_corrente->pc)+3];
+    #####: 1296:	divinfo4 = frame_corrente->code[(frame_corrente->pc)+4];
+        -: 1297:	
+    #####: 1298:	desloc = (int32_t) ( ((divinfo1 & 0xFF)<<24) | ((divinfo2 & 0xFF)<<16) | 
+    #####: 1299:						  ((divinfo3 & 0xFF)<<8) | (divinfo1 & 0xFF) );
+    #####: 1300:	frame_corrente->pc += desloc;
+    #####: 1301:}
+        -: 1302:
+function executarInstrucoes called 0 returned 0% blocks executed 0%
+    #####: 1303:void executarInstrucoes(u1 opcode) {
+    #####: 1304:	vetorInstruc[opcode]();
+call    0 never executed
+    #####: 1305:}
+        -: 1306:
+function iniciarInstrucoes called 2 returned 100% blocks executed 100%
+        2: 1307:void iniciarInstrucoes() {
+        2: 1308:	vetorInstruc[0x00] = jvm_nop;
+        2: 1309:	vetorInstruc[0x01] = jvm_aconst_null;
+        2: 1310:	vetorInstruc[0x02] = jvm_iconst_m1;
+        2: 1311:	vetorInstruc[0x03] = jvm_iconst_0;
+        2: 1312:	vetorInstruc[0x04] = jvm_iconst_1;
+        2: 1313:	vetorInstruc[0x05] = jvm_iconst_2;
+        2: 1314:	vetorInstruc[0x06] = jvm_iconst_3;
+        2: 1315:	vetorInstruc[0x07] = jvm_iconst_4;
+        2: 1316:	vetorInstruc[0x08] = jvm_iconst_5;
+        2: 1317:	vetorInstruc[0x09] = jvm_lconst_0;
+        2: 1318:	vetorInstruc[0x0a] = jvm_lconst_1;
+        2: 1319:	vetorInstruc[0x0b] = jvm_fconst_0;
+        2: 1320:	vetorInstruc[0x0c] = jvm_fconst_1;
+        2: 1321:	vetorInstruc[0x0d] = jvm_fconst_2;
+        2: 1322:	vetorInstruc[0x0e] = jvm_dconst_0;
+        2: 1323:	vetorInstruc[0x0f] = jvm_dconst_1;
+        2: 1324:	vetorInstruc[0x10] = jvm_bipush;
+        2: 1325:	vetorInstruc[0x11] = jvm_sipush;
+        2: 1326:	vetorInstruc[0x12] = jvm_ldc;
+        2: 1327:	vetorInstruc[0x13] = jvm_ldc_w;
+        2: 1328:	vetorInstruc[0x14] = jvm_ldc2_w;
+        2: 1329:	vetorInstruc[0x15] = jvm_iload;
+        2: 1330:	vetorInstruc[0x16] = jvm_lload;
+        2: 1331:	vetorInstruc[0x17] = jvm_fload;
+        2: 1332:	vetorInstruc[0x18] = jvm_dload;
+        2: 1333:	vetorInstruc[0x19] = jvm_aload;
+        2: 1334:	vetorInstruc[0x1a] = jvm_iload_0;
+        2: 1335:	vetorInstruc[0x1b] = jvm_iload_1;
+        2: 1336:	vetorInstruc[0x1c] = jvm_iload_2;
+        2: 1337:	vetorInstruc[0x1d] = jvm_iload_3;
+        2: 1338:	vetorInstruc[0x1e] = jvm_lload_0;
+        2: 1339:	vetorInstruc[0x1f] = jvm_lload_1;
+        2: 1340:	vetorInstruc[0x20] = jvm_lload_2;
+        2: 1341:	vetorInstruc[0x21] = jvm_lload_3;
+        2: 1342:	vetorInstruc[0x22] = jvm_fload_0;
+        2: 1343:	vetorInstruc[0x23] = jvm_fload_1;
+        2: 1344:	vetorInstruc[0x24] = jvm_fload_2;
+        2: 1345:	vetorInstruc[0x25] = jvm_fload_3;
+        2: 1346:	vetorInstruc[0x26] = jvm_dload_0;
+        2: 1347:	vetorInstruc[0x27] = jvm_dload_1;
+        2: 1348:	vetorInstruc[0x28] = jvm_dload_2;
+        2: 1349:	vetorInstruc[0x29] = jvm_dload_3;
+        2: 1350:	vetorInstruc[0x2a] = jvm_aload_0;
+        2: 1351:	vetorInstruc[0x2b] = jvm_aload_1;
+        2: 1352:	vetorInstruc[0x2c] = jvm_aload_2;
+        2: 1353:	vetorInstruc[0x2d] = jvm_aload_3;
+        2: 1354:	vetorInstruc[0x2e] = jvm_iaload;
+        2: 1355:	vetorInstruc[0x2f] = jvm_laload;
+        2: 1356:	vetorInstruc[0x30] = jvm_faload;
+        2: 1357:	vetorInstruc[0x31] = jvm_daload;
+        2: 1358:	vetorInstruc[0x32] = jvm_aaload;
+        2: 1359:	vetorInstruc[0x33] = jvm_baload;
+        2: 1360:	vetorInstruc[0x34] = jvm_caload;
+        2: 1361:	vetorInstruc[0x35] = jvm_saload;
+        2: 1362:	vetorInstruc[0x36] = jvm_istore;
+        2: 1363:	vetorInstruc[0x37] = jvm_lstore;
+        2: 1364:	vetorInstruc[0x38] = jvm_fstore;
+        2: 1365:	vetorInstruc[0x39] = jvm_dstore;
+        2: 1366:	vetorInstruc[0x3a] = jvm_astore;
+        2: 1367:	vetorInstruc[0x3b] = jvm_istore_0;
+        2: 1368:	vetorInstruc[0x3c] = jvm_istore_1;
+        2: 1369:	vetorInstruc[0x3d] = jvm_istore_2;
+        2: 1370:	vetorInstruc[0x3e] = jvm_istore_3;
+        2: 1371:	vetorInstruc[0x3f] = jvm_lstore_0;
+        2: 1372:	vetorInstruc[0x40] = jvm_lstore_1;
+        2: 1373:	vetorInstruc[0x41] = jvm_lstore_2;
+        2: 1374:	vetorInstruc[0x42] = jvm_lstore_3;
+        2: 1375:	vetorInstruc[0x43] = jvm_fstore_0;
+        2: 1376:	vetorInstruc[0x44] = jvm_fstore_1;
+        2: 1377:	vetorInstruc[0x45] = jvm_fstore_2;
+        2: 1378:	vetorInstruc[0x46] = jvm_fstore_3;
+        2: 1379:	vetorInstruc[0x47] = jvm_dstore_0;
+        2: 1380:	vetorInstruc[0x48] = jvm_dstore_1;
+        2: 1381:	vetorInstruc[0x49] = jvm_dstore_2;
+        2: 1382:	vetorInstruc[0x4a] = jvm_dstore_3;
+        2: 1383:	vetorInstruc[0x4b] = jvm_astore_0;
+        2: 1384:	vetorInstruc[0x4c] = jvm_astore_1;
+        2: 1385:	vetorInstruc[0x4d] = jvm_astore_2;
+        2: 1386:	vetorInstruc[0x4e] = jvm_astore_3;
+        2: 1387:	vetorInstruc[0x4f] = jvm_iastore;
+        2: 1388:	vetorInstruc[0x50] = jvm_lastore;
+        2: 1389:	vetorInstruc[0x51] = jvm_fastore;
+        2: 1390:	vetorInstruc[0x52] = jvm_dastore;
+        2: 1391:	vetorInstruc[0x53] = jvm_aastore;
+        2: 1392:	vetorInstruc[0x54] = jvm_bastore;
+        2: 1393:	vetorInstruc[0x55] = jvm_castore;
+        2: 1394:	vetorInstruc[0x56] = jvm_sastore;
+        2: 1395:	vetorInstruc[0x57] = jvm_pop;
+        2: 1396:	vetorInstruc[0x58] = jvm_pop2;
+        2: 1397:	vetorInstruc[0x59] = jvm_dup;
+        2: 1398:	vetorInstruc[0x5a] = jvm_dup_x1;
+        2: 1399:	vetorInstruc[0x5b] = jvm_dup_x2;
+        2: 1400:	vetorInstruc[0x5c] = jvm_dup2;
+        2: 1401:	vetorInstruc[0x5d] = jvm_dup2_x1;
+        2: 1402:	vetorInstruc[0x5e] = jvm_dup2_x2;
+        2: 1403:	vetorInstruc[0x5f] = jvm_swap;
+        2: 1404:	vetorInstruc[0x60] = jvm_iadd;
+        2: 1405:	vetorInstruc[0x61] = jvm_ladd;
+        2: 1406:	vetorInstruc[0x62] = jvm_fadd;
+        2: 1407:	vetorInstruc[0x63] = jvm_dadd;
+        2: 1408:	vetorInstruc[0x64] = jvm_isub;
+        2: 1409:	vetorInstruc[0x65] = jvm_lsub;
+        2: 1410:	vetorInstruc[0x66] = jvm_fsub;
+        2: 1411:	vetorInstruc[0x67] = jvm_dsub;
+        2: 1412:	vetorInstruc[0x68] = jvm_imul;
+        2: 1413:	vetorInstruc[0x69] = jvm_lmul;
+        2: 1414:	vetorInstruc[0x6a] = jvm_fmul;
+        2: 1415:	vetorInstruc[0x6b] = jvm_dmul;
+        2: 1416:	vetorInstruc[0x6c] = jvm_idiv;
+        2: 1417:	vetorInstruc[0x6d] = jvm_ldiv;
+        2: 1418:	vetorInstruc[0x6e] = jvm_fdiv;
+        2: 1419:	vetorInstruc[0x6f] = jvm_ddiv;
+        2: 1420:	vetorInstruc[0x70] = jvm_irem;
+        2: 1421:	vetorInstruc[0x71] = jvm_lrem;
+        2: 1422:	vetorInstruc[0x72] = jvm_frem;
+        2: 1423:	vetorInstruc[0x73] = jvm_drem;
+        2: 1424:	vetorInstruc[0x74] = jvm_ineg;
+        2: 1425:	vetorInstruc[0x75] = jvm_lneg;
+        2: 1426:	vetorInstruc[0x76] = jvm_fneg;
+        2: 1427:	vetorInstruc[0x77] = jvm_dneg;
+        2: 1428:	vetorInstruc[0x78] = jvm_ishl;
+        2: 1429:	vetorInstruc[0x79] = jvm_lshl;
+        2: 1430:	vetorInstruc[0x7a] = jvm_ishr;
+        2: 1431:	vetorInstruc[0x7b] = jvm_lshr;
+        2: 1432:	vetorInstruc[0x7c] = jvm_iushr;
+        2: 1433:	vetorInstruc[0x7d] = jvm_lushr;
+        2: 1434:	vetorInstruc[0x7e] = jvm_iand;
+        2: 1435:	vetorInstruc[0x7f] = jvm_land;
+        2: 1436:	vetorInstruc[0x80] = jvm_ior;
+        2: 1437:	vetorInstruc[0x81] = jvm_lor;
+        2: 1438:	vetorInstruc[0x82] = jvm_ixor;
+        2: 1439:	vetorInstruc[0x83] = jvm_lxor;
+        2: 1440:	vetorInstruc[0x84] = jvm_iinc;
+        2: 1441:	vetorInstruc[0x85] = jvm_i2l;
+        2: 1442:	vetorInstruc[0x86] = jvm_i2f;
+        2: 1443:	vetorInstruc[0x87] = jvm_i2d;
+        2: 1444:	vetorInstruc[0x88] = jvm_l2i;
+        2: 1445:	vetorInstruc[0x89] = jvm_l2f;
+        2: 1446:	vetorInstruc[0x8a] = jvm_l2d;
+        2: 1447:	vetorInstruc[0x8b] = jvm_f2i;
+        2: 1448:	vetorInstruc[0x8c] = jvm_f2l;
+        2: 1449:	vetorInstruc[0x8d] = jvm_f2d;
+        2: 1450:	vetorInstruc[0x8e] = jvm_d2i;
+        2: 1451:	vetorInstruc[0x8f] = jvm_d2l;
+        2: 1452:	vetorInstruc[0x90] = jvm_d2f;
+        2: 1453:	vetorInstruc[0x91] = jvm_i2b;
+        2: 1454:	vetorInstruc[0x92] = jvm_i2c;
+        2: 1455:	vetorInstruc[0x93] = jvm_i2s;
+        2: 1456:	vetorInstruc[0x94] = jvm_lcmp;
+        2: 1457:	vetorInstruc[0x95] = jvm_fcmpl;
+        2: 1458:	vetorInstruc[0x96] = jvm_fcmpg;
+        2: 1459:	vetorInstruc[0x97] = jvm_dcmpl;
+        2: 1460:	vetorInstruc[0x98] = jvm_dcmpg;
+        2: 1461:	vetorInstruc[0x99] = jvm_ifeq;
+        2: 1462:	vetorInstruc[0x9a] = jvm_ifne;
+        2: 1463:	vetorInstruc[0x9b] = jvm_iflt;
+        2: 1464:	vetorInstruc[0x9c] = jvm_ifge;
+        2: 1465:	vetorInstruc[0x9d] = jvm_ifgt;
+        2: 1466:	vetorInstruc[0x9e] = jvm_ifle;
+        2: 1467:	vetorInstruc[0x9f] = jvm_if_icmpeq;
+        2: 1468:	vetorInstruc[0xa0] = jvm_if_icmpne;
+        2: 1469:	vetorInstruc[0xa1] = jvm_if_icmplt;
+        2: 1470:	vetorInstruc[0xa2] = jvm_if_icmpge;
+        2: 1471:	vetorInstruc[0xa3] = jvm_if_icmpgt;
+        2: 1472:	vetorInstruc[0xa4] = jvm_if_icmple;
+        2: 1473:	vetorInstruc[0xa5] = jvm_if_acmpeq;
+        2: 1474:	vetorInstruc[0xa6] = jvm_if_acmpne;
+        2: 1475:	vetorInstruc[0xa7] = jvm_goto;
+        2: 1476:	vetorInstruc[0xa8] = jvm_jsr;
+        2: 1477:	vetorInstruc[0xa9] = jvm_ret;
+        2: 1478:	vetorInstruc[0xaa] = jvm_tableswitch;
+        2: 1479:	vetorInstruc[0xab] = jvm_lookupswitch;
+        2: 1480:	vetorInstruc[0xac] = jvm_ireturn;
+        2: 1481:	vetorInstruc[0xad] = jvm_lreturn;
+        2: 1482:	vetorInstruc[0xae] = jvm_freturn;
+        2: 1483:	vetorInstruc[0xaf] = jvm_dreturn;
+        2: 1484:	vetorInstruc[0xb0] = jvm_areturn;
+        2: 1485:	vetorInstruc[0xb1] = jvm_return;
+        2: 1486:	vetorInstruc[0xb2] = jvm_getstatic;
+        2: 1487:	vetorInstruc[0xb3] = jvm_putstatic;
+        2: 1488:	vetorInstruc[0xb4] = jvm_getfield;
+        2: 1489:	vetorInstruc[0xb5] = jvm_putfield;
+        2: 1490:	vetorInstruc[0xb6] = jvm_invokevirtual;
+        2: 1491:	vetorInstruc[0xb7] = jvm_invokespecial;
+        2: 1492:	vetorInstruc[0xb8] = jvm_invokestatic;
+        2: 1493:	vetorInstruc[0xb9] = jvm_invokeinterface;
+        2: 1494:	vetorInstruc[0xba] = jvm_invokedynamic;
+        2: 1495:	vetorInstruc[0xbb] = jvm_new;
+        2: 1496:	vetorInstruc[0xbc] = jvm_newarray;
+        2: 1497:	vetorInstruc[0xbd] = jvm_anewarray;
+        2: 1498:	vetorInstruc[0xbe] = jvm_arraylength;
+        2: 1499:	vetorInstruc[0xbf] = jvm_athrow;
+        2: 1500:	vetorInstruc[0xc0] = jvm_checkcast;
+        2: 1501:	vetorInstruc[0xc1] = jvm_instanceof;
+        2: 1502:	vetorInstruc[0xc2] = jvm_monitorenter;
+        2: 1503:	vetorInstruc[0xc3] = jvm_monitorexit;
+        2: 1504:	vetorInstruc[0xc4] = jvm_wide;
+        2: 1505:	vetorInstruc[0xc5] = jvm_multianewarray;
+        2: 1506:	vetorInstruc[0xc6] = jvm_ifnull;
+        2: 1507:	vetorInstruc[0xc7] = jvm_ifnonnull;
+        2: 1508:	vetorInstruc[0xc8] = jvm_goto_w;
+        2: 1509:	vetorInstruc[0xc9] = jvm_jsr_w;
+        2: 1510:}

@@ -1,0 +1,146 @@
+        -:    0:Source:main.c
+        -:    0:Programs:12
+        -:    1:/**  @file: main.c
+        -:    2: * @brief Aquivo principal do programa
+        -:    3: * 
+        -:    4: * @details Aqui sao comeca a execucao da JVM chamando todos as funcoes de execucao e exibicao
+        -:    5: */
+        -:    6:#include <stdio.h>
+        -:    7:#include <string.h>
+        -:    8:#include <stdlib.h>
+        -:    9:
+        -:   10:#include "FuncoesAuxiliares.h"
+        -:   11:#include "InicializaClasses.h"
+        -:   12:#include "InstrucoesGerais.h"
+        -:   13:#include "GerenciaMetodos.h"
+        -:   14:
+        -:   15:struct array *tamArray;
+        -:   16:u4 numArrays;
+        -:   17:
+        -:   18:/**
+        -:   19:* @brief Função principal do programa
+        -:   20:*
+        -:   21:* @param int32_t argc - número de parâmetros passados por linha de comando
+        -:   22:* @param char **argv - nome do arquivo.class e/ou flag passado por linha de comando
+        -:   23:* 
+        -:   24:* @return Sucesso ou falha de acordo com o .class passado
+        -:   25:*/
+function main called 2 returned 0% blocks executed 21%
+        2:   26:int32_t main(int32_t argc, char **argv) {
+        -:   27:	char strIn[100], strOut[100], strPath[200];
+        -:   28:	methodInfo *metodoMain;
+        2:   29:	int32_t flagImpr = 0, flagExec = 1;
+        2:   30:	numArrays = 0;
+        2:   31:	tamArray = NULL;
+        -:   32:	
+        2:   33:	iniciarInstrucoes();
+call    0 returned 100%
+        2:   34:	carregaOpcodeInfo();
+call    0 returned 100%
+        -:   35:
+        2:   36:	if (argc < 2) {
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+        2:   37:		printf("Informe o nome do .class: ");
+call    0 returned 100%
+        2:   38:		scanf("%s", strIn);
+call    0 returned 100%
+        2:   39:		getchar();
+call    0 returned 100%
+    #####:   40:	} else if(strcmp(argv[1], "-c") == 0 || strcmp(argv[1], "-p") == 0){
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+        -:   41:		
+    #####:   42:		flagImpr = 1;
+    #####:   43:		if(strcmp(argv[1], "-p") == 0) flagExec = 0;
+branch  0 never executed
+branch  1 never executed
+        -:   44:		
+    #####:   45:		if (argc >= 3) {
+branch  0 never executed
+branch  1 never executed
+    #####:   46:			strcpy(strIn, argv[2]);
+        -:   47:		} else{
+    #####:   48:			printf("Informe o nome do .class: ");
+call    0 never executed
+    #####:   49:			scanf("%s", strIn);
+call    0 never executed
+    #####:   50:			getchar();
+call    0 never executed
+        -:   51:		}
+        -:   52:		
+    #####:   53:		if (argc >= 4) {
+branch  0 never executed
+branch  1 never executed
+    #####:   54:			strcpy(strOut, argv[3]);
+        -:   55:		} else{
+    #####:   56:			strcpy(strOut, "");
+        -:   57:		}
+        -:   58:		
+    #####:   59:		if (argc >= 5) {
+branch  0 never executed
+branch  1 never executed
+    #####:   60:			strcpy(strPath, argv[4]);
+        -:   61:		} else{
+    #####:   62:			strcpy(strPath, "");
+        -:   63:		}
+        -:   64:		
+    #####:   65:		if (argc > 5) {
+branch  0 never executed
+branch  1 never executed
+    #####:   66:			printf("Aviso: necessario, no maximo, tres parametros, caso a flag esteja ativada.\n");
+call    0 never executed
+        -:   67:		}
+        -:   68:		
+        -:   69:	} else {
+        -:   70:		
+    #####:   71:		strcpy (strIn, argv[1]);
+    #####:   72:		strcpy(strOut, "");
+        -:   73:		
+    #####:   74:		if (argc >= 3) {
+branch  0 never executed
+branch  1 never executed
+    #####:   75:			strcpy(strPath, argv[2]);
+        -:   76:		} else{
+    #####:   77:			strcpy(strPath, "");
+        -:   78:		}
+        -:   79:		
+    #####:   80:		if (argc > 3) {
+branch  0 never executed
+branch  1 never executed
+    #####:   81:			printf("Aviso: necessario, no maximo, dois parametros, caso a flag nao esteja ativada.\n");
+call    0 never executed
+        -:   82:		}
+        -:   83:		
+        -:   84:	}
+        -:   85:	
+        2:   86:	configuraSaida(strOut, strPath, flagImpr);
+call    0 returned 100%
+        2:   87:	carregaClass(strIn);
+call    0 returned 0%
+        -:   88:	
+    #####:   89:	if(flagExec == 1){
+branch  0 never executed
+branch  1 never executed
+    #####:   90:		metodoMain = recuperaMetodoMain();
+call    0 never executed
+    #####:   91:		if(metodoMain) {
+branch  0 never executed
+branch  1 never executed
+    #####:   92:			prepararMetodo(metodoMain, capturaClassPorIndice(0));
+call    0 never executed
+call    1 never executed
+    #####:   93:			executarMetodo();
+call    0 never executed
+        -:   94:		} else{
+    #####:   95:			printf("\nErro: o metodo main nao foi encontrado.\n");
+call    0 never executed
+    #####:   96:			return EXIT_FAILURE;
+        -:   97:		}
+        -:   98:	}
+        -:   99:
+    #####:  100:	return EXIT_SUCCESS;
+        -:  101:
+        -:  102:}

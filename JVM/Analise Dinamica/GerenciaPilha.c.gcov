@@ -1,0 +1,72 @@
+        -:    0:Source:GerenciaPilha.c
+        -:    0:Programs:12
+        -:    1:#include <stdio.h>
+        -:    2:#include <stdlib.h>
+        -:    3:
+        -:    4:#include "GerenciaPilha.h"
+        -:    5:
+        -:    6:static u4 pilha[tamanho_maximo_pilha];
+        -:    7:static u4 topo;
+        -:    8:static u4 frame_base;
+        -:    9:
+        -:   10:
+function Nova_Pilha called 0 returned 0% blocks executed 0%
+    #####:   11:void Nova_Pilha() {
+    #####:   12:	topo = -1;
+    #####:   13:	frame_base = 0;
+    #####:   14:}
+        -:   15:
+function pushU8 called 0 returned 0% blocks executed 0%
+    #####:   16:void pushU8(u8 valoru8) {
+        -:   17:	u4 low, high;
+    #####:   18:	shift64To32(valoru8, &low, &high);
+call    0 never executed
+    #####:   19:	push(high);	push(low);
+call    0 never executed
+call    1 never executed
+    #####:   20:}
+        -:   21:
+function push called 0 returned 0% blocks executed 0%
+    #####:   22:void push(u4 valoru4) {
+    #####:   23:	if (topo == tamanho_maximo_pilha) {
+branch  0 never executed
+branch  1 never executed
+    #####:   24:		printf("\nErro: pilha sem espaco disponivel.\n");
+call    0 never executed
+    #####:   25:		exit(1);
+call    0 never executed
+    #####:   26:	} else pilha[++topo] = valoru4;
+    #####:   27:}
+        -:   28:
+function pop called 0 returned 0% blocks executed 0%
+    #####:   29:u4 pop() {
+    #####:   30:	if (topo < frame_base) {
+branch  0 never executed
+branch  1 never executed
+    #####:   31:		printf("\nErro: acesso em posicao invalida da pilha.\n");
+call    0 never executed
+    #####:   32:		return 0;
+    #####:   33:	} return pilha[topo--];
+        -:   34:}
+        -:   35:
+function Novo_Frame_Pilha called 0 returned 0% blocks executed 0%
+    #####:   36:void Novo_Frame_Pilha() {
+    #####:   37:	push(frame_base);
+call    0 never executed
+    #####:   38:	frame_base = topo;
+    #####:   39:}
+        -:   40:
+function Libera_Frame_Pilha called 0 returned 0% blocks executed 0%
+    #####:   41:void Libera_Frame_Pilha() {
+        -:   42:	u4 frame_anterior;
+    #####:   43:	topo = frame_base;
+    #####:   44:	frame_anterior = pop();
+call    0 never executed
+        -:   45:	
+    #####:   46:	if (frame_anterior > frame_base) {
+branch  0 never executed
+branch  1 never executed
+    #####:   47:		printf("\nErro: acesso em posicao invalida da pilha, frame nao existe.\n");
+call    0 never executed
+    #####:   48:	} else frame_base = frame_anterior;
+    #####:   49:}

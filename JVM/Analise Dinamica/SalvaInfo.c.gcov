@@ -1,0 +1,663 @@
+        -:    0:Source:SalvaInfo.c
+        -:    0:Programs:12
+        -:    1:#include <stdio.h>
+        -:    2:#include <stdlib.h>
+        -:    3:#include <string.h>
+        -:    4:
+        -:    5:#include "SalvaInfo.h"
+        -:    6:
+function salvaInfos called 2 returned 0% blocks executed 24%
+        2:    7:classStructure* salvaInfos(char *fileSrc, char *fileTrg, char *filePath, int32_t flag_impressao) {
+        -:    8:	static int32_t contSaidas = 0, contEntr = 0;
+        -:    9:	char outFileName[110], tipo_perm[70], fileName[306], auxIn[100];
+        -:   10:	FILE *fpClass, *fpSaida;
+        -:   11:
+        2:   12:	strcpy(fileName, filePath);
+        2:   13:	strcat(fileName, fileSrc);
+        2:   14:	if(strstr(fileName,".class") == NULL) {
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+        2:   15:		sprintf(fileName, "%s.class", fileName);
+        -:   16:	}
+        2:   17:	fpClass = fopen(fileName, "rb");
+call    0 returned 100%
+        2:   18:	if(!fpClass && contEntr > 0){
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+branch  2 taken 0% (fallthrough)
+branch  3 taken 100%
+    #####:   19:		printf("\nErro: Super Class %s nao se encontra no diretorio.\n", fileName);
+call    0 never executed
+    #####:   20:		exit(1);
+call    0 never executed
+        -:   21:	}
+        5:   22:	while(!fpClass) {
+branch  0 taken 100%
+branch  1 taken 0% (fallthrough)
+        3:   23:		printf("\nErro: arquivo inexistente %s\nInforme o nome de um .class valido: ", fileName);
+call    0 returned 100%
+        3:   24:		scanf("%s", auxIn);
+call    0 returned 33%
+        1:   25:		getchar();
+call    0 returned 100%
+        -:   26:		
+        1:   27:		strcpy(fileName, filePath);
+        1:   28:		strcat(fileName, auxIn);
+        1:   29:		if(strstr(fileName,".class") == NULL) {
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+        1:   30:			sprintf(fileName, "%s.class", fileName);
+        -:   31:		}
+        1:   32:		fpClass = fopen(fileName, "rb");
+call    0 returned 100%
+        -:   33:	}
+    #####:   34:	contEntr++;
+    #####:   35:	printf("Arquivo aberto: [%s]\n\n", fileName);
+call    0 never executed
+        -:   36:
+    #####:   37:	cs = calloc(sizeof(classStructure), 1);
+        -:   38:
+    #####:   39:	if(!verificaNumMagic(fpClass)) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   40:		printf("\nErro: O arquivo nao e do tipo .class\n");
+call    0 never executed
+    #####:   41:		fclose(fpClass);
+call    0 never executed
+    #####:   42:		exit(1);
+call    0 never executed
+        -:   43:    } else {
+    #####:   44:        armazenaVersoes(fpClass);
+call    0 never executed
+        -:   45:        
+    #####:   46:        if(!verificaVersao()) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   47:        	printf("\nErro: o arquivo .class nao e compativel com java 1.2\n");
+call    0 never executed
+    #####:   48:    		fclose(fpClass);
+call    0 never executed
+    #####:   49:    		exit(1);
+call    0 never executed
+        -:   50:        } else {
+    #####:   51:            armazenaConstantPool(fpClass);
+call    0 never executed
+    #####:   52:            armazenaAccessFlags(fpClass);
+call    0 never executed
+    #####:   53:            armazenaClasses(fpClass);
+call    0 never executed
+    #####:   54:            armazenaInterfaces(fpClass);
+call    0 never executed
+    #####:   55:            armazenaCampos(fpClass);
+call    0 never executed
+    #####:   56:            armazenaMetodos(fpClass);
+call    0 never executed
+    #####:   57:            armazenaAtributos(fpClass);
+call    0 never executed
+        -:   58:        }
+        -:   59:    }
+        -:   60:
+    #####:   61:	if(flag_impressao == 1) {
+branch  0 never executed
+branch  1 never executed
+    #####:   62:        if(strcmp(fileTrg, "") == 0){
+branch  0 never executed
+branch  1 never executed
+    #####:   63:        	strcpy(outFileName, "Resultado.txt");
+        -:   64:        } else{
+    #####:   65:        	strcpy(outFileName, fileTrg);
+    #####:   66:        	if(strstr(outFileName,".txt") == NULL) {
+branch  0 never executed
+branch  1 never executed
+    #####:   67:				sprintf(outFileName, "%s.txt", outFileName);
+        -:   68:			}
+        -:   69:        }
+        -:   70:        
+    #####:   71:        if(contSaidas > 0){
+branch  0 never executed
+branch  1 never executed
+    #####:   72:        	outFileName[strlen(outFileName) - 4] = '\0';
+    #####:   73:        	sprintf(outFileName, "%s%d.txt", outFileName, contSaidas%10);
+        -:   74:		}
+        -:   75:		
+    #####:   76:		fpSaida = fopen(outFileName, "w");
+call    0 never executed
+    #####:   77:		if(!fpSaida) {
+branch  0 never executed
+branch  1 never executed
+    #####:   78:			printf("\nErro: nao foi possivel criar um arquivo de saida.\n");
+call    0 never executed
+    #####:   79:			fclose(fpClass);
+call    0 never executed
+    #####:   80:			return cs;
+        -:   81:		}
+    #####:   82:		contSaidas++;
+    #####:   83:		printf("Arquivo de saida gerado: %s\n\n", outFileName);
+call    0 never executed
+    #####:   84:		fprintf(fpSaida, "\n%s\n\n", fileName);
+call    0 never executed
+        -:   85:		
+    #####:   86:        salvaGeral(fpSaida, tipo_perm);
+call    0 never executed
+    #####:   87:        salvaConstantPool(fpSaida);
+call    0 never executed
+    #####:   88:        salvaInterfaces(fpSaida);
+call    0 never executed
+    #####:   89:        salvaCampos(fpSaida);
+call    0 never executed
+    #####:   90:        salvaMetodos(fpSaida);
+call    0 never executed
+    #####:   91:        salvaAtributos(fpSaida);
+call    0 never executed
+        -:   92:        
+    #####:   93:		fclose(fpSaida);
+call    0 never executed
+        -:   94:    }
+        -:   95:
+    #####:   96:	fclose(fpClass);
+call    0 never executed
+    #####:   97:	fpClass = NULL;
+        -:   98:
+    #####:   99:	return cs;
+        -:  100:}
+        -:  101:
+function salvaGeral called 0 returned 0% blocks executed 0%
+    #####:  102:void salvaGeral(FILE * fpSaida, char * tipo_perm) {
+    #####:  103:    fprintf(fpSaida, "General Information:\n\n");
+call    0 never executed
+    #####:  104:    fprintf(fpSaida, "Magic Number:   \t0x%08X\n", cs->magicNumber);
+call    0 never executed
+    #####:  105:    fprintf(fpSaida, "Minor Version: %14d\n", cs->minorVersion);
+call    0 never executed
+    #####:  106:    fprintf(fpSaida, "Major Version: %14d\n", cs->majorVersion);
+call    0 never executed
+    #####:  107:    fprintf(fpSaida, "Constant Pool Count: %8d\n", cs->constantPoolCount - 1);
+call    0 never executed
+    #####:  108:    getPermissaoDeAcesso(cs->accessFlags, tipo_perm);
+call    0 never executed
+    #####:  109:    fprintf(fpSaida, "Access Flags:  \t0x%x [ %s]\n", cs->accessFlags, tipo_perm);
+call    0 never executed
+    #####:  110:    fprintf(fpSaida, "This Class:    \t#%d <%s>\n", cs->thisClass, 
+call    0 never executed
+    #####:  111:						cs->constantPool[cs->constantPool[cs->thisClass - 1].type.Class.nameIndex - 1].type.Utf8.bytes);
+    #####:  112:    if(cs->superClass == (int32_t) NULL) fprintf(fpSaida, "Super Class: \n");
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+    #####:  113:	else fprintf(fpSaida, "Super Class:   \t#%d <%s>\n", cs->superClass, 
+call    0 never executed
+    #####:  114:						cs->constantPool[cs->constantPool[cs->superClass - 1].type.Class.nameIndex - 1].type.Utf8.bytes);
+    #####:  115:    fprintf(fpSaida, "Interface Count: %12d\n", cs->interfaceCount);
+call    0 never executed
+    #####:  116:    fprintf(fpSaida, "Field Count: %16d\n", cs->fieldCount);
+call    0 never executed
+    #####:  117:    fprintf(fpSaida, "Method Count: %15d\n", cs->methodCount);
+call    0 never executed
+    #####:  118:    fprintf(fpSaida, "Attribute Count: %12d\n\n", cs->attributeCount);
+call    0 never executed
+    #####:  119:}
+        -:  120:
+function salvaConstantPool called 0 returned 0% blocks executed 0%
+    #####:  121:void salvaConstantPool(FILE * fpSaida) {
+        -:  122:    int32_t j;
+        -:  123:    long long whole;
+        -:  124:
+    #####:  125:    fprintf(fpSaida, "-----------------------------------------------\n\n");
+call    0 never executed
+    #####:  126:    fprintf(fpSaida, "Constant Pool Count: %d\n\n", cs->constantPoolCount - 1);
+call    0 never executed
+        -:  127:
+    #####:  128:    for(j = 0; j < cs->constantPoolCount - 1; j++) {
+branch  0 never executed
+branch  1 never executed
+    #####:  129:        fprintf(fpSaida, "Constant Pool [%d]\n", j + 1);
+call    0 never executed
+        -:  130:        
+    #####:  131:        switch(cs->constantPool[j].tag) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+branch  4 never executed
+branch  5 never executed
+branch  6 never executed
+branch  7 never executed
+branch  8 never executed
+branch  9 never executed
+branch 10 never executed
+branch 11 never executed
+branch 12 never executed
+        -:  132:            case CPOOL_CONTINUED:
+    #####:  133:                fprintf(fpSaida, "%s\n\n", cs->constantPool[j].type.Continued.bytes);
+call    0 never executed
+    #####:  134:                break;
+        -:  135:            case CPOOL_UTF8:
+    #####:  136:                fprintf(fpSaida, "Type: Utf8\nLength: %d\nString: %s\n\n",
+call    0 never executed
+    #####:  137:						cs->constantPool[j].type.Utf8.length, cs->constantPool[j].type.Utf8.bytes);
+    #####:  138:                break;
+        -:  139:            case CPOOL_INTEGER:
+    #####:  140:                fprintf(fpSaida, "Type: Integer\nBytes: 0x%x\nValue: %d\n\n",
+call    0 never executed
+    #####:  141:                        cs->constantPool[j].type.Integer.bytes, cs->constantPool[j].type.Integer.bytes);
+    #####:  142:                break;
+        -:  143:            case CPOOL_FLOAT:
+    #####:  144:                u.i = cs->constantPool[j].type.Float.bytes;
+    #####:  145:                fprintf(fpSaida, "Type: Float\nBytes: 0x%x\nValue: %f\n\n", cs->constantPool[j].type.Float.bytes, u.f);
+call    0 never executed
+    #####:  146:                break;
+        -:  147:            case CPOOL_LONG:
+    #####:  148:                whole = (long long) cs->constantPool[j].type.Long.highBytes << 32;
+    #####:  149:                whole = whole | cs->constantPool[j].type.Long.lowBytes;
+    #####:  150:                fprintf(fpSaida, "Type: Long\nHigh Bytes: 0x%x\nLow Bytes: 0x%x\nValue: %lu\n\n",
+call    0 never executed
+    #####:  151:                        cs->constantPool[j].type.Long.highBytes, cs->constantPool[j].type.Long.lowBytes, whole);
+    #####:  152:                break;
+        -:  153:            case CPOOL_DOUBLE:
+    #####:  154:                whole = (long long) cs->constantPool[j].type.Double.highBytes << 32;
+    #####:  155:                du.l = whole | cs->constantPool[j].type.Double.lowBytes;
+    #####:  156:                fprintf(fpSaida, "Type: Double\nHigh Bytes: 0x%x\nLow Bytes: 0x%x\nValue: %f\n\n",
+call    0 never executed
+    #####:  157:                        cs->constantPool[j].type.Double.highBytes, cs->constantPool[j].type.Double.lowBytes, du.d);
+    #####:  158:                break;
+        -:  159:            case CPOOL_CLASS:
+    #####:  160:                fprintf(fpSaida, "Type: Class\nName: #%d <%s>\n\n", cs->constantPool[j].type.Class.nameIndex,
+call    0 never executed
+    #####:  161:                        cs->constantPool[cs->constantPool[j].type.Class.nameIndex - 1].type.Utf8.bytes);
+    #####:  162:                break;
+        -:  163:            case CPOOL_STRING:
+    #####:  164:                fprintf(fpSaida, "Type: String\nString: #%d <%s>\n\n",
+call    0 never executed
+    #####:  165:                        cs->constantPool[j].type.Class.nameIndex,
+    #####:  166:                        cs->constantPool[cs->constantPool[j].type.Class.nameIndex - 1].type.Utf8.bytes);
+    #####:  167:                break;
+        -:  168:            case CPOOL_FIELD:
+    #####:  169:                fprintf(fpSaida, "Type: Field Reference\nClass: #%d <%s>\nName and Type: #%d <%s%s>\n\n",
+call    0 never executed
+    #####:  170:                        cs->constantPool[j].type.FieldRef.classIndex,
+    #####:  171:                        cs->constantPool[cs->constantPool[cs->constantPool[j].type.FieldRef.classIndex - 1].type.Class.nameIndex - 1].type.Utf8.bytes,
+    #####:  172:                        cs->constantPool[j].type.FieldRef.nameTypeIndex,
+    #####:  173:                        cs->constantPool[cs->constantPool[cs->constantPool[j].type.FieldRef.nameTypeIndex - 1].type.NameType.nameIndex - 1].type.Utf8.bytes,
+    #####:  174:                        cs->constantPool[cs->constantPool[cs->constantPool[j].type.FieldRef.nameTypeIndex - 1].type.NameType.descriptorIndex - 1].type.Utf8.bytes);
+    #####:  175:                break;
+        -:  176:            case CPOOL_METHOD:
+    #####:  177:                fprintf(fpSaida, "Type: Method Reference\nClass: #%d <%s>\nName and Type: #%d <%s%s>\n\n",
+call    0 never executed
+    #####:  178:                        cs->constantPool[j].type.MethodRef.classIndex,
+    #####:  179:                        cs->constantPool[cs->constantPool[cs->constantPool[j].type.MethodRef.classIndex - 1].type.Class.nameIndex - 1].type.Utf8.bytes,
+    #####:  180:                        cs->constantPool[j].type.MethodRef.nameTypeIndex,
+    #####:  181:                        cs->constantPool[cs->constantPool[cs->constantPool[j].type.MethodRef.nameTypeIndex - 1].type.NameType.nameIndex - 1].type.Utf8.bytes,
+    #####:  182:                        cs->constantPool[cs->constantPool[cs->constantPool[j].type.MethodRef.nameTypeIndex - 1].type.NameType.descriptorIndex - 1].type.Utf8.bytes);
+    #####:  183:                break;
+        -:  184:            case CPOOL_INTERFACE:
+    #####:  185:                fprintf(fpSaida, "Type: Interface Method Reference\nClass: #%d <%s>\nName and Type: #%d <%s%s>\n\n",
+call    0 never executed
+    #####:  186:                        cs->constantPool[j].type.InterfaceMethodRef.classIndex,
+    #####:  187:                        cs->constantPool[cs->constantPool[cs->constantPool[j].type.InterfaceMethodRef.classIndex - 1].type.Class.nameIndex - 1].type.Utf8.bytes,
+    #####:  188:                        cs->constantPool[j].type.InterfaceMethodRef.nameTypeIndex,
+    #####:  189:                        cs->constantPool[cs->constantPool[cs->constantPool[j].type.InterfaceMethodRef.nameTypeIndex - 1].type.NameType.nameIndex - 1].type.Utf8.bytes,
+    #####:  190:                        cs->constantPool[cs->constantPool[cs->constantPool[j].type.InterfaceMethodRef.nameTypeIndex - 1].type.NameType.descriptorIndex - 1].type.Utf8.bytes);
+    #####:  191:                break;
+        -:  192:            case CPOOL_NAMETYPE:
+    #####:  193:                fprintf(fpSaida, "Type: Name and Type\nName: #%d <%s>\nDescriptor: #%d <%s>\n\n",
+call    0 never executed
+    #####:  194:                        cs->constantPool[j].type.NameType.nameIndex,
+    #####:  195:                        cs->constantPool[cs->constantPool[j].type.NameType.nameIndex - 1].type.Utf8.bytes,
+    #####:  196:                        cs->constantPool[j].type.NameType.descriptorIndex,
+    #####:  197:                        cs->constantPool[cs->constantPool[j].type.NameType.descriptorIndex - 1].type.Utf8.bytes);
+    #####:  198:                break;
+        -:  199:            default:
+    #####:  200:                break;
+        -:  201:        }
+        -:  202:        
+        -:  203:    }
+        -:  204:    
+    #####:  205:}
+        -:  206:
+function salvaInterfaces called 0 returned 0% blocks executed 0%
+    #####:  207:void salvaInterfaces(FILE * fpSaida) {
+        -:  208:    int32_t i;
+        -:  209:
+    #####:  210:    fprintf(fpSaida, "-----------------------------------------------\n\n");
+call    0 never executed
+    #####:  211:    fprintf(fpSaida, "Interface Count: %d\n\n", cs->interfaceCount);
+call    0 never executed
+        -:  212:
+    #####:  213:    for(i = 0; i < cs->interfaceCount; i++) {
+branch  0 never executed
+branch  1 never executed
+    #####:  214:        fprintf(fpSaida, "Interface [%d]\nName: #%d <%s>\n\n", i + 1, cs->interfaces[i],
+call    0 never executed
+    #####:  215:                cs->constantPool[cs->constantPool[cs->interfaces[i] - 1].type.Class.nameIndex - 1].type.Utf8.bytes);
+        -:  216:    }
+        -:  217:    
+    #####:  218:}
+        -:  219:
+function salvaCampos called 0 returned 0% blocks executed 0%
+    #####:  220:void salvaCampos(FILE * fpSaida) {
+        -:  221:    int32_t j, i;
+        -:  222:    char tipo_perm[70];
+        -:  223:
+    #####:  224:    fprintf(fpSaida, "-----------------------------------------------\n\n");
+call    0 never executed
+    #####:  225:    fprintf(fpSaida, "Field Count: %d\n\n", cs->fieldCount);
+call    0 never executed
+        -:  226:
+    #####:  227:    for(j = 0; j < cs->fieldCount; j++) {
+branch  0 never executed
+branch  1 never executed
+    #####:  228:        fprintf(fpSaida, "Field [%d]\n", j + 1);
+call    0 never executed
+        -:  229:        
+    #####:  230:        getPermissaoDeAcesso(cs->fields[j].accessFlags, tipo_perm);
+call    0 never executed
+    #####:  231:        fprintf(fpSaida, "Access Flags: 0x%x [ %s]\nName: #%d <%s>\nDescriptor: #%d <%s>\n\nAttribute Count: %d\n\n",
+call    0 never executed
+    #####:  232:                cs->fields[j].accessFlags, tipo_perm, cs->fields[j].nameIndex,
+    #####:  233:                cs->constantPool[cs->fields[j].nameIndex - 1].type.Utf8.bytes,
+    #####:  234:                cs->fields[j].descriptorIndex,
+    #####:  235:                cs->constantPool[cs->fields[j].descriptorIndex - 1].type.Utf8.bytes,
+    #####:  236:                cs->fields[j].attributeCount);
+        -:  237:                
+    #####:  238:        for(i = 0; i < cs->fields[j].attributeCount; i++)
+branch  0 never executed
+branch  1 never executed
+    #####:  239:            salvaAtributoUnico(fpSaida, &(cs->fields[j].attributes[i]), i + 1);
+call    0 never executed
+        -:  240:            
+        -:  241:    }
+        -:  242:    
+    #####:  243:}
+        -:  244:
+function salvaMetodos called 0 returned 0% blocks executed 0%
+    #####:  245:void salvaMetodos(FILE * fpSaida) {
+        -:  246:    int32_t i, j;
+        -:  247:    char tipo_perm[70];
+        -:  248:
+    #####:  249:    fprintf(fpSaida, "-----------------------------------------------\n\n");
+call    0 never executed
+    #####:  250:    fprintf(fpSaida, "Method Count: %d\n\n", cs->methodCount);
+call    0 never executed
+        -:  251:
+    #####:  252:    for(j = 0; j < cs->methodCount; j++) {
+branch  0 never executed
+branch  1 never executed
+    #####:  253:        fprintf(fpSaida, "Method [%d]\n", j + 1);
+call    0 never executed
+        -:  254:        
+    #####:  255:        getPermissaoDeAcesso(cs->methods[j].accessFlags, tipo_perm);
+call    0 never executed
+    #####:  256:        fprintf(fpSaida, "Access Flags: 0x%x [ %s]\nName: #%d <%s>\nDescriptor: #%d <%s>\n\nAttribute Count: %d\n\n",
+call    0 never executed
+    #####:  257:                cs->methods[j].accessFlags, tipo_perm, cs->methods[j].nameIndex,
+    #####:  258:                cs->constantPool[cs->methods[j].nameIndex - 1].type.Utf8.bytes,
+    #####:  259:                cs->methods[j].descriptorIndex,
+    #####:  260:                cs->constantPool[cs->methods[j].descriptorIndex - 1].type.Utf8.bytes,
+    #####:  261:                cs->methods[j].attributeCount);
+        -:  262:                
+    #####:  263:        for(i = 0; i < cs->methods[j].attributeCount; i++)
+branch  0 never executed
+branch  1 never executed
+    #####:  264:            salvaAtributoUnico(fpSaida, &(cs->methods[j].attributes[i]), i + 1);
+call    0 never executed
+        -:  265:            
+        -:  266:    }
+        -:  267:    
+    #####:  268:}
+        -:  269:
+function salvaAtributos called 0 returned 0% blocks executed 0%
+    #####:  270:void salvaAtributos(FILE * fpSaida) {
+        -:  271:    int32_t i;
+        -:  272:
+    #####:  273:    fprintf(fpSaida, "-----------------------------------------------\n\n");
+call    0 never executed
+    #####:  274:    fprintf(fpSaida, "Attribute Count: %d\n\n", cs->attributeCount);
+call    0 never executed
+        -:  275:
+    #####:  276:    for(i = 0; i < cs->attributeCount; i++)
+branch  0 never executed
+branch  1 never executed
+    #####:  277:        salvaAtributoUnico(fpSaida, &(cs->attributes[i]), i + 1);
+call    0 never executed
+        -:  278:
+    #####:  279:}
+        -:  280:
+function salvaAtributoUnico called 0 returned 0% blocks executed 0%
+    #####:  281:void salvaAtributoUnico(FILE * fpSaida, attributeInfo * att, int32_t j) {
+        -:  282:    int32_t i;
+    #####:  283:    char tipo_atrib[30] = "", tipo_perm[70];
+        -:  284:    long long whole;
+        -:  285:
+    #####:  286:    fprintf(fpSaida, "\tAttribute [%d]\n", j);
+call    0 never executed
+    #####:  287:    strcpy(tipo_atrib, (char*) cs->constantPool[att->attributeNameIndex - 1].type.Utf8.bytes);
+    #####:  288:    fprintf(fpSaida, "\t[Generic Info]\n\tAttribute Name: #%d <%s>\n\tAttribute Length: %d\n\n",
+call    0 never executed
+    #####:  289:            att->attributeNameIndex, tipo_atrib, att->attributeLength);
+        -:  290:            
+    #####:  291:    if(strcmp(tipo_atrib, "ConstantValue") == 0) {
+branch  0 never executed
+branch  1 never executed
+    #####:  292:        fprintf(fpSaida, "\t[Specific Info]\n");
+call    0 never executed
+    #####:  293:        fprintf(fpSaida, "\tConstant Value: #%d", att->type.ConstantValue.constantValueIndex);
+call    0 never executed
+        -:  294:                
+    #####:  295:        switch(cs->constantPool[att->type.ConstantValue.constantValueIndex - 1].tag) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+branch  4 never executed
+        -:  296:            case CPOOL_INTEGER:
+    #####:  297:                fprintf(fpSaida, " <%d>\n", cs->constantPool[att->type.ConstantValue.constantValueIndex - 1].type.Integer.bytes);
+call    0 never executed
+    #####:  298:                break;
+        -:  299:            case CPOOL_FLOAT:
+    #####:  300:                u.i = cs->constantPool[att->type.ConstantValue.constantValueIndex - 1].type.Float.bytes;
+    #####:  301:                fprintf(fpSaida, " <%f>\n", u.f);
+call    0 never executed
+    #####:  302:                break;
+        -:  303:            case CPOOL_LONG:
+    #####:  304:                whole = (long long) cs->constantPool[att->type.ConstantValue.constantValueIndex - 1].type.Long.highBytes << 32;
+    #####:  305:                whole = whole | cs->constantPool[att->type.ConstantValue.constantValueIndex - 1].type.Long.lowBytes;
+    #####:  306:                fprintf(fpSaida, " <%lu>\n", whole);
+call    0 never executed
+    #####:  307:                break;
+        -:  308:            case CPOOL_DOUBLE:
+    #####:  309:                whole = (long long) cs->constantPool[att->type.ConstantValue.constantValueIndex - 1].type.Double.highBytes << 32;
+    #####:  310:                du.l = whole | cs->constantPool[att->type.ConstantValue.constantValueIndex - 1].type.Double.lowBytes;
+    #####:  311:                fprintf(fpSaida, " <%f>\n", du.d);
+call    0 never executed
+    #####:  312:                break;
+        -:  313:            default:
+    #####:  314:                fprintf(fpSaida, "\n");
+call    0 never executed
+    #####:  315:                break;
+        -:  316:        }
+    #####:  317:    } else if(strcmp(tipo_atrib, "Code") == 0) {
+branch  0 never executed
+branch  1 never executed
+    #####:  318:        fprintf(fpSaida, "\t[Specific Info]\n");
+call    0 never executed
+    #####:  319:        fprintf(fpSaida, "\tMaximum stack depth: %d\n\tMaximum local variables: %d\n\tCode Length: %d\n",
+call    0 never executed
+    #####:  320:                att->type.Code.maxStack, att->type.Code.maxLocals, att->type.Code.codeLength);
+        -:  321:                
+        -:  322:        if(att->type.Code.exceptionTableLength >= 0)
+    #####:  323:			fprintf(fpSaida, "\n\tException Table Length: %d\n\n", att->type.Code.exceptionTableLength);
+call    0 never executed
+        -:  324:			
+    #####:  325:        for(i = 0; i < att->type.Code.exceptionTableLength; i++) {
+branch  0 never executed
+branch  1 never executed
+    #####:  326:            fprintf(fpSaida, "\tCode [%d]\n\tStart PC: %d\n\tEnd PC: %d\n\tHandler PC: %d\n\tCatch Type: %d\n",
+call    0 never executed
+    #####:  327:                    i + 1, att->type.Code.exceptionTable[i].startPc, att->type.Code.exceptionTable[i].endPc,
+    #####:  328:                    att->type.Code.exceptionTable[i].handlerPc, att->type.Code.exceptionTable[i].catchType);
+        -:  329:        }
+        -:  330:        
+    #####:  331:        if(att->type.Code.attributeCount > 0) {
+branch  0 never executed
+branch  1 never executed
+    #####:  332:        	fprintf(fpSaida, "\n\tSub-attribute Count: %d\n\n", att->type.Code.attributeCount);
+call    0 never executed
+        -:  333:        	
+    #####:  334:        	for(i = 0; i < att->type.Code.attributeCount; i++)
+branch  0 never executed
+branch  1 never executed
+    #####:  335:	            salvaAtributoUnico(fpSaida, &(att->type.Code.attributes[i]), i + 1);
+call    0 never executed
+        -:  336:	            
+    #####:  337:    		imprimirMnemonics(att->type.Code.code, att->type.Code.codeLength, fpSaida);
+call    0 never executed
+    #####:  338:			fprintf(fpSaida, "\n");
+call    0 never executed
+        -:  339:		}
+        -:  340:		
+    #####:  341:    } else if(strcmp(tipo_atrib, "Exceptions") == 0) {
+branch  0 never executed
+branch  1 never executed
+    #####:  342:        fprintf(fpSaida, "\t[Specific Info]\n");
+call    0 never executed
+    #####:  343:        fprintf(fpSaida, "\tNumber of Exceptions: %d\n\n", att->type.Exceptions.numberOfExceptions);
+call    0 never executed
+        -:  344:        
+    #####:  345:        for(i = 0; i < att->type.Exceptions.numberOfExceptions; i++) {
+branch  0 never executed
+branch  1 never executed
+    #####:  346:            fprintf(fpSaida, "\tException [%d]\n\tClass: #%d\n\tClass Name: #%d <%s>\n\n",
+call    0 never executed
+    #####:  347:                    i + 1, att->type.Exceptions.exceptionIndexTable[i],
+    #####:  348:                    cs->constantPool[att->type.Exceptions.exceptionIndexTable[i] - 1].type.Class.nameIndex,
+    #####:  349:                    cs->constantPool[cs->constantPool[att->type.Exceptions.exceptionIndexTable[i] - 1].type.Class.nameIndex - 1].type.Utf8.bytes);
+        -:  350:        }
+        -:  351:        
+    #####:  352:    } else if(strcmp(tipo_atrib, "InnerClasses") == 0) {
+branch  0 never executed
+branch  1 never executed
+    #####:  353:        fprintf(fpSaida, "\t[Specific Info]\n");
+call    0 never executed
+    #####:  354:        fprintf(fpSaida, "\tNumber of Classes: %d\n\n", att->type.InnerClasses.numberOfClasses);
+call    0 never executed
+        -:  355:
+    #####:  356:        for(i = 0; i < att->type.InnerClasses.numberOfClasses; i++) {
+branch  0 never executed
+branch  1 never executed
+    #####:  357:            getPermissaoDeAcesso(att->type.InnerClasses.classes[i].innerClassAccessFlags, tipo_perm);
+call    0 never executed
+    #####:  358:            fprintf(fpSaida, "\tInner Class [%d]\n\tInner Class: #%d <%s>\n\tOuter Class: #%d <%s>\n"
+call    0 never executed
+        -:  359:                             "\tInner Name: #%d <%s>\n\tInner Class Access Flags: 0x%x [ %s]\n",
+    #####:  360:                    i + 1, att->type.InnerClasses.classes[i].innerClassInfoIndex,
+    #####:  361:                    cs->constantPool[cs->constantPool[att->type.InnerClasses.classes[i].innerClassInfoIndex - 1].type.Class.nameIndex - 1].type.Utf8.bytes,
+    #####:  362:                    att->type.InnerClasses.classes[i].outerClassInfoIndex,
+    #####:  363:                    cs->constantPool[cs->constantPool[att->type.InnerClasses.classes[i].outerClassInfoIndex - 1].type.Class.nameIndex - 1].type.Utf8.bytes,
+    #####:  364:                    att->type.InnerClasses.classes[i].innerNameIndex,
+    #####:  365:                    cs->constantPool[att->type.InnerClasses.classes[i].innerNameIndex - 1].type.Utf8.bytes,
+    #####:  366:                    att->type.InnerClasses.classes[i].innerClassAccessFlags, tipo_perm);
+        -:  367:        }
+        -:  368:        
+    #####:  369:    } else if(strcmp(tipo_atrib, "SourceFile") == 0) {
+branch  0 never executed
+branch  1 never executed
+    #####:  370:    	fprintf(fpSaida, "\t[Specific Info]\n");
+call    0 never executed
+    #####:  371:        fprintf(fpSaida, "\tSource File Name Index: #%d\n", att->type.SourceFile.sourceFileIndex);
+call    0 never executed
+        -:  372:    }
+    #####:  373:}
+        -:  374:
+function imprimirMnemonics called 0 returned 0% blocks executed 0%
+    #####:  375:void imprimirMnemonics(u1 *bytecode, u2 tam, FILE *fpSaida) {
+        -:  376:	int32_t i, j;
+        -:  377:	opcode_informacao op_aux;
+        -:  378:
+    #####:  379:	fprintf(fpSaida, "\tBytecode:\n");
+call    0 never executed
+    #####:  380:	for(i = 0; i < tam; i++) {
+branch  0 never executed
+branch  1 never executed
+    #####:  381:		op_aux = op_info[bytecode[i]];
+    #####:  382:		fprintf(fpSaida, "\t%d  %s", i, op_aux.info);
+call    0 never executed
+        -:  383:		
+    #####:  384:		op_aux.operandos_index = calloc(sizeof(u4), op_aux.cont_op);
+    #####:  385:		for(j = 0; j < op_aux.cont_op; j++) {
+branch  0 never executed
+branch  1 never executed
+    #####:  386:			op_aux.operandos_index[j] = bytecode[++i];
+    #####:  387:			if(j == 0) {
+branch  0 never executed
+branch  1 never executed
+    #####:  388:				if(op_aux.operandos_index[j] == 0) fprintf(fpSaida, " #");
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+    #####:  389:				else fprintf(fpSaida, " #%hu", op_aux.operandos_index[j]);
+call    0 never executed
+        -:  390:			}
+    #####:  391:			else fprintf(fpSaida, "%hu", op_aux.operandos_index[j]);
+call    0 never executed
+        -:  392:		}
+    #####:  393:		fprintf(fpSaida, "\n");
+call    0 never executed
+        -:  394:	}
+        -:  395:
+    #####:  396:}
+        -:  397:
+function getPermissaoDeAcesso called 0 returned 0% blocks executed 0%
+    #####:  398:void getPermissaoDeAcesso(int32_t intValue, char *target) {
+    #####:  399:    strcpy(target, "");
+        -:  400:
+    #####:  401:    if ifBitIs(intValue, 1) strcat(target, "public ");
+branch  0 never executed
+branch  1 never executed
+    #####:  402:    else if ifBitIs(intValue, 2) strcat(target, "private ");
+branch  0 never executed
+branch  1 never executed
+    #####:  403:    else if ifBitIs(intValue, 3) strcat(target, "protected ");
+branch  0 never executed
+branch  1 never executed
+        -:  404:
+    #####:  405:    if ifBitIs(intValue, 4) strcat(target, "static ");
+branch  0 never executed
+branch  1 never executed
+    #####:  406:    if ifBitIs(intValue, 5) strcat(target, "final ");
+branch  0 never executed
+branch  1 never executed
+    #####:  407:    if ifBitIs(intValue, 6) strcat(target, "super ");
+branch  0 never executed
+branch  1 never executed
+    #####:  408:    if ifBitIs(intValue, 7) strcat(target, "volatile ");
+branch  0 never executed
+branch  1 never executed
+    #####:  409:    if ifBitIs(intValue, 8) strcat(target, "transient ");
+branch  0 never executed
+branch  1 never executed
+    #####:  410:    if ifBitIs(intValue, 9) strcat(target, "native ");
+branch  0 never executed
+branch  1 never executed
+    #####:  411:    if ifBitIs(intValue, 10) strcat(target, "interface ");
+branch  0 never executed
+branch  1 never executed
+    #####:  412:    if ifBitIs(intValue, 11) strcat(target, "abstract ");
+branch  0 never executed
+branch  1 never executed
+    #####:  413:}
+        -:  414:
+function getNome called 0 returned 0% blocks executed 0%
+    #####:  415:char* getNome(classStructure *class_file, u2 nameIndex) {
+        -:  416:	int32_t i;
+    #####:  417:	char *dest = malloc((class_file->constantPool[nameIndex - 1]).type.Utf8.length + 1);
+        -:  418:
+    #####:  419:	for(i = 0; i < (class_file->constantPool[nameIndex - 1]).type.Utf8.length; i++)
+branch  0 never executed
+branch  1 never executed
+    #####:  420:		dest[i] = (char) (class_file->constantPool[nameIndex - 1]).type.Utf8.bytes[i];
+    #####:  421:	dest[i] = '\0';
+        -:  422:
+    #####:  423:	return dest;
+        -:  424:}

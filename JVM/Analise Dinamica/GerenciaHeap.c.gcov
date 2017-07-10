@@ -1,0 +1,199 @@
+        -:    0:Source:GerenciaHeap.c
+        -:    0:Programs:12
+        -:    1:#include <stdlib.h>
+        -:    2:#include <string.h>
+        -:    3:#include <stdio.h>
+        -:    4:
+        -:    5:#include "GerenciaHeap.h"
+        -:    6:
+        -:    7:static u4 heap_indice;
+        -:    8:static u4 heap_maximo;
+        -:    9:
+function novaHeap called 0 returned 0% blocks executed 0%
+    #####:   10:void novaHeap() {
+    #####:   11:	heap = calloc(sizeof(struct Object*), HEAP_INIT);
+    #####:   12:	heap_indice = 0;
+    #####:   13:	heap_maximo = HEAP_INIT;
+    #####:   14:}
+        -:   15:
+function novoObject called 0 returned 0% blocks executed 0%
+    #####:   16:struct Object* novoObject(classStructure *cs_this) {
+        -:   17:	struct Object *object;
+        -:   18:	u4 i, j, cont;
+        -:   19:	u2 indice;
+        -:   20:	char descriptor[200];
+        -:   21:	cpInfo *descriptor_struct;
+        -:   22:
+        -:   23:
+    #####:   24:	if (!cs_this) return NULL;
+branch  0 never executed
+branch  1 never executed
+        -:   25:
+    #####:   26:	if (heap_indice == heap_maximo) {
+branch  0 never executed
+branch  1 never executed
+    #####:   27:		heap = realloc(heap, heap_maximo + HEAP_INIT);
+    #####:   28:		if (heap == NULL) {
+branch  0 never executed
+branch  1 never executed
+    #####:   29:			printf("\nErro: sem memoria Heap.\n");
+call    0 never executed
+    #####:   30:			exit(1);
+call    0 never executed
+        -:   31:		}
+    #####:   32:		heap_maximo += HEAP_INIT;
+        -:   33:	}
+        -:   34:
+    #####:   35:	object = calloc(sizeof(struct Object), 1);
+    #####:   36:	object->this = cs_this;
+    #####:   37:	object->super = novoObject(capturaClassPorNome(capturaParentNome(cs_this)));
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:   38:
+    #####:   39:	for (i = 0, cont = 0; i < cs_this->fieldCount; i++) {
+branch  0 never executed
+branch  1 never executed
+    #####:   40:		cont++;
+    #####:   41:		indice = cs_this->fields[i].descriptorIndex;
+    #####:   42:		descriptor_struct = &(cs_this->constantPool[indice - 1]);
+    #####:   43:		memcpy(descriptor, descriptor_struct->type.Utf8.bytes, descriptor_struct->type.Utf8.length);
+        -:   44:
+    #####:   45:		if (descriptor[0] == 'D' || descriptor[0] == 'J') cont++;
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+        -:   46:	}
+        -:   47:
+    #####:   48:	object->fields = calloc(sizeof(u4), cont);
+    #####:   49:	object->fields_index = calloc(sizeof(u4), cont);
+        -:   50:
+    #####:   51:	for (i = 0, j = 0; i < cs_this->fieldCount; i++, j++) {
+branch  0 never executed
+branch  1 never executed
+    #####:   52:		object->fields_index[j] = cs_this->fields[i].nameIndex;
+        -:   53:
+    #####:   54:		indice = cs_this->fields[i].descriptorIndex;
+    #####:   55:		descriptor_struct = &(cs_this->constantPool[indice - 1]);
+    #####:   56:		memcpy(descriptor, descriptor_struct->type.Utf8.bytes, descriptor_struct->type.Utf8.length);
+        -:   57:
+    #####:   58:		if (descriptor[0] == 'D' || descriptor[0] == 'J')
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:   59:			object->fields_index[++j] = -1;
+        -:   60:			
+        -:   61:	}
+        -:   62:
+    #####:   63:	heap[heap_indice] = object;
+    #####:   64:	heap_indice++;
+    #####:   65:	return object;
+        -:   66:}
+        -:   67:
+function capturaCampoObjeto called 0 returned 0% blocks executed 0%
+    #####:   68:u4 capturaCampoObjeto(struct Object* object, u4 nameIndex) {
+        -:   69:	int32_t i;
+        -:   70:	
+    #####:   71:	for(i = 0; object->fields_index[i] != nameIndex; i++);
+branch  0 never executed
+branch  1 never executed
+        -:   72:	
+    #####:   73:	return object->fields[i];
+        -:   74:}
+        -:   75:
+function capturaCampoObjetoLargo called 0 returned 0% blocks executed 0%
+    #####:   76:u8 capturaCampoObjetoLargo(struct Object* object, u4 nameIndex) {
+    #####:   77:	int32_t i = 0;
+        -:   78:	
+    #####:   79:	for(i = 0; object->fields_index[i] != nameIndex; i++);
+branch  0 never executed
+branch  1 never executed
+        -:   80:
+    #####:   81:	return shift32To64(object->fields[i],object->fields[i+1]);
+call    0 never executed
+        -:   82:}
+        -:   83:
+function atribuiCampoObjeto called 0 returned 0% blocks executed 0%
+    #####:   84:void atribuiCampoObjeto(struct Object* object, u4 nameIndex, u4 valor) {
+        -:   85:	int32_t i;
+        -:   86:	
+    #####:   87:	for(i = 0; object->fields_index[i] != nameIndex; i++);
+branch  0 never executed
+branch  1 never executed
+        -:   88:	
+    #####:   89:	object->fields[i] = valor;
+    #####:   90:}
+        -:   91:
+function atribuiCampoObjetoLargo called 0 returned 0% blocks executed 0%
+    #####:   92:void atribuiCampoObjetoLargo(struct Object* object, u4 nameIndex, u8 valor) {
+        -:   93:	int32_t i;
+        -:   94:	u4 low, high;
+        -:   95:
+    #####:   96:	for(i = 0; object->fields_index[i] != nameIndex; i++);
+branch  0 never executed
+branch  1 never executed
+        -:   97:
+    #####:   98:	shift64To32(valor, &low, &high);
+call    0 never executed
+    #####:   99:	object->fields[i] = low;
+    #####:  100:	object->fields[i+1] = high;
+    #####:  101:}
+        -:  102:
+function novoArray called 0 returned 0% blocks executed 0%
+    #####:  103:void* novoArray(u4 cont, u1 type) {
+        -:  104:	u4 size;
+        -:  105:	void *array;
+        -:  106:
+    #####:  107:	switch (type) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+branch  4 never executed
+branch  5 never executed
+branch  6 never executed
+branch  7 never executed
+branch  8 never executed
+branch  9 never executed
+        -:  108:		case TYPE_BOOLEAN:
+    #####:  109:			size = 1;
+    #####:  110:			break;
+        -:  111:		case TYPE_BYTE:
+    #####:  112:			size = 1;
+    #####:  113:			break;
+        -:  114:		case TYPE_SHORT:
+    #####:  115:			size = 2;
+    #####:  116:			break;
+        -:  117:		case TYPE_CHAR:
+    #####:  118:			size = 2;
+    #####:  119:			break;
+        -:  120:		case TYPE_INT:
+    #####:  121:			size = 4;
+    #####:  122:			break;
+        -:  123:		case TYPE_FLOAT:
+    #####:  124:			size= 4;
+    #####:  125:			break;
+        -:  126:		case TYPE_REFERENCE:
+    #####:  127:			size = 4;
+    #####:  128:			break;
+        -:  129:		case TYPE_DOUBLE:
+    #####:  130:			size = 8;
+    #####:  131:			break;
+        -:  132:		case TYPE_LONG:
+    #####:  133:			size = 8;
+    #####:  134:			break;
+        -:  135:	}
+        -:  136:
+    #####:  137:	numArrays++;
+        -:  138:	
+    #####:  139:	array = calloc(cont, size);
+    #####:  140:	tamArray = realloc (tamArray, sizeof(struct array)*numArrays);
+        -:  141:	
+    #####:  142:	tamArray[numArrays-1].size = size;
+    #####:  143:	tamArray[numArrays-1].ref = (u4) array;
+        -:  144:
+    #####:  145:	return array;
+        -:  146:}
+        -:  147:

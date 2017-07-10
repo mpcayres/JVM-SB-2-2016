@@ -1,0 +1,28 @@
+digraph "pilhaFrames"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="pilhaFrames",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" prox" ,fontname="Helvetica"];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" valor" ,fontname="Helvetica"];
+  Node2 [label="frame",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structframe.html",tooltip="Estrutura de um frame. "];
+  Node3 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" class" ,fontname="Helvetica"];
+  Node3 [label="classStructure",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structclassStructure.html",tooltip="Estruturas da classe. "];
+  Node4 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" attributes" ,fontname="Helvetica"];
+  Node4 [label="attrInfo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structattrInfo.html",tooltip="Informacoes de atributo. "];
+  Node5 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" lineNumberTable" ,fontname="Helvetica"];
+  Node5 [label="LineNumberTableType",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structLineNumberTableType.html",tooltip="Tabela do tipo de numero da linha. "];
+  Node6 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" classes" ,fontname="Helvetica"];
+  Node6 [label="classType",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structclassType.html",tooltip="Tabela de Classes. "];
+  Node4 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" attributes" ,fontname="Helvetica"];
+  Node7 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" exceptionTable" ,fontname="Helvetica"];
+  Node7 [label="exceptionTableType",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structexceptionTableType.html",tooltip="Tabela de Excecoes. "];
+  Node8 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" localVariableTable" ,fontname="Helvetica"];
+  Node8 [label="LocalVariableTableType",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structLocalVariableTableType.html",tooltip="Tabela do tipo de variaveis locais. "];
+  Node9 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" constantPool" ,fontname="Helvetica"];
+  Node9 [label="cpInfo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structcpInfo.html",tooltip="Informacoes da Constant Pool. "];
+  Node10 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" fields\nmethods" ,fontname="Helvetica"];
+  Node10 [label="fieldInfo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structfieldInfo.html",tooltip="Informacoes de metodo e campo. "];
+  Node4 -> Node10 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" attributes" ,fontname="Helvetica"];
+  Node9 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" constantPool" ,fontname="Helvetica"];
+}
